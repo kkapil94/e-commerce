@@ -4,12 +4,12 @@ import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import ApiFeatures from "../utils/apiFeatures.js";
 // getting products
 export const getProducts = catchAsyncErrors(async (req,res)=>{
-    const resultPerPage = 5
+    const resultPerPage = 8
     const countProducts = await products.countDocuments()
     const apiFeature = new ApiFeatures(products.find(),req.query).search().filter().pagination(resultPerPage)
     
     const product =await apiFeature.query
-    res.status(200).json({success:true,product,countProducts})
+    res.status(200).json({success:true,product,countProducts,resultPerPage})
 })
 
 

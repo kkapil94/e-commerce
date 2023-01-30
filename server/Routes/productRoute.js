@@ -3,7 +3,7 @@ import * as controller from "../apiControllers/productController.js"
 import {isAuthenticated} from "../middleware/isAuthenticated.js"
 const route = Router()
 
-route.get('/',controller.getProducts)
+route.get('/products',controller.getProducts)
 route.get('/:id',controller.getDetails)
 route.post('/new',isAuthenticated,controller.createProduct)
 route.put('/:id',isAuthenticated,controller.updateProduct)

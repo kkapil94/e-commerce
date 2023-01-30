@@ -11,3 +11,7 @@ body{
   font-family: 'Martian Mono', monospace;
 
 }
+
+.avatar > div{
+  margin: 0;
+}

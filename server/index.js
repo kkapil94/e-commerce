@@ -7,8 +7,9 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import errorMiddleware from './middleware/error.js'
 import user from './Routes/userRoute.js'
+import cors from "cors"
 const app = express()
-
+app.use(cors())
 //uncaught error
 
 process.on("uncaughtException",(err)=>{
