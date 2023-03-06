@@ -5,6 +5,7 @@ import ProductDetails from "./pages/ProductDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Products from "./components/Products";
 import Footer from "./components/Footer";
+import LoginAndSignUp from "./components/LoginAndSignUp";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route  path="/products/:keyword" element={<Products />} />
           <Route exact path="/products/product/:id" element={<ProductDetails />} />
           <Route exact path="/product/:id" element={<ProductDetails />} />
+          <Route exact path="/login" element={<LoginAndSignUp/>} />
         </Routes>
         <Footer />
       </Router>

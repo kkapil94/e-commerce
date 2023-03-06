@@ -6,7 +6,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <>
-        <Stack direction="row" justifyContent="space-around" sx={{height:"25rem",padding:"5rem",background:"#fafafb",marginTop:"2rem"}}>
+        <Stack direction="row" justifyContent="space-around" sx={{height:"25rem",padding:"5rem",background:"#fafafb"}}>
             <Box sx={{width:"20rem"}}>
                 <Typography variant="h6" textAlign={"center"}>
                     DOWNLOAD OUR APP <br /> Download App for Android and Ios mobile phone

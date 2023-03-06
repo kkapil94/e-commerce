@@ -1,0 +1,13 @@
+.activeTab{
+    border-bottom: 2px solid red;
+}
+.signUPForm{
+    transform:translateY(-100%) translateX(-100vmax)
+}
+.shiftLeft{
+    transform: translateX(-100%);
+}
+
+.shiftToNeutralForm{
+    transform: translateX(0%) translateY(-100%);
+}

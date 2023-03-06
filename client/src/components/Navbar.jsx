@@ -33,7 +33,7 @@ export default function Navbar() {
                     <IconButton >
                         <ShoppingCartOutlinedIcon fontSize='large'/>
                     </IconButton>
-                    <IconButton sx={{marginLeft:'5px'}}>
+                    <IconButton sx={{marginLeft:'5px'}} component={Link} to="/login">
                         <AccountCircleOutlinedIcon fontSize='large'/>
                     </IconButton>
                 </Box>
