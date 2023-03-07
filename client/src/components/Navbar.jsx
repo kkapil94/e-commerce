@@ -3,8 +3,10 @@ import {AppBar, Box, Button, IconButton, Toolbar, TextField} from '@mui/material
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {Link, useNavigate} from "react-router-dom"
+import userStore from '../Stores/userStore';
 import '../index.css'
 export default function Navbar() {
+    const user = userStore(state=>state.user)
     const navigate = useNavigate()
     const [keyword,setKeyword] = useState(false)
     const handleClick = (e)=>{
@@ -34,7 +36,9 @@ export default function Navbar() {
                         <ShoppingCartOutlinedIcon fontSize='large'/>
                     </IconButton>
                     <IconButton sx={{marginLeft:'5px'}} component={Link} to="/login">
-                        <AccountCircleOutlinedIcon fontSize='large'/>
+                        {user.avatar? <img src={user.avatar.url} alt="" style={{height:"1.9rem",width:"1.9rem",borderRadius:"50%"}}/>:
+                              <AccountCircleOutlinedIcon fontSize='large'/>
+                        }
                     </IconButton>
                 </Box>
             </Toolbar>

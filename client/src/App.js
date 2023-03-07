@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Products from "./components/Products";
 import Footer from "./components/Footer";
 import LoginAndSignUp from "./components/LoginAndSignUp";
+import Account from "./pages/Account";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/products/product/:id" element={<ProductDetails />} />
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="/login" element={<LoginAndSignUp/>} />
+          <Route exact path="/account" element={<Account/>} />
         </Routes>
         <Footer />
       </Router>

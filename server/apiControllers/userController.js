@@ -4,15 +4,21 @@ import User from '../models/userModel.js'
 import bcrypt from "bcryptjs"
 import userModel from "../models/userModel.js";
 import { Token } from "../utils/webToken.js";
+import cloudinary from "cloudinary"
 // register user
 export const registerUser = catchAsyncErrors(async (req,res,next)=>{
+    const myCloud =await cloudinary.v2.uploader.upload(req.body.avatar,{
+        folder:"Avatars",
+        width:150,
+        crop:"scale"
+    })
     const {name,email,password,role} = req.body
     const hashedPass =await bcrypt.hash(password,10)
     const user =await User.create({
         name,email,password:hashedPass,role,
         avatar:{
-            public_id:'this is a sample id',
-            url:'profilePicUrl'
+            public_id:myCloud.public_id,
+            url:myCloud.secure_url
         }
     })
     Token(user,200,res)

@@ -5,10 +5,11 @@ import {
 import { Stack } from "@mui/system";
 import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import useProducts from "../store";
+import useProducts from "../Stores/productStore";
 import ProductCard from "./ProductCard";
 
 export default function HomeProducts() {
+  
   const products = useProducts((state) => state.products.product);
   const loading = useProducts((state) => state.loading);
   console.log(products, loading);

@@ -2,12 +2,14 @@ import { Box, Container } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import PortraitOutlinedIcon from '@mui/icons-material/PortraitOutlined';
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import userStore from "../Stores/userStore"
 import "./LoginAndSignUP.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginAndSignUp() {
     const [loginEmail,setLoginEmail] = useState("");
+    const navigate = useNavigate()
     const [loginPassword,setLoginPassword] = useState("");
     const [avatarPreview,setAvatarPreview] = useState("./images/avatar.jpg")
     const [avatar,setAvatar] = useState("")
@@ -21,32 +23,53 @@ export default function LoginAndSignUp() {
     const signUpForm = useRef()
     const loginTab = useRef()
     const registerTab = useRef()
-    const registerSubmit = (e)=>{
-      e.preventDefault()
-        const myForm = new FormData;
+    const loginUser = userStore(state=>state.loginUser)
+    const registerUser = userStore(state=>state.registerUser)
+    const isAuthenticated =  userStore(state=>state.isAuthenticated)
+    const registerSubmit =async (e)=>{
+      e.preventDefault();
+        const myForm = new FormData();
         myForm.set("name",name);
         myForm.set("email",email);
         myForm.set("password",password);
-        myForm.set(avatarPreview)
-
+        myForm.set("avatar",avatar)
+        console.log(myForm);
+        const response =await registerUser(myForm);
+        console.log(response);
+        if(response.data.success){
+          navigate("/account")
+        }
+        return response
     }
-    const loginSubmit = (e)=>{
+    const loginSubmit =async (e)=>{
       e.preventDefault();
-      
+      const response =await loginUser(loginEmail,loginPassword);
+      if(response.data.success){
+        navigate("/account")
+      }
     }
-    const changeFormData = (e)=>{
-        if(e.tartget.name===avatar){
+    const changeFormData = (e)=>{ 
+        if(e.target.name==='avatar'){
           const reader = new FileReader();
           reader.onload = ()=>{
             if(reader.readyState === 2)
-            setAvatar(reader.result)
-            setAvatarPreview(reader.result)
+            {setAvatar(reader.result)
+            setAvatarPreview(reader.result)}
           }
+          reader.readAsDataURL(e.target.files[0])
         }
         else{
-            setUser({...user,[e.tartget.name]:e.target.value})
+          console.log("i am");
+            setUser({...user,[e.target.name]:e.target.value})
         }
     }
+    useEffect(() => {
+      if(isAuthenticated){
+        console.log(isAuthenticated);
+        navigate("/account")
+      }
+    }, [isAuthenticated])
+    
     function switchTabs(e,tab){
         if(tab==="login"){
             signUpForm.current.classList.remove("shiftToNeutralForm")
@@ -78,7 +101,7 @@ export default function LoginAndSignUp() {
           <div style={{ paddingTop: ".5rem",marginBottom:"1rem"}}>
             <span 
                 onClick={(e)=>switchTabs(e,"login")}
-              class="loginTab activeTab"
+              className="loginTab activeTab"
               ref={loginTab}
               style={{
                 width: "50%",
@@ -92,7 +115,7 @@ export default function LoginAndSignUp() {
               Login
             </span>
             <span
-              class="registerTab"
+              className="registerTab"
               ref={registerTab}
               onClick={(e)=>switchTabs(e,'register')}
               style={{
@@ -122,15 +145,15 @@ export default function LoginAndSignUp() {
             <form  className="signUPForm" onSubmit={registerSubmit} ref={signUpForm} encType="multipart/form-data" style={{display:"flex",width:"100%",flexDirection:"column",alignItems:"center",rowGap:"2rem",justifyContent:"center",transition:"all 0.5s"}}>
               <div style={{display:"flex",alignItems:"center"}}>
                 <PortraitOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
-                <input type="text" required placeholder="Name" name="name" value={name} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
+                <input type="text" required placeholder="Name" name="name" value={user.name} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <div style={{display:"flex",alignItems:"center"}}>
                 <EmailOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
-                <input type="email" name="email" required placeholder="Email" value={email} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
+                <input type="email" name="email" required placeholder="Email" value={user.email} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <div style={{display:"flex",alignItems:"center"}}>
                 <VpnKeyOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
-                <input type="password" name="password" required placeholder="Password" value={password} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
+                <input type="password" name="password" required placeholder="Password" value={user.password} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <div id="registeredImage" style={{display:"flex",alignItems:"center",justifyContent:"center",width:"90%",paddingLeft:".5rem"}}>
                 <img src={avatarPreview}  alt="" style={{height:"3rem",width:"3rem"}}  />

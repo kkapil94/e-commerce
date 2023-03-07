@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { Fragment, useEffect } from "react";
 import Slider from "react-slick";
-import useProducts from "../store";
+import useProducts from "../Stores/productStore";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
