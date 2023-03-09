@@ -3,8 +3,8 @@ import {create} from "zustand"
 import { persist,createJSONStorage } from "zustand/middleware"
 
 const userStore = create(persist((set)=>({
-    isAuthenticated:null,
-    user:{},
+    isAuthenticated:0,
+    user:0,
     loginUser:async (email,password)=>{
         const config = {headers:{"Content-Type":"application/json"}}
         const response = await axios.post("/api/v1/login",{email,password},config)
@@ -13,7 +13,6 @@ const userStore = create(persist((set)=>({
         return response
     },
     registerUser:async (myData)=>{
-        console.log("kkk",myData)
         const config = {headers:{"Content-Type":"multipart/form-data"}}
         const response = await axios.post("/api/v1/register",myData,config)
         if(response.data.success)
@@ -22,9 +21,24 @@ const userStore = create(persist((set)=>({
     },
     logoutUser:async ()=>{
         const response = await axios.post("api/v1/logout");
-        if(response.data.success)
-        await set({isAuthenticated:0})
+          if(response.data.sucsess)
+         {
+            set({isAuthenticated:0,user:0})
+        }
         return response;
+    },
+    updateUser:async (user)=>{
+        const config = {headers:{"Content-Type":"multipart/form-data"}}
+        const response = await axios.patch("api/v1/update",user,config)
+        if(response.data.success){
+            set({user:response.data.user})
+        }
+        return response;
+    },
+    updatePassword:async (pass,user)=>{
+        const config = {headers:{"Content-Type":"application/json"}} 
+        const response = await axios.patch("api/v1/updatePassword",{pass,user},config)
+        return response
     }
 
 }),{

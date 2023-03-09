@@ -56,3 +56,47 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
         message:"Logged out"
     })
  })
+
+ //update user
+
+ export const updateUser = catchAsyncErrors(async (req,res,next)=>{
+    const newData = {
+        name:req.body.name,
+        email:req.body.email
+    }
+    if(req.body.avatar!==""){
+        console.log(req.body);
+        const user = await User.findById(req.body._id)
+        console.log("i am user",user);
+        const imageId =  user.avatar.public_id
+        console.log("image",imageId)
+        await cloudinary.v2.uploader.destroy(imageId)
+        const myCloud =await cloudinary.v2.uploader.upload(req.body.avatar,{
+            folder:"Avatars",
+            width:150,
+            crop:"scale"
+        })
+        newData.avatar = {
+            public_id:myCloud.public_id,
+            url:myCloud.url
+        }
+    }
+    const user =await User.findByIdAndUpdate(req.body._id,{
+        name:newData.name,email:newData.email,avatar:newData.avatar
+    },{new:true,runValidators:true,useFindAndModify:true})
+    res.status(200).json({success:true,user})
+ })
+
+ // updatePassword
+
+ export const updatePassword = catchAsyncErrors(async (req,res,next)=>{
+    const {pass,user} = req.body;
+    const compare = bcrypt.compare(pass,user.password);
+    if(compare){
+        const hashedPass = bcrypt(pass,10)
+    const response = User.findByIdAndUpdate(user._id,{password:hashedPass},{
+        new:true,runValidators:true,useFindAndModify:true
+    })
+    res.status(200).json({success:true,user})
+    }else return
+ })

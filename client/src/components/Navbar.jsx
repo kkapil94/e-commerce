@@ -36,7 +36,7 @@ export default function Navbar() {
                         <ShoppingCartOutlinedIcon fontSize='large'/>
                     </IconButton>
                     <IconButton sx={{marginLeft:'5px'}} component={Link} to="/login">
-                        {user.avatar? <img src={user.avatar.url} alt="" style={{height:"1.9rem",width:"1.9rem",borderRadius:"50%"}}/>:
+                        {user? <img src={user.avatar.url} alt="" style={{height:"1.9rem",width:"1.9rem",borderRadius:"50%"}}/>:
                               <AccountCircleOutlinedIcon fontSize='large'/>
                         }
                     </IconButton>

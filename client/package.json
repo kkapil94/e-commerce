@@ -13,6 +13,8 @@
     "axios": "^1.2.3",
     "dom": "^0.0.3",
     "react": "^18.2.0",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
@@ -46,5 +48,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://172.20.80.1:4000"
+  "proxy": "http://192.168.110.249:4000"
 }

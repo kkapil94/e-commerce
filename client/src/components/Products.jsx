@@ -35,7 +35,6 @@ export default function Products() {
   const keyword = params.keyword;
   useEffect(() => {
     fetchProducts(keyword, page, price, category);
-    console.log(category,products,products.length);
   }, [fetchProducts, keyword, page, price, category]);
 
   return (

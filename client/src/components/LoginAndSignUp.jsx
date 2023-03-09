@@ -33,9 +33,7 @@ export default function LoginAndSignUp() {
         myForm.set("email",email);
         myForm.set("password",password);
         myForm.set("avatar",avatar)
-        console.log(myForm);
         const response =await registerUser(myForm);
-        console.log(response);
         if(response.data.success){
           navigate("/account")
         }
@@ -59,13 +57,11 @@ export default function LoginAndSignUp() {
           reader.readAsDataURL(e.target.files[0])
         }
         else{
-          console.log("i am");
             setUser({...user,[e.target.name]:e.target.value})
         }
     }
     useEffect(() => {
       if(isAuthenticated){
-        console.log(isAuthenticated);
         navigate("/account")
       }
     }, [isAuthenticated])

@@ -12,7 +12,6 @@ export default function HomeProducts() {
   
   const products = useProducts((state) => state.products.product);
   const loading = useProducts((state) => state.loading);
-  console.log(products, loading);
   const fetch = useProducts((state) => state.fetchProducts);
   useEffect(() => {
     fetch();
