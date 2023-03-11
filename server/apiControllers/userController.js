@@ -91,12 +91,15 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
 
  export const updatePassword = catchAsyncErrors(async (req,res,next)=>{
     const {pass,user} = req.body;
-    const compare = bcrypt.compare(pass,user.password);
+    const compare =await bcrypt.compare(pass.oldOne,user.password);
+    if(!compare){
+        return next(new ErrorHandler("Incorrect Old Password",404)) 
+    }
     if(compare){
-        const hashedPass = bcrypt(pass,10)
-    const response = User.findByIdAndUpdate(user._id,{password:hashedPass},{
-        new:true,runValidators:true,useFindAndModify:true
-    })
-    res.status(200).json({success:true,user})
-    }else return
+        console.log(compare,);
+        const hashedPass =await bcrypt.hash(pass.newOne,10)
+        console.log(user._id,hashedPass);
+    const resp =await User.findByIdAndUpdate(user._id,{password:hashedPass},{new:true,runValidators:true,useFindAndModify:true})
+    res.status(200).json({success:true,resp})
+    }
  })

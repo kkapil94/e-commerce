@@ -1,5 +1,6 @@
 import { Alert, Box, Button, IconButton, Input, Modal, Typography } from "@mui/material";
 import React, { useState } from "react";
+import {useAlert} from "react-alert"
 import userStore from "../Stores/userStore";
 const style = {
     position: "absolute",
@@ -17,6 +18,7 @@ const style = {
   };
 
 export default function PasswordUpdate(props) {
+    const alert = useAlert()
     const user = userStore(state=>state.user)
     const updatePassword = userStore(state=>state.updatePassword)
     const [password,setPassword] = useState({
@@ -32,15 +34,18 @@ export default function PasswordUpdate(props) {
     const close = ()=>props.edit(0)
     const changePassword =async (e)=>{
         e.preventDefault()
-        if(password.newOne.length<<6){
-            console.log(password.newOne,password.newOne.length);
-            <Alert severity="info" variant="outlined" sx={{zIndex:"10"}}>Password should be of more than 6 characters</Alert>
-        }else if(password.oldOne !== password.newOne){
-            <Alert severity="info">New password does not matches</Alert>
-        }else{
-            const response = await updatePassword(password.newOne,user);
-            if(response.data.success === 1){
-                <Alert severity="info">Password changed successfully</Alert>
+        if(password.newOne.length>>6){
+            alert.show("Password should be of more than 6 characters");
+        }else if(password.reNewOne !== password.newOne)
+        {
+            alert.show("Password does not matches.")
+        }else
+        {   console.log({old:password.oldOne,new:password.newOne});
+            const response = await updatePassword(password,user);
+            console.log(response.data.success,"success");
+            if(response.data.success){
+            alert.show("Password changed successfully")
+            close()
             }
         }
     }
@@ -50,6 +55,7 @@ export default function PasswordUpdate(props) {
       onClose={close}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      sx={{zIndex:'0'}}
     >
       <Box sx={style}>
         <Box sx={{borderBottom:"2px solid gray",display:"flex",justifyContent:"space-between",paddingBottom:".5rem",zIndex:"-1"}}>

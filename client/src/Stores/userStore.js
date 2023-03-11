@@ -37,7 +37,10 @@ const userStore = create(persist((set)=>({
     },
     updatePassword:async (pass,user)=>{
         const config = {headers:{"Content-Type":"application/json"}} 
-        const response = await axios.patch("api/v1/updatePassword",{pass,user},config)
+        const response = await axios.patch("api/v1/updatePassword",{pass,user},config) 
+        if(response.data.success){
+            set({user:response.data.resp})
+        }
         return response
     }
 
