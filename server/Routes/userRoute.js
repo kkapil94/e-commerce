@@ -7,5 +7,6 @@ route.post("/login",controller.loginUser)
 route.post("/logout",controller.logoutUser)
 route.patch("/update",controller.updateUser)
 route.patch("/updatePassword",controller.updatePassword)
+route.post("/forgotPassword",controller.forgotPass)
 
 export default route

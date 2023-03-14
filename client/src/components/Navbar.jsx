@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <>
     <Box >
-        <AppBar color='inherit' sx={{position:'relative'}} >
+        <AppBar color='inherit' sx={{position:'relative',zIndex:"5"}} >
             <Toolbar >
                 <Box id='navBar' >
                     <Button component={Link} to={"/"}>Home</Button>

@@ -1,4 +1,4 @@
-import { Alert, Box, Button, IconButton, Input, Modal, Typography } from "@mui/material";
+import {  Box, Button, IconButton, Input, Modal, Typography } from "@mui/material";
 import React, { useState } from "react";
 import {useAlert} from "react-alert"
 import userStore from "../Stores/userStore";
@@ -7,14 +7,14 @@ const style = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    minWidth: "30rem",
+    width: "30rem",
     minHeight:'35rem',
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
     borderRadius:'1rem',
-    zIndex:-1
+    zIndex:"1100"
   };
 
 export default function PasswordUpdate(props) {
@@ -34,7 +34,8 @@ export default function PasswordUpdate(props) {
     const close = ()=>props.edit(0)
     const changePassword =async (e)=>{
         e.preventDefault()
-        if(password.newOne.length>>6){
+        console.log(password.newOne.length);
+        if(password.newOne.length<6){
             alert.show("Password should be of more than 6 characters");
         }else if(password.reNewOne !== password.newOne)
         {
@@ -55,7 +56,7 @@ export default function PasswordUpdate(props) {
       onClose={close}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      sx={{zIndex:'0'}}
+      sx={{zIndex:"10"}}
     >
       <Box sx={style}>
         <Box sx={{borderBottom:"2px solid gray",display:"flex",justifyContent:"space-between",paddingBottom:".5rem",zIndex:"-1"}}>
@@ -69,11 +70,11 @@ export default function PasswordUpdate(props) {
             </Box>
             <Box>
                 <Typography variant="h6">New Password</Typography>
-                <Input placeholder="Enter your new password" sx={{width:"100%"}} required name="newOne" value={password.newOne} onChange={changeData}/>
+                <Input placeholder="Enter your new password" type="password" sx={{width:"100%"}} required name="newOne" value={password.newOne} onChange={changeData}/>
             </Box>
             <Box>
                 <Typography variant="h6">Confirm New Password</Typography>
-                <Input placeholder="Re-enter your new Password" sx={{width:"100%"}} required name="reNewOne" value={password.reNewOne} onChange={changeData}/>
+                <Input placeholder="Re-enter your new Password" type="password" sx={{width:"100%"}} required name="reNewOne" value={password.reNewOne} onChange={changeData}/>
             </Box>
             <Button variant="outlined" type="submit" sx={{marginTop:"2rem"}}>Change Password</Button>
         </form>

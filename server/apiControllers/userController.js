@@ -1,10 +1,12 @@
 import ErrorHandler from "../utils/errorhandler.js";
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
+import crypto from "crypto"
 import User from '../models/userModel.js'
 import bcrypt from "bcryptjs"
 import userModel from "../models/userModel.js";
 import { Token } from "../utils/webToken.js";
 import cloudinary from "cloudinary"
+import sendMail from "../utils/sendMail.js"
 // register user
 export const registerUser = catchAsyncErrors(async (req,res,next)=>{
     const myCloud =await cloudinary.v2.uploader.upload(req.body.avatar,{
@@ -103,3 +105,50 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
     res.status(200).json({success:true,resp})
     }
  })
+
+ // Forgot Password
+
+ const genTok = ()=>{
+    //generate token
+    const resetToken = crypto.randomBytes(20).toString("hex");
+
+    //hashing and save reset token
+    const resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest('hex');
+
+    const resetPasswordExpire = Date.now() + 15 * 60 * 1000
+    
+    return {resetPasswordToken,resetPasswordExpire} 
+ }
+
+export const forgotPass = catchAsyncErrors(async (req,res,next)=>{
+    const {email} = req.body;
+    const user =await User.findOne({email});
+    console.log(user);
+    if(!user){
+         return next(new ErrorHandler("Please enter valid email and password",400));
+    }
+    const token = genTok();
+    user.resetPasswordToken = token.resetPasswordToken;
+    user.resetPasswordExpire = token.resetPasswordExpire;
+    await user.save({validateBeforUse:false});
+    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${token}`
+    const message = `Your password reset token is :-- \n\n${resetPasswordUrl}\n\n . If you does not have requested it, then ignore it ` 
+    try {
+        await sendMail({
+            email:user.email,
+            subject:"KK mart reset password token",
+            message
+        })
+        res.status(200).json({
+            success:true,
+            message:`email sent to ${user.email}`
+        })
+        
+    } catch (error) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save({validateBeforeSave:false});
+        return next(new ErrorHandler(error.message,"500"))
+    }
+
+})

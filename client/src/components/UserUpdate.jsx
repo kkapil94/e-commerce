@@ -58,7 +58,7 @@ export default function UserUpdate(props) {
       onClose={close}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      sx={{zIndex:"-1"}}
+      sx={{zIndex:"10"}}
     >
       <Box sx={style}>
         <Box sx={{display:"flex",flexDirection:'row',alignItems:'center',justifyContent:"space-between",marginBottom:"3.5rem",borderBottom:"2px solid gray",paddingBottom:"0.5rem"}}>
