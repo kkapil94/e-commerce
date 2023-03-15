@@ -7,6 +7,8 @@ import Products from "./components/Products";
 import Footer from "./components/Footer";
 import LoginAndSignUp from "./components/LoginAndSignUp";
 import Account from "./pages/Account";
+import ForgotPasword from "./components/ForgotPasword";
+import ResetPassword from "./components/ResetPassword";
 function App() {
   return (
     <>
@@ -20,6 +22,8 @@ function App() {
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="/login" element={<LoginAndSignUp/>} />
           <Route exact path="/account" element={<Account/>} />
+          <Route exact path="/forgotPassword" element={<ForgotPasword/>} />
+          <Route exact path="/reset/password/:token" element={<ResetPassword/>} />
         </Routes>
         <Footer />
       </Router>

@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
 
 const sendMail = async(options)=>{
+    // console.log(procees.env.SMPT_MAIL);
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -12,13 +13,16 @@ const sendMail = async(options)=>{
         }
     });
 
+
+
     const mailOptions = {
         from:process.env.SMPT_MAIL,
         to:options.email,
         subject:options.subject,
-        message:options.message
+        text:options.message
     } 
     await transporter.sendMail(mailOptions)
+
 
 } 
 export default sendMail

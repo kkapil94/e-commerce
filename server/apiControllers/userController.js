@@ -98,7 +98,7 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
         return next(new ErrorHandler("Incorrect Old Password",404)) 
     }
     if(compare){
-        console.log(compare,);
+        console.log(compare);
         const hashedPass =await bcrypt.hash(pass.newOne,10)
         console.log(user._id,hashedPass);
     const resp =await User.findByIdAndUpdate(user._id,{password:hashedPass},{new:true,runValidators:true,useFindAndModify:true})
@@ -117,21 +117,20 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
 
     const resetPasswordExpire = Date.now() + 15 * 60 * 1000
     
-    return {resetPasswordToken,resetPasswordExpire} 
+    return {resetToken,resetPasswordToken,resetPasswordExpire} 
  }
 
 export const forgotPass = catchAsyncErrors(async (req,res,next)=>{
     const {email} = req.body;
     const user =await User.findOne({email});
-    console.log(user);
     if(!user){
-         return next(new ErrorHandler("Please enter valid email and password",400));
+         return next(new ErrorHandler("please enter valid email",400));
     }
     const token = genTok();
     user.resetPasswordToken = token.resetPasswordToken;
     user.resetPasswordExpire = token.resetPasswordExpire;
     await user.save({validateBeforUse:false});
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${token}`
+    const resetPasswordUrl = `${process.env.FRONTED_URL}}/api/v1/password/reset/${token.resetToken}`
     const message = `Your password reset token is :-- \n\n${resetPasswordUrl}\n\n . If you does not have requested it, then ignore it ` 
     try {
         await sendMail({
@@ -148,7 +147,29 @@ export const forgotPass = catchAsyncErrors(async (req,res,next)=>{
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
         await user.save({validateBeforeSave:false});
-        return next(new ErrorHandler(error.message,"500"))
+        return next(new ErrorHandler(error.message,500))
     }
 
+})
+
+//reset password
+
+export const resetPass = catchAsyncErrors(async (req,res,next)=>{
+    console.log(req.params.token);
+    const token = crypto.createHash("sha256").update(req.params.token).digest('hex');
+    console.log(token);
+    const user = await User.findOne({
+        resetPasswordToken:token,
+        resetPasswordExpire:{$gt:Date.now()}
+    })
+    console.log(user);
+    if(!user){
+        return next(new ErrorHandler("the reset token is expired or invalid",400))
+    }
+    const hashedPass =await bcrypt.hash(req.body.password,10)
+    user.password = hashedPass;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    user.save();
+    Token(user,200,res)
 })

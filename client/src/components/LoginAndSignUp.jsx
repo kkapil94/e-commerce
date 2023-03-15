@@ -135,7 +135,7 @@ export default function LoginAndSignUp() {
                 <VpnKeyOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
                 <input type="password" required placeholder="Password" name="password" value={loginPassword} onChange={(e)=>{setLoginPassword(e.target.value)}} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
-              <Link to="/password/forgot" style={{display:"inline-block",fontSize:'.8rem',marginLeft:"auto"}}>Forgot Password?</Link>
+              <Link to="/forgotPassword" style={{display:"inline-block",fontSize:'.8rem',marginLeft:"auto"}}>Forgot Password?</Link>
               <button type="submit" style={{width:"100%",height:"2rem"}}>Login</button>
             </form>
             <form  className="signUPForm" onSubmit={registerSubmit} ref={signUpForm} encType="multipart/form-data" style={{display:"flex",width:"100%",flexDirection:"column",alignItems:"center",rowGap:"2rem",justifyContent:"center",transition:"all 0.5s"}}>
