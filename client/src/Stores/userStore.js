@@ -47,16 +47,16 @@ const userStore = create(persist((set)=>({
         const config = {headers:{"Content-Type":"application/json"}} 
         try {
             const response = await axios.post("api/v1/password/forgot",{mail},config)  
-        console.log(response.data);
         return response
         } catch (error) {
-            return error
+            return error.response
         }
         
     },
     resetPass:async (token,pass)=>{
         const config = {headers:{"Content-Type":"application/json"}}
         const res = await axios.put(`/api/v1/password/reset/${token}`,pass,config)
+        return res
     }
 
 }),{

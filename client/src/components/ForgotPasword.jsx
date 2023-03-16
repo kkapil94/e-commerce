@@ -9,8 +9,13 @@ export default function ForgotPasword() {
     const forgot = userStore(state=>state.forgotPassword)
 const submit =async (e)=>{
     e.preventDefault()
-    const {response} = await forgot(mail);
-    if(!response.data.success){
+    const response = await forgot(mail);
+    console.log(response);
+     if(response.data.success){
+        console.log("ok");
+        alert.show("email sent successfully")
+    }
+    else if(!response.data.success){
         alert.show(response.data.message)
     }
 }
@@ -21,7 +26,7 @@ const submit =async (e)=>{
             <Box sx={{border:"2px solid grey",borderRadius:"1rem",height:"18rem",width:"18rem",padding:"2rem"}}>
                 <Typography variant="h5" textAlign="center" sx={{borderBottom:"2px solid gray",padding:".3rem"}}>Forgot Password</Typography>
                 <form onSubmit={submit} style={{height:"10rem",display:"flex",flexDirection:"column",justifyContent:"space-evenly",marginTop:"1rem"}}>
-                    <Input type="email" placeholder='Enter your email' value={mail} onChange={(e)=>setMail(e.target.value)}/>
+                    <Input type="email" placeholder='Enter your email' value={mail} required onChange={(e)=>setMail(e.target.value)}/>
                     <Button variant="outlined" type='submit'>submit</Button>
                 </form>
             </Box>

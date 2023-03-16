@@ -1,6 +1,7 @@
 import { Box, Button, Container, IconButton, Input, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useAlert } from 'react-alert';
+import { useParams } from 'react-router-dom';
 import userStore from '../Stores/userStore';
 // const style = {
 //     position: "absolute",
@@ -17,7 +18,8 @@ import userStore from '../Stores/userStore';
 //     zIndex:"1100"
 //   };
 
-export default function ResetPassword({match}) {
+export default function ResetPassword() {
+    const params = useParams()
     const resetPass = userStore(state=>state.resetPass)
     const alert = useAlert()
     const [password,setPassword] = useState({
@@ -33,13 +35,13 @@ export default function ResetPassword({match}) {
         e.preventDefault()
         console.log(password.newOne.length);
         if(password.newOne.length<6){
-            alert.show("Password should be of more than 6 characters");
+            alert.show("Password should be of 6 or more than 6 characters");
         }else if(password.reNewOne !== password.newOne)
         {
             alert.show("Password does not matches.")
         }else
         {  
-            const response =await resetPass(match.params.token,password)
+            const response =await resetPass(params.token,password)
             if(response.data.success){
                 alert.success("password reset successfully")
             }

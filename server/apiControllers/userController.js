@@ -121,8 +121,8 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
  }
 
 export const forgotPass = catchAsyncErrors(async (req,res,next)=>{
-    const {email} = req.body;
-    const user =await User.findOne({email});
+    const {mail} = req.body;
+    const user =await User.findOne({email:mail});
     if(!user){
          return next(new ErrorHandler("please enter valid email",400));
     }
@@ -130,7 +130,7 @@ export const forgotPass = catchAsyncErrors(async (req,res,next)=>{
     user.resetPasswordToken = token.resetPasswordToken;
     user.resetPasswordExpire = token.resetPasswordExpire;
     await user.save({validateBeforUse:false});
-    const resetPasswordUrl = `${process.env.FRONTED_URL}}/api/v1/password/reset/${token.resetToken}`
+    const resetPasswordUrl = `${process.env.FRONTED_URL}/password/reset/${token.resetToken}`
     const message = `Your password reset token is :-- \n\n${resetPasswordUrl}\n\n . If you does not have requested it, then ignore it ` 
     try {
         await sendMail({
