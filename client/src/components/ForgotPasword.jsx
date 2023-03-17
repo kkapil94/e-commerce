@@ -2,9 +2,11 @@ import { Box, Button, Container, Input, Typography } from '@mui/material'
 import { useAlert } from 'react-alert'
 import React, { useState } from 'react'
 import userStore from '../Stores/userStore'
+import { useNavigate } from 'react-router-dom'
 
 export default function ForgotPasword() {
     const alert = useAlert()
+    const navigate = useNavigate()
     const [mail,setMail] = useState("")
     const forgot = userStore(state=>state.forgotPassword)
 const submit =async (e)=>{
@@ -13,7 +15,8 @@ const submit =async (e)=>{
     console.log(response);
      if(response.data.success){
         console.log("ok");
-        alert.show("email sent successfully")
+        alert.success("email sent successfully")
+        navigate("/")
     }
     else if(!response.data.success){
         alert.show(response.data.message)

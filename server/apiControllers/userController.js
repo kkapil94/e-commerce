@@ -166,7 +166,7 @@ export const resetPass = catchAsyncErrors(async (req,res,next)=>{
     if(!user){
         return next(new ErrorHandler("the reset token is expired or invalid",400))
     }
-    const hashedPass =await bcrypt.hash(req.body.password,10)
+    const hashedPass =await bcrypt.hash(req.body.newOne,10)
     user.password = hashedPass;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;

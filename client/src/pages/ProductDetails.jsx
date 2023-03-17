@@ -7,16 +7,18 @@ import {
   TextField,
   IconButton,
   Container,
+  Input,
 } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Slider from "react-slick";
 import useProducts from "../Stores/productStore";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Review from "../components/Review";
+import "./ProductDetails.css"
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -31,9 +33,21 @@ export default function ProductDetails() {
     autoplaySpeed: 3000,
     cssEase: "linear",
   };
+  const [quan,setQuan] = useState(1)
   const productDetails = useProducts((state) => state.productDetails);
   const fetchProductDetails = useProducts((state) => state.fetchProductDetails);
-
+  const incQuan = ()=>{
+    if(productDetails.product.stock>quan){
+      setQuan(quan+1)
+    }
+    else{return quan}
+  }
+  const decQuan = ()=>{
+    if(quan>1){
+      setQuan(quan-1)
+    }
+    else{return quan}
+  }
   useEffect(() => {
     fetchProductDetails(id);
   }, [id, fetchProductDetails]);
@@ -113,18 +127,22 @@ export default function ProductDetails() {
               <Box
                 sx={{ borderBottom: "1px solid black", paddingBottom: "1rem" }}
               >
-                <IconButton size="small">
-                  <AddIcon />
+                <IconButton size="small" onClick={decQuan}>
+                  <RemoveIcon />
                 </IconButton>
-                <TextField
-                  sx={{ width: "3rem" }}
-                  size="small"
-                  InputLabelProps={{
-                    shrink: true,
+                <Input sx={{width:'2rem',paddingLeft:".7rem"}}
+                 type="number"
+                  size="sm"
+                  value={quan}
+                  slotProps={{
+                    input: {
+                      min: 1,
+                      max: productDetails.product.stock
+                    },
                   }}
                 />
-                <IconButton size="small">
-                  <RemoveIcon />
+                <IconButton size="small" onClick={incQuan}>
+                  <AddIcon />
                 </IconButton>
                 <Button variant="contained" sx={{ borderRadius: "2rem" }}>
                   Add to cart

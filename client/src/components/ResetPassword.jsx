@@ -1,24 +1,12 @@
 import { Box, Button, Container, IconButton, Input, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useAlert } from 'react-alert';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import userStore from '../Stores/userStore';
-// const style = {
-//     position: "absolute",
-//     top: "50%",
-//     left: "50%",
-//     transform: "translate(-50%, -50%)",
-//     width: "30rem",
-//     minHeight:'35rem',
-//     bgcolor: "background.paper",
-//     border: "2px solid #000",
-//     boxShadow: 24,
-//     p: 4,
-//     borderRadius:'1rem',
-//     zIndex:"1100"
-//   };
+
 
 export default function ResetPassword() {
+    const navigate = useNavigate()
     const params = useParams()
     const resetPass = userStore(state=>state.resetPass)
     const alert = useAlert()
@@ -44,6 +32,7 @@ export default function ResetPassword() {
             const response =await resetPass(params.token,password)
             if(response.data.success){
                 alert.success("password reset successfully")
+                navigate("/login")
             }
         }
     }
