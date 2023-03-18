@@ -32,7 +32,7 @@ export default function Navbar() {
                     <Button variant='outlined' sx={{height:"2.5rem"}} onClick={handleClick}>Search</Button>
                 </Box>
                 <Box sx={{marginLeft:'9.5rem'}}>
-                    <IconButton >
+                    <IconButton onClick={()=>navigate('/cart')}>
                         <ShoppingCartOutlinedIcon fontSize='large'/>
                     </IconButton>
                     <IconButton sx={{marginLeft:'5px'}} component={Link} to="/login">

@@ -19,6 +19,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Review from "../components/Review";
 import "./ProductDetails.css"
+import cartStore from "../Stores/cartStore";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -36,6 +37,7 @@ export default function ProductDetails() {
   const [quan,setQuan] = useState(1)
   const productDetails = useProducts((state) => state.productDetails);
   const fetchProductDetails = useProducts((state) => state.fetchProductDetails);
+  const addItem = cartStore(state=>state.addToCart)
   const incQuan = ()=>{
     if(productDetails.product.stock>quan){
       setQuan(quan+1)
@@ -47,6 +49,9 @@ export default function ProductDetails() {
       setQuan(quan-1)
     }
     else{return quan}
+  }
+  const addToCart = (product)=>{
+    addItem(product,quan)
   }
   useEffect(() => {
     fetchProductDetails(id);
@@ -130,7 +135,7 @@ export default function ProductDetails() {
                 <IconButton size="small" onClick={decQuan}>
                   <RemoveIcon />
                 </IconButton>
-                <Input sx={{width:'2rem',paddingLeft:".7rem"}}
+                <Input 
                  type="number"
                   size="sm"
                   value={quan}
@@ -144,7 +149,7 @@ export default function ProductDetails() {
                 <IconButton size="small" onClick={incQuan}>
                   <AddIcon />
                 </IconButton>
-                <Button variant="contained" sx={{ borderRadius: "2rem" }}>
+                <Button variant="contained" sx={{ borderRadius: "2rem" }} onClick={()=>addToCart(productDetails.product)}>
                   Add to cart
                 </Button>
               </Box>
