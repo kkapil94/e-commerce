@@ -14,14 +14,14 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { Box } from "@mui/system";
 export default function Cart() {
   const cartItems = cartStore((state) => state.cart);
-  const [price, setPrice] = useState(0);
-
+  const [price, setPrice] = useState(cartItems.forEach(i=>(i.product.price*i.quantity)));
+  const [quan,setQuan] = useState(0)
   const setQuantity = cartStore((state) => state.setQuan);
-  const [quan, setQuan] = useState(null);
 
   const incQuan = async (prod, quantity) => {
     if (prod.stock > quantity) {
       setQuantity(prod, quantity + 1);
+      setQuan(quantity+1)
     } else {
       return setQuantity(quantity);
     }
@@ -29,16 +29,22 @@ export default function Cart() {
   const decQuan = (prod, quantity) => {
     if (quantity > 1) {
       setQuantity(prod, quantity - 1);
+      setQuan(quantity-1)
     } else {
       return setQuantity(quantity);
     }
   };
+  const total = ()=>{
+    const money = cartItems.forEach((i)=>(total + i.product.price * i.quantity))
+    setPrice(money)
+  }
   useEffect(() => {
-    let total = 0;
-    cartItems.forEach(
-      (item) => (total = total + item.product.price * item.quantity)
-    );
-    setPrice(total);
+    // let total = 0;
+    // cartItems.forEach(
+    //   (item) => (total = total + item.product.price * item.quantity)
+    // );
+    // setPrice(total);
+    total()
   }, [cartItems]);
   return (
     <>
@@ -132,7 +138,7 @@ export default function Cart() {
                     </div>
                     <div className="price">
                       <Typography variant="subtitle1">
-                        ₹{(quan ? quan : item.quantity) * item.product.price}
+                        ₹{( item.quantity) * item.product.price}
                       </Typography>
                     </div>
                   </div>
