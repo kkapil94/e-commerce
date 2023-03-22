@@ -1,5 +1,5 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material"
-import {useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import React, { useEffect, useState } from "react"
 import userStore from "../Stores/userStore"
 import UserUpdate from "../components/UserUpdate"
@@ -21,7 +21,7 @@ export default function Account(){
      if(!isAuthenticated){
         navigate("/login")
      }
-    }, [])
+    }, [navigate,isAuthenticated])
     
     return(
         <>{isAuthenticated&&
@@ -31,7 +31,7 @@ export default function Account(){
                 <Typography variant='h3' letterSpacing={2.5} sx={{borderBottom:'2px solid gray',display:'inline-block',marginTop:'1rem'}}>My Profile</Typography>
                 <Grid container alignItems="center" justifyContent="center" sx={{height:"90vh"}} direction="row">
                     <Grid container item lg={6} sm={6} xs={12} direction="column" justifyContent={"center"} alignItems="center">
-                        <img src={user.avatar.url} style={{height:"20rem",width:"20rem",display:"inline",borderRadius:"50%"}}/>
+                        <img src={user.avatar.url} style={{height:"20rem",width:"20rem",display:"inline",borderRadius:"50%"}} alt=""/>
                         <Button variant="outlined" sx={{marginTop:"2rem",width:'50%'}} onClick={()=>setEdit(true)}>Edit Profile</Button>
                     </Grid>
                     <Grid container item lg={6} sm={6} xs={12} direction="column" sx={{paddingLeft:"7rem",rowGap:"2rem"}} >

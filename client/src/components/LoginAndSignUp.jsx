@@ -5,7 +5,7 @@ import PortraitOutlinedIcon from '@mui/icons-material/PortraitOutlined';
 import React, { useEffect, useRef, useState } from "react";
 import userStore from "../Stores/userStore"
 import "./LoginAndSignUP.css"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function LoginAndSignUp() {
     const [loginEmail,setLoginEmail] = useState("");
@@ -17,8 +17,9 @@ export default function LoginAndSignUp() {
         name:'',
         email:"",
         password:"",
-    })
-    const {name,email,password} = user
+      })
+      const {name,email,password} = user
+      const location = useLocation()
     const loginForm = useRef()
     const signUpForm = useRef()
     const loginTab = useRef()
@@ -34,17 +35,14 @@ export default function LoginAndSignUp() {
         myForm.set("password",password);
         myForm.set("avatar",avatar)
         const response =await registerUser(myForm);
-        if(response.data.success){
-          navigate("/account")
-        }
+        // if(response.data.success){
+        //   navigate("/account")
+        // }
         return response
     }
     const loginSubmit =async (e)=>{
       e.preventDefault();
       const response =await loginUser(loginEmail,loginPassword);
-      if(response.data.success){
-        navigate("/account")
-      }
     }
     const changeFormData = (e)=>{ 
         if(e.target.name==='avatar'){
@@ -60,11 +58,12 @@ export default function LoginAndSignUp() {
             setUser({...user,[e.target.name]:e.target.value})
         }
     }
+    const redirect = location.search?location.search.split("=")[1]:"/account"
     useEffect(() => {
       if(isAuthenticated){
-        navigate("/account")
+        navigate("/"+redirect)
       }
-    }, [isAuthenticated])
+    }, [isAuthenticated,navigate])
     
     function switchTabs(e,tab){
         if(tab==="login"){

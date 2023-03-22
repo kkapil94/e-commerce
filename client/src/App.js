@@ -10,6 +10,7 @@ import Account from "./pages/Account";
 import ForgotPasword from "./components/ForgotPasword";
 import ResetPassword from "./components/ResetPassword";
 import Cart from "./pages/Cart";
+import Shipping from "./components/Shipping";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/forgotPassword" element={<ForgotPasword/>} />
           <Route exact path="/password/reset/:token" element={<ResetPassword/>} />
           <Route exact path="/cart" element={<Cart/>} />
+          <Route exact path="/shipping" element={<Shipping/>} />
         </Routes>
         <Footer />
       </Router>

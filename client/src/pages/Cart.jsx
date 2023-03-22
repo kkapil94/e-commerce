@@ -11,6 +11,7 @@ import cartStore from "../Stores/cartStore";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box } from "@mui/system";
+import {useNavigate} from "react-router-dom"
 export default function Cart() {
   const cartItems = cartStore((state) => state.cart);
   console.log(cartItems);
@@ -23,7 +24,7 @@ export default function Cart() {
   // eslint-disable-next-line
   const [quan, setQuan] = useState(0);
   const setQuantity = cartStore((state) => state.setQuan);
-
+  const navigate = useNavigate()
   const incQuan = (prod, quantity) => {
     if (prod.stock > quantity) {
       setQuantity(prod, quantity + 1);
@@ -40,6 +41,9 @@ export default function Cart() {
       return setQuantity(quantity);
     }
   };
+  const checkOut = ()=>{
+    navigate("/login?redirect=shipping")
+  }
   return !cartItems.length ? (
     <>
       <div style={{ display: "flex", alignItems: "center",flexDirection:"column"}}>
@@ -205,6 +209,7 @@ export default function Cart() {
               <Button
                 variant="outlined"
                 sx={{ width: "80%", marginTop: "2rem" }}
+                onClick={checkOut}
               >
                 Proceed To Check Out
               </Button>
