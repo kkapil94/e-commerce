@@ -7,6 +7,7 @@ import {
   FormControl,
   InputLabel,
   Button,
+  Typography,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
@@ -16,30 +17,40 @@ import PublicIcon from "@mui/icons-material/Public";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import { Country, State } from "country-state-city";
 import React, { useState } from "react";
+import { shippingStore } from "../Stores/shippingStore";
+import Stepper from './Stepper'
 
 export default function Shipping() {
+  const shipInfo = shippingStore(state=>state.shippingInfo)
+  const setShipInfo = shippingStore(state=>state.setShippingInfo)
   const [shippingInfo, setShippingInfo] = useState({
-    address: "",
-    city: "",
-    pincode: "",
-    phone: "",
-    country: "",
+    address: shipInfo?shipInfo.address:'',
+    city: shipInfo?shipInfo.city:'',
+    pincode: shipInfo?shipInfo.pincode:'',
+    phone: shipInfo?shipInfo.phone:'',
+    country: shipInfo?shipInfo.country:'',
   });
   const changeData = (e) => {
-    e.preventDefault();
     console.log("working", shippingInfo.country);
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
   };
+  const submit = (e)=>{
+    e.preventDefault();
+    setShipInfo(shippingInfo)
+  }
   return (
     <>
+      <Stepper activeStep={0}/>
       <Container maxWidth="lg" sx={{ width: "100vw",height:"100vh", paddingTop: "2rem" }}>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection:"column"
           }}
         >
+          <Typography variant="h4" textAlign={'center'} letterSpacing={1} sx={{marginBottom:"2rem",borderBottom:"2px solid gray",paddingBottom:".4rem",width:"30%"}}>Shipping Details</Typography>
           <form
             style={{
               border: "2px solid gray",
@@ -150,7 +161,7 @@ export default function Shipping() {
               </Select>
               </FormControl>
             </div>
-            <Button variant="outlined" type="submit" sx={{marginTop:"1rem",width:"100%"}}>Continue</Button>
+            <Button variant="outlined" type="submit" sx={{marginTop:"1rem",width:"100%"}} onClick={submit}>Continue</Button>
           </form>
         </Box>
       </Container>

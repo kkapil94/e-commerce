@@ -1,0 +1,53 @@
+@media screen and  (max-width:1050px){
+    #page{
+        font-size: 1rem;
+        text-decoration: underline;
+        font-family: 'Martian Mono', monospace;
+        color: #BAD7E9;
+        letter-spacing: .2rem;
+    }
+    .logo{
+        width: 4rem !important;
+    }
+    MuiTextFeild-root{
+        width: 20rem ;
+    }
+    #searchBar{
+        max-width: 100% !important;
+    }
+    #navBar{
+        position:absolute;
+        left: 0;
+        top: 0rem;
+        height: 100vh;
+        width: 30vw;
+        background: #2B3467;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #open{
+        display: block;
+    }
+    #close{
+        display: none;
+    }
+    #nav{
+        display: none;
+    }
+}
+
+@media screen and (max-width:650px){
+    .searchbar{
+        position: absolute;
+        top:4.5rem;
+        left: .5rem;
+    }
+    #searchBar{
+        width: 75vw !important;
+    }
+    #logoContainer{
+        margin:0
+    }
+}
