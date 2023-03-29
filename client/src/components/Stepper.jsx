@@ -24,7 +24,7 @@ const steps = [
   },
 ];
 
-export default function HorizontalLabelPositionBelowStepper({activeStep}) {
+export default function deliveryStepper({activeStep}) {
   return (
     <Box sx={{ width: "100%",marginTop:"1rem" }}>
       <Stepper activeStep={activeStep} alternativeLabel>
