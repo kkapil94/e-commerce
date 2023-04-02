@@ -12,6 +12,7 @@ import ResetPassword from "./components/ResetPassword";
 import Cart from "./pages/Cart";
 import Shipping from "./components/Shipping";
 import OrderConfirm from "./components/OrderConfirm";
+import PaymentHandler from "./components/PaymentHandler";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path="/shipping" element={<Shipping/>} />
           <Route exact path="/order/confirm" element={<OrderConfirm/>} />
+          <Route exact path="/payment" element={<PaymentHandler/>} />
         </Routes>
         <Footer />
       </Router>

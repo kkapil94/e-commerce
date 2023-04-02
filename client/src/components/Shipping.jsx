@@ -17,12 +17,14 @@ import PublicIcon from "@mui/icons-material/Public";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import { Country, State } from "country-state-city";
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
 import { shippingStore } from "../Stores/shippingStore";
 import Stepper from './Stepper'
 
 export default function Shipping() {
   const shipInfo = shippingStore(state=>state.shippingInfo)
   const setShipInfo = shippingStore(state=>state.setShippingInfo)
+  const navigate = useNavigate()
   const [shippingInfo, setShippingInfo] = useState({
     address: shipInfo?shipInfo.address:'',
     city: shipInfo?shipInfo.city:'',
@@ -37,6 +39,7 @@ export default function Shipping() {
   const submit = (e)=>{
     e.preventDefault();
     setShipInfo(shippingInfo)
+    navigate("/order/confirm")
   }
   return (
     <>

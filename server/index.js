@@ -9,6 +9,7 @@ import errorMiddleware from './middleware/error.js'
 import cloudinary from 'cloudinary'
 import dotenv from 'dotenv'
 
+import paymentRoute from "./Routes/paymentRoute.js"
 
 import user from './Routes/userRoute.js'
 import cors from "cors"
@@ -33,6 +34,7 @@ app.use(cookieParser())
 app.use('/api/v1',product)
 app.use('/api/v1',user)
 app.use("/api/v1",order)
+app.use("/api/v1",paymentRoute)
 app.use(errorMiddleware)
 cloudinary.config({
     cloud_name:process.env.CLOUDINARY_NAME,
@@ -40,6 +42,7 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET,
 
 })
+
 const server = app.listen('4000',()=>{
     console.log('app is listening on port:4000');
 })

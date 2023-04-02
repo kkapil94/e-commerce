@@ -1,26 +1,32 @@
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import cartStore from "../Stores/cartStore";
 import { shippingStore } from "../Stores/shippingStore";
 import userStore from "../Stores/userStore";
 import Stepper from "./Stepper";
 import CloseIcon from '@mui/icons-material/Close';
+import {useNavigate} from "react-router-dom"
 
 function OrderConfirm() {
   const { address, city, phone, country, pincode, state } = shippingStore((state) => state.shippingInfo);
   const user = userStore((state) => state.user);
   const cart = cartStore((state) => state.cart);
+  const navigate = useNavigate()
   let subTotal = 0;
   cart.forEach((i) => {
     subTotal = subTotal + i.product.price * i.quantity;
   });
   const gst = subTotal*0.18
   const shippingCharges = subTotal>=500?0:100
+  const total = subTotal+gst+shippingCharges
+  const payment =async  ()=>{
+    navigate("/payment")
+  }
   return (
     <>
       <Stepper activeStep={1}/>
       <Grid container>
-        <Grid item lg={8} md={8} sm={8} sx={{padding:"4rem"}}>
+        <Grid item lg={8} md={8} sm={8} sx={{padding:"4rem",borderRight:"1px solid grey"}}>
           <Stack >
             <Box sx={{marginBottom:"2rem"}}>
               <Typography variant="h6">Shipping Info</Typography>
@@ -72,11 +78,11 @@ function OrderConfirm() {
                 </Stack>
                 <Stack direction={"row"} justifyContent={"space-between"} alignItems="center" sx={{marginBottom:"1rem"}}>
                   <Typography variant="subtitle2">Total:</Typography>
-                  <Typography variant="subtitle2">₹{subTotal+gst+shippingCharges}</Typography>
+                  <Typography variant="subtitle2">₹{total}</Typography>
                 </Stack>
             </Box>
           </Box>
-          <Button variant="contained" sx={{width:"100%",marginTop:".5rem"}}>Proceed To Payment</Button>
+          <Button variant="contained" sx={{width:"100%",marginTop:".5rem"}} onClick={payment}>Proceed To Payment</Button>
         </Grid>
       </Grid>
       
