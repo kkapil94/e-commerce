@@ -24,8 +24,15 @@ export default function PaymentHandler() {
   const shippingCharges = subTotal >= 500 ? 0 : 100;
   const total = subTotal + gst + shippingCharges;
 
-  let orderDetails = {shippingInfo,
-    orderItems:cart,
+  let orderDetails = {
+    shippingInfo,
+    orderItems:cart.map(item=>({
+      name:item.product.name,
+      quantity:item.quantity,
+      price:item.product.price,
+      image:item.product.images[0].url,
+      product:item.product._id
+    })),
     itemsPrice:subTotal,
     taxPrice:gst,
     shippingPrice:shippingCharges,

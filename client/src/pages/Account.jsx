@@ -48,7 +48,7 @@ export default function Account(){
                             <Typography variant="subtitle1">{String(user.createdAt).substring(0,10)}</Typography>
                         </Box>
                         <Box>
-                            <Button variant="outlined" sx={{display:"block",marginBottom:"1rem",width:"70%"}}>My Orders</Button>
+                            <Button variant="outlined" sx={{display:"block",marginBottom:"1rem",width:"70%"}} onClick={()=>navigate(`/order/me/${user._id}`)}>My Orders</Button>
                             <Button variant="outlined" sx={{width:"70%",marginBottom:"1rem"}} onClick={()=>setEdit(1)}>Change Password</Button>
                             <Button variant="outlined" sx={{width:"70%"}} onClick={logout} >Log Out</Button>
                         </Box>
