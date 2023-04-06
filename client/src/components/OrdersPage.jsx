@@ -1,59 +1,43 @@
 import React, { useEffect, useState } from "react"
-import {DataGrid} from "@mui/x-data-grid"
 import orderStore from "../Stores/orderStore";
 import { useParams } from "react-router-dom";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import "./OrdersPage.css"
 export  function OrderPage(){
     const param = useParams()
     const order = orderStore(state=>state.getOrders)
     const [orders,setOrders] = useState()
-    const columns = [
-        {field:"id",headerName:"Order Id",minWidth:300,flex:1},
-        {
-            field:"status",
-            headerName:"Status",
-            minWidth:150,
-            flex:0.5
-        },
-        {
-            field:"itemsQty",
-            headerName:"Items Quantity",
-            type:"number",
-            minWidth:150,
-            flex:0.3
-        },
-        {
-            field:"amount",
-            headerName:"Amount",
-            type:"number",
-            minWidth:270,
-            flex:0.5
-        }
-    ]
     const getOrders = async()=>{
         const {orders} = await order(param.id);
-        setOrders(orders.map(item=>(
-            {
-                itemsQty:item.orderItems.length,
-                id:item._id,
-                status:item.orderStatus,
-                amount:item.totalPrice
-            }
-        )))
+        setOrders(orders)
+        console.log(orders);
     }
     useEffect(()=>{
         getOrders()
-    },[getOrders])
+    },[])
     return(
         <>
-            {orders?<DataGrid
-                columns={columns}
-                rows={orders}
-                disableRowSelectionOnClick
-                autoHeight
-            />: <Box sx={{ display: "flex",height:"100vh",width:"100vw",alignItems:'center',justifyContent:"center",overflow:"hidden" }}>
-            <CircularProgress />
-          </Box> }
+            <Container sx={{background:"#f1f3f6",paddingBottom:"1rem"}}>
+                <Typography variant="h3">Your Orders:</Typography>
+                <Box id="itemContainer" sx={{marginTop:"2rem",paddingLeft:"1rem"}}>
+                {orders&&
+                orders.map(item=>(
+                    item.orderItems.map(items=>(
+
+                <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center",minHeight:"5rem",margin:"2rem 0",background:"#fff",padding:"1rem"}}>
+                  <div style={{display:"flex",alignItems:"center"}}>
+                  <img  alt='' src={items.image} style={{width:"5.5rem",border:"1px solid grey",marginRight:"1rem"}}/>
+                  <Typography variant="subtitle1" >{items.name}<br/><Typography variant="subtitle2">Quantity:{items.quantity}</Typography></Typography>
+                  </div>
+                  <Typography variant="subtitle1" >₹{items.price}</Typography>
+                  <Typography variant="subtitle1">status:{item.orderStatus}</Typography>
+                </Box>
+                    ))
+                ))
+                }
+
+              </Box>
+
+            </Container>
         </>
 )}
