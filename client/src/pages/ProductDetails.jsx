@@ -64,9 +64,7 @@ export default function ProductDetails() {
           container
           alignItems={"center"}
           sx={{
-            background: "gray",
             height: "100vh",
-            width: "100vw",
             overflow: "hidden",
             padding: "2rem 5rem 5rem 5rem",
           }}
@@ -76,7 +74,7 @@ export default function ProductDetails() {
             lg={6}
             md={6}
             sm={12}
-            sx={{ border: "2px solid black", paddingBottom: "4rem" }}
+            sx={{ border: "1px solid #f0f0f0", paddingBottom: "4rem" }}
           >
             <Box>
               <Slider {...settings}>
@@ -102,7 +100,7 @@ export default function ProductDetails() {
             lg={6}
             md={6}
             sm={12}
-            sx={{ border: "2px solid black", paddingLeft: "2rem" }}
+            sx={{ paddingLeft: "2rem" }}
           >
             <Box>
               <Box>
@@ -173,7 +171,7 @@ export default function ProductDetails() {
           </Grid>
         </Grid>
       )}
-      <Container maxWidth="lg">
+      <Box >
         <Typography
           variant="h5"
           textAlign={"center"}
@@ -186,14 +184,14 @@ export default function ProductDetails() {
         >
           Reviews
         </Typography>
-        <Box sx={{ display: "flex", justifyContent: "space-evenly",overflow:"auto"}}>
+        <Box sx={{ display: "flex",overflow:"auto"}}>
           {productDetails && productDetails.product.review[0] ? (
             <Review review={productDetails.product.review} />
           ) : (
             "No reviews"
           )}
         </Box>
-      </Container>
+      </Box>
     </Fragment>
   );
 }

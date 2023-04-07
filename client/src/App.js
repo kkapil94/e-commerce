@@ -14,6 +14,7 @@ import Shipping from "./components/Shipping";
 import OrderConfirm from "./components/OrderConfirm";
 import PaymentHandler from "./components/PaymentHandler";
 import { OrderPage } from "./components/OrdersPage";
+import OrderDetails from "./components/OrderDetails";
 function App() {
   return (
     <>
@@ -33,7 +34,8 @@ function App() {
           <Route exact path="/shipping" element={<Shipping/>} />
           <Route exact path="/order/confirm" element={<OrderConfirm/>} />
           <Route exact path="/payment" element={<PaymentHandler/>} />
-          <Route exact path="/order/me/:id" element={<OrderPage/>} />
+          <Route exact path="/order/myOrders/:id" element={<OrderPage/>} />
+          <Route exact path="/order/:id" element={<OrderDetails/>} />
         </Routes>
         <Footer />
       </Router>
