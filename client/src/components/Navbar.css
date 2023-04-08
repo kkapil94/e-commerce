@@ -43,11 +43,16 @@
         position: absolute;
         top:4.5rem;
         left: .5rem;
+        width:100% !important;
     }
     #searchBar{
-        width: 75vw !important;
+        width: 70vw !important;
     }
     #logoContainer{
-        margin:0
+        margin-left:1rem !important;
+    }
+    .posterImg{
+        height: 1.5rem !important;
+        width:1.5rem !important
     }
 }

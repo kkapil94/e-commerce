@@ -14,12 +14,15 @@ export default function Navbar() {
     const nav = useRef()
     const [navbar,setNavbar] = useState(false)
     const navigate = useNavigate()
-    const [keyword,setKeyword] = useState(false)
+    const [keyword,setKeyword] = useState()
     const handleClick = (e)=>{
+        e.preventDefault()
         if(keyword.trim()){
             navigate(`/products/${keyword}`)
+            setKeyword("")
         }else{
             navigate('/products')
+            setKeyword("")
         }
     }
     const controlNavbar = (control)=>{
@@ -50,20 +53,22 @@ export default function Navbar() {
                     <Button component={Link} to={"/products"} id="page">Products</Button>
                     <Button component={Link} to={"/search"} id="page">Search</Button>
                 </Box> 
-                <Box id="logoContainer" sx={{margin:'auto',display:"flex"}} >
-                    <img className="logo" src='./images/logo1234.jpg' style={{width:'4.5rem',cursor:"pointer",marginRight:"1rem"}} alt=''/>
-                    <div className="searchbar">
-                    <TextField id="searchBar"  size="small" sx={{width:{lg:"25rem",md:"22rem"},zIndex:-1}} onChange={(e)=>setKeyword(e.target.value)} placeholder="Search any product"></TextField>
-                    <Button variant='outlined' sx={{height:"2.5rem"}} onClick={handleClick} >Search</Button>
+                <form id="logoContainer" style={{margin:"auto",display:"flex"}} onSubmit={handleClick}>
+                    <Box sx={{width:{lg:"4.5rem",md:"4rem",sm:"3.5rem",xs:"3rem"}}}>
+                    <img className="logo" src='./images/logo1234.jpg' style={{width:'100%',cursor:"pointer",marginRight:"1rem"}} alt=''/>
+                    </Box>
+                    <div className="searchbar" style={{display:"flex",justifyContent:'center'}}>
+                    <TextField id="searchBar"  size="small" sx={{width:{lg:"25rem",md:"22rem",},zIndex:1}} onChange={(e)=>setKeyword(e.target.value)} placeholder="Search any product" value={keyword}></TextField>
+                    <Button variant='outlined'size='small'  sx={{height:"2.5rem"}} onClick={handleClick}>Search</Button>
                     </div>
-                </Box>
+                </form>
                 <Box sx={{marginLeft:'auto'}}>
-                    <IconButton onClick={()=>navigate('/cart')} size={"large"}>
-                        <ShoppingCartOutlinedIcon fontSize='large'/>
+                    <IconButton onClick={()=>navigate('/cart')}>
+                        <ShoppingCartOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
                     </IconButton>
                     <IconButton sx={{marginLeft:'5px'}} component={Link} to="/login" size={"large"}>
                         {user? <img src={user.avatar.url} alt="" style={{height:"1.9rem",width:"1.9rem",borderRadius:"50%"}}/>:
-                              <AccountCircleOutlinedIcon fontSize={'large'}/>
+                              <AccountCircleOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
                         }
                     </IconButton>
                 </Box>

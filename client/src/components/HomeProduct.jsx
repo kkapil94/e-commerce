@@ -21,13 +21,14 @@ export default function HomeProducts() {
     <Fragment>
       <Container sx={{width:"85%",marginTop: "5rem" }}>
         <Typography
-          variant="h4"
+          
           align="center"
           sx={{
+            typography:{lg:"h4",xs:"h5"},
             color: "#424040",
             borderBottom: "2px solid #b1aeae",
-            width: "25rem",
-            paddingBottom: "1rem",
+            width: {lg:"25rem",md:"20rem",sm:"20rem",xs:"16rem"},
+            paddingBottom: ".8rem",
             textAlign: "center",
             margin: "0 auto 2rem auto",
           }}

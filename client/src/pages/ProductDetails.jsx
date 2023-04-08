@@ -4,9 +4,7 @@ import {
   Grid,
   Rating,
   Typography,
-  TextField,
   IconButton,
-  Container,
   Input,
 } from "@mui/material";
 import "slick-carousel/slick/slick.css";
