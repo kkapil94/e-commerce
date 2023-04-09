@@ -25,7 +25,7 @@ export default function ProductCard(products) {
                         style={{ height: "17rem", width: "100%" }}
                       />
                     </Box>
-                    <Typography variant="h6" sx={{ marginBottom: "0.5rem" }}>
+                    <Typography variant="h6">
                       {product.name}
                     </Typography>
                     <Rating
@@ -36,7 +36,6 @@ export default function ProductCard(products) {
                     />
                     <Typography
                       variant="subtitle2"
-                      sx={{ marginTop: "0.5rem" }}
                     >
                       ₹{product.price}
                     </Typography>

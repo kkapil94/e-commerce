@@ -6,14 +6,11 @@
         color: #BAD7E9;
         letter-spacing: .2rem;
     }
-    .logo{
-        width: 4rem !important;
-    }
     MuiTextFeild-root{
         width: 20rem ;
     }
     #searchBar{
-        max-width: 100% !important;
+        max-width: 97% !important;
     }
     #navBar{
         position:absolute;
@@ -38,15 +35,15 @@
     }
 }
 
-@media screen and (max-width:650px){
+@media screen and (max-width:600px){
     .searchbar{
         position: absolute;
-        top:4.5rem;
-        left: .5rem;
+        top:3.59rem;
+        left:0rem;
         width:100% !important;
     }
     #searchBar{
-        width: 70vw !important;
+        width: 100vw !important;
     }
     #logoContainer{
         margin-left:1rem !important;

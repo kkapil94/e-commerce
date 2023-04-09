@@ -40,33 +40,32 @@ export default function Navbar() {
   return (
     <>
     <Box >
-        <AppBar color='inherit' sx={{position:'relative'}} >
-            <Toolbar >
-                <IconButton id="close" ref={closeIcon} onClick={()=>controlNavbar(false)} sx={{display:"none",zIndex:"10"}}>
+        <AppBar color='inherit' sx={{position:'relative',maxHeight:'4rem'}}>
+            <Toolbar>
+                <IconButton id="close" ref={closeIcon} onClick={()=>controlNavbar(false)} sx={{display:"none",zIndex:"10",padding:0}}>
                     <CloseRoundedIcon/>
                 </IconButton>
-                <IconButton id="open" ref={openIcon} onClick={()=>controlNavbar(true)} sx={{display:"none",zIndex:"10"}}>
+                <IconButton id="open" ref={openIcon} onClick={()=>controlNavbar(true)} sx={{display:"none",zIndex:"10",padding:0}}>
                     <MenuRoundedIcon/>
                 </IconButton>
                 <Box id='nav' ref={nav} onClick={()=>setNavbar(false)}>
                     <Button component={Link} to={"/"} id="page">Home</Button>
                     <Button component={Link} to={"/products"} id="page">Products</Button>
-                    <Button component={Link} to={"/search"} id="page">Search</Button>
                 </Box> 
                 <form id="logoContainer" style={{margin:"auto",display:"flex"}} onSubmit={handleClick}>
-                    <Box sx={{width:{lg:"4.5rem",md:"4rem",sm:"3.5rem",xs:"3rem"}}}>
-                    <img className="logo" src='./images/logo1234.jpg' style={{width:'100%',cursor:"pointer",marginRight:"1rem"}} alt=''/>
+                    <Box sx={{width:{lg:"4.5rem",md:"4rem",sm:"3.5rem",xs:"2.9rem"},marginRight:"1.2rem"}}>
+                    <img className="logo" src='./images/logo1234.jpg' style={{width:'80%',height:"80%",cursor:"pointer"}} alt=''/>
                     </Box>
-                    <div className="searchbar" style={{display:"flex",justifyContent:'center'}}>
+                    <Box className="searchbar" style={{display:"flex",justifyContent:'center'}}>
                     <TextField id="searchBar"  size="small" sx={{width:{lg:"25rem",md:"22rem",},zIndex:1}} onChange={(e)=>setKeyword(e.target.value)} placeholder="Search any product" value={keyword}></TextField>
                     <Button variant='outlined'size='small'  sx={{height:"2.5rem"}} onClick={handleClick}>Search</Button>
-                    </div>
+                    </Box>
                 </form>
-                <Box sx={{marginLeft:'auto'}}>
-                    <IconButton onClick={()=>navigate('/cart')}>
+                <Box >
+                    <IconButton onClick={()=>navigate('/cart')} sx={{padding:{xs:"0rem"}}}>
                         <ShoppingCartOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
                     </IconButton>
-                    <IconButton sx={{marginLeft:'5px'}} component={Link} to="/login" size={"large"}>
+                    <IconButton sx={{marginLeft:'5px',padding:{lg:"1rem",md:"1rem",sm:"0rem",xs:"0rem"}}} component={Link} to="/login" >
                         {user? <img src={user.avatar.url} alt="" style={{height:"1.9rem",width:"1.9rem",borderRadius:"50%"}}/>:
                               <AccountCircleOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
                         }
