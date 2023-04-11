@@ -11,11 +11,7 @@ export default function ProductCard(products) {
   return (
     <Fragment>
        {product && <Card
-                  sx={{
-                    width: "15rem",
-                    height: "24rem",
-                    margin: "2rem 1rem 0 1rem",
-                  }}
+                  sx={{width: "14rem",height: "24rem",margin: "2rem 1rem 0 1rem"}}
                 >
                   <CardContent>
                     <Box>

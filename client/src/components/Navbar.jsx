@@ -40,7 +40,7 @@ export default function Navbar() {
   return (
     <>
     <Box >
-        <AppBar color='inherit' sx={{position:'relative',maxHeight:'4rem'}}>
+        <AppBar color='inherit' sx={{position:"relative",maxHeight:'4rem',}}>
             <Toolbar>
                 <IconButton id="close" ref={closeIcon} onClick={()=>controlNavbar(false)} sx={{display:"none",zIndex:"10",padding:0}}>
                     <CloseRoundedIcon/>
