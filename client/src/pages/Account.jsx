@@ -27,30 +27,32 @@ export default function Account(){
         <>{isAuthenticated&&
             <><UserUpdate open={edit} edit={(edit)=>setEdit(edit)} />
               <PasswordUpdate open={edit} edit={(edit)=>setEdit(edit)} />   
-            <Container maxWidth="lg" sx={{height:"100vh"}}>
-                <Typography variant='h3' letterSpacing={2.5} sx={{borderBottom:'2px solid gray',display:'inline-block',marginTop:'1rem'}}>My Profile</Typography>
-                <Grid container alignItems="center" justifyContent="center" sx={{height:"90vh"}} direction="row">
+            <Container maxWidth="lg" sx={{marginTop:"2rem"}}>
+                <Typography  letterSpacing={2.5} sx={{typography:{lg:"h3",md:"h3",sm:"h3",xs:"h4"},borderBottom:'2px solid gray',display:'inline-block',marginTop:'1rem'}}>My Profile</Typography>
+                <Grid container alignItems="center" justifyContent="center" sx={{height:{lg:"90vh",md:"90vh",sm:"90vh",xs:"initial"},marginTop:{lg:"0",md:"0",sm:"0",xs:"2rem"}}} direction="row">
                     <Grid container item lg={6} sm={6} xs={12} direction="column" justifyContent={"center"} alignItems="center">
-                        <img src={user.avatar.url} style={{height:"20rem",width:"20rem",display:"inline",borderRadius:"50%"}} alt=""/>
-                        <Button variant="outlined" sx={{marginTop:"2rem",width:'50%'}} onClick={()=>setEdit(true)}>Edit Profile</Button>
+                        <Box sx={{height:{lg:"20rem",md:"20rem",sm:"18rem",xs:"12rem"},width:{lg:"20rem",md:"20rem",sm:"18rem",xs:"12rem"},marginBottom:{lg:0,md:0,sm:"3rem"}}}>
+                        <img src={user.avatar.url} style={{height:"100%",width:"100%",display:"inline",borderRadius:"50%"}} alt=""/>
+                        </Box>
+                        <Button variant="outlined" sx={{marginTop:{lg:"2rem",md:"2rem",sm:"0",xs:"1rem"},width:'50%'}} onClick={()=>setEdit(true)}>Edit Profile</Button>
                     </Grid>
-                    <Grid container item lg={6} sm={6} xs={12} direction="column" sx={{paddingLeft:"7rem",rowGap:"2rem"}} >
-                        <Box>
-                            <Typography variant="h6">Full Name</Typography>
-                            <Typography variant="subtitle1">{user.name}</Typography>
+                    <Grid container item lg={6} sm={6} xs={12} direction="column"  sx={{paddingLeft:{lg:"7rem",md:"7rem",sm:0},margin:{lg:"0",md:"0",sm:"0",xs:"1rem"},rowGap:"2rem"}} >
+                        <Box sx={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+                            <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Full Name</Typography>
+                            <Typography letterSpacing={2} sx={{typography:{lg:"subtitle1",md:"subtitle1",sm:"subtitle1",xs:"subtitle2"},fontWeight:"100"}} >{user.name}</Typography>
+                        </Box>
+                        <Box sx={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+                            <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Email</Typography>
+                            <Typography letterSpacing={2} sx={{typography:{lg:"subtitle1",md:"subtitle1",sm:"subtitle1",xs:"subtitle2"}}} >{user.email}</Typography>
+                        </Box>
+                        <Box sx={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+                            <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Joined At</Typography>
+                            <Typography letterSpacing={2} sx={{typography:{lg:"subtitle1",md:"subtitle1",sm:"subtitle1",xs:"subtitle2"}}} >{String(user.createdAt).substring(0,10)}</Typography>
                         </Box>
                         <Box>
-                            <Typography variant="h6">Email</Typography>
-                            <Typography variant="subtitle1">{user.email}</Typography>
-                        </Box>
-                        <Box>
-                            <Typography variant="h6">Joined At</Typography>
-                            <Typography variant="subtitle1">{String(user.createdAt).substring(0,10)}</Typography>
-                        </Box>
-                        <Box>
-                            <Button variant="outlined" sx={{display:"block",marginBottom:"1rem",width:"70%"}} onClick={()=>navigate(`/order/myOrders/${user._id}`)}>My Orders</Button>
-                            <Button variant="outlined" sx={{width:"70%",marginBottom:"1rem"}} onClick={()=>setEdit(1)}>Change Password</Button>
-                            <Button variant="outlined" sx={{width:"70%"}} onClick={logout} >Log Out</Button>
+                            <Button variant="outlined" sx={{display:"block",marginBottom:"1rem",width:{lg:"70%",md:"70%",sm:"100%",xs:"100%"}}} onClick={()=>navigate(`/order/myOrders/${user._id}`)}>My Orders</Button>
+                            <Button variant="outlined" sx={{width:{lg:"70%",md:"70%",sm:"100%",xs:"100%"},marginBottom:"1rem"}} onClick={()=>setEdit(1)}>Change Password</Button>
+                            <Button variant="outlined" sx={{width:{lg:"70%",md:"70%",sm:"100%",xs:"100%"}}} onClick={logout} >Log Out</Button>
                         </Box>
                     </Grid>
                 </Grid>

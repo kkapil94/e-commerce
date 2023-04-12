@@ -20,6 +20,7 @@ import "./ProductDetails.css"
 import cartStore from "../Stores/cartStore";
 
 export default function ProductDetails() {
+ 
   const { id } = useParams();
   const settings = {
     dots: true,
@@ -62,9 +63,10 @@ export default function ProductDetails() {
           container
           alignItems={"center"}
           sx={{
-            height: "100vh",
+            // height: "100vh",
             overflow: "hidden",
-            padding: "2rem 5rem 5rem 5rem",
+            padding: {lg:"2rem 5rem 5rem 5rem",md:"2rem 5rem 5rem 5rem",sm:"2rem 5rem 5rem 5rem",xs:"1rem"},
+            marginTop:{lg:0,md:0,sm:0,xs:"2rem"}
           }}
         >
           <Grid
@@ -72,22 +74,23 @@ export default function ProductDetails() {
             lg={6}
             md={6}
             sm={12}
+            xs={12}
             sx={{ border: "1px solid #f0f0f0", paddingBottom: "4rem" }}
           >
             <Box>
               <Slider {...settings}>
                 {productDetails.product.images.map((img) => (
                   <Box key={productDetails.product._id}>
+                    <Box sx={{width:{lg:"50%",md:"65%",sm:"50%",xs:"80%"},height:{lg:"25rem",md:"25rem",sm:"25rem",xs:"25rem"},margin: "auto",paddingTop: "2rem",}}>
                     <img
                       src={img.url}
                       alt=""
                       style={{
                         height: "25rem",
-                        width: "50%",
-                        margin: "auto",
-                        paddingTop: "2rem",
+                        width: "100%",
                       }}
                     />
+                    </Box>
                   </Box>
                 ))}
               </Slider>
@@ -98,9 +101,12 @@ export default function ProductDetails() {
             lg={6}
             md={6}
             sm={12}
-            sx={{ paddingLeft: "2rem" }}
+            xs={12}
+            sx={{ paddingLeft:{lg:"2rem",md:"2rem",sm:"2rem",xs:'0' }}}
+            container
+            justifyContent={"center"}
           >
-            <Box>
+            <Box sx={{width:"100%"}}>
               <Box>
                 <Typography variant="h5">
                   {productDetails.product.name}
@@ -177,12 +183,12 @@ export default function ProductDetails() {
             margin: "2rem auto",
             borderBottom: "2px solid black",
             width: "18rem",
-            paddingBottom: "1rem",
+            paddingBottom: "1rem"
           }}
         >
           Reviews
         </Typography>
-        <Box sx={{ display: "flex",overflow:"auto"}}>
+        <Box sx={{ display: "flex",flexWrap:"wrap",overflow:"auto",alignItems:"center",justifyContent:"center"}}>
           {productDetails && productDetails.product.review[0] ? (
             <Review review={productDetails.product.review} />
           ) : (

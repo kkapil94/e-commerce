@@ -59,6 +59,7 @@ export default function Cart() {
           width: "98.5vw",
           position: "relative",
           overflow: "hidden",
+          marginTop:{lg:"0",md:"0",sm:"0",xs:"2.6rem"}
         }}
       >
         <Grid container>
@@ -67,12 +68,13 @@ export default function Cart() {
             lg={8}
             md={8}
             sm={12}
+            xs={12}
             sx={{
               padding: "1rem",
               width: "60%",
-              margin: "2rem",
+              margin: {lg:"2rem",md:"2rem",sm:"1.5rem",xs:"1rem"},
               background: "#fff",
-              border: "2px solid gray",
+              border: "1px solid gray",
             }}
           >
             <Stack
@@ -80,13 +82,13 @@ export default function Cart() {
               alignItems="center"
               justifyContent={"space-between"}
               className="title"
-              style={{
-                borderBottom: "2px solid gray",
+              sx={{
+                borderBottom: "1px solid gray",
                 paddingBottom: ".5rem",
               }}
             >
-              <Typography variant="h3">Shopping Cart</Typography>
-              <Typography variant="h6" sx={{ paddingTop: "3rem" }}>
+              <Typography sx={{typography:{lg:"h3",md:"h3",sm:"h3",xs:"h5"}}}>Shopping Cart</Typography>
+              <Typography variant="h6" sx={{ paddingTop: "3rem",display:{lg:"initial",md:"initial",sm:"initial",xs:"none"} }}>
                 Price
               </Typography>
             </Stack>
@@ -106,7 +108,7 @@ export default function Cart() {
                     style={{
                       height: "100%",
                       width: "8rem",
-                      border: "2px solid grey",
+                      border: "1px solid grey",
                     }}
                     alt=""
                   />
@@ -122,13 +124,14 @@ export default function Cart() {
                   >
                     <div>
                       <Typography variant="h5">{item.product.name}</Typography>
-                      <div style={{ margin: "1.9rem 0" }}>
+                      <Typography variant="subtitle2" sx={{display:{lg:"none",md:"none",sm:"none",xs:"inline"}}}>₹{item.quantity * item.product.price}</Typography>
+                      <Box sx={{ margin: {lg:"1.9rem 0",md:"1.9rem 0",sm:"1.9rem 0",xs:"1rem 0"} }}>
                         <IconButton
                           size="small"
                           sx={{
                             border: "2px solid gray",
                             borderRadius: ".4rem",
-                            height: "2.2rem",
+                            height: "2rem",
                           }}
                           onClick={() => decQuan(item.product, item.quantity)}
                         >
@@ -138,9 +141,10 @@ export default function Cart() {
                           sx={{
                             border: "2px solid gray",
                             borderRadius: ".4rem",
+                            width:"2.6rem"
                           }}
                           type="number"
-                          size="sm"
+                          size="small"
                           value={item.quantity}
                           slotProps={{
                             input: {
@@ -154,13 +158,13 @@ export default function Cart() {
                           sx={{
                             border: "2px solid gray",
                             borderRadius: ".4rem",
-                            height: "2.2rem",
+                            height: "2rem",
                           }}
                           onClick={() => incQuan(item.product, item.quantity)}
                         >
                           <AddIcon />
                         </IconButton>
-                      </div>
+                      </Box>
                       <Button
                         variant="outlined"
                         size="small"
@@ -172,7 +176,7 @@ export default function Cart() {
                       </Button>
                     </div>
                     <div className="price">
-                      <Typography variant="subtitle1">
+                      <Typography variant="subtitle1" sx={{display:{lg:"initial",md:"initial",sm:"initial",xs:"none"}}}>
                         ₹{item.quantity * item.product.price}
                       </Typography>
                     </div>
@@ -189,13 +193,13 @@ export default function Cart() {
                 margin: "2rem 0 0 0",
               }}
             >
-              <Typography variant="h6">Subtotal: ₹{total}</Typography>
+              <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Subtotal: ₹{total}</Typography>
             </Box>
           </Grid>
-          <Grid item lg={3.2} md={3.2} sm={12} sx={{ marginTop: "2rem" }}>
+          <Grid item lg={3.2} md={3.2} sm={12} xs={12} sx={{ marginTop: "2rem" }}>
             <Box
               sx={{
-                width: "100%",
+                width: {lg:"95%",md:"95%",sm:"95%",xs:"94%"},
                 height: "10rem",
                 border: "2px solid gray",
                 padding: "1rem",
@@ -203,6 +207,8 @@ export default function Cart() {
                 flexDirection: "column",
                 alignItems: "center",
                 background: "#fff",
+                margin:{lg:"0",md:"0",sm:"1rem",xs:"1rem"}
+
               }}
             >
               <Typography variant="h5">Subtotal: ₹{total}</Typography>

@@ -6,10 +6,10 @@ export default function Review(props) {
     <>
     {props.review && props.review.map((rev)=>(
         <Card  sx={{width:"30rem",display:"flex",flexDirection:"column",margin:"0 2rem"}} key={rev._id}>
-            <CardHeader className="avatar" sx={{display:"flex",flexDirection:"column"}}
+            <CardHeader className="avatar" sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}
                 avatar={
-                    <Avatar  sx={{margin:"0 0 0.4rem 0"}}>
-                      k
+                    <Avatar  sx={{marginLeft:"1.0rem"}}>
+                      {rev.name[0]}
                     </Avatar>
                   }
                   title={rev.name}

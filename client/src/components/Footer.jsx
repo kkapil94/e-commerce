@@ -6,14 +6,14 @@ import React from 'react'
 export default function Footer() {
   return (
     <>
-        <Stack  justifyContent="space-around"  sx={{height:{lg:"25rem",md:"25rem",sm:"100%"},padding:{lg:"5rem",md:"3rem",sm:"1rem"},background:"#fafafb",flexDirection:{lg:"row",md:"row",sm:"column"},marginTop:"1.5rem",alignItems:{lg:"flex-start",md:"flex-start",sm:"center",xs:"center"}}}>
+        <Stack  justifyContent="space-around"  sx={{height:{lg:"25rem",md:"25rem",sm:"100%"},padding:{lg:"5rem",md:"3rem",sm:"1rem"},background:"#eeeefd",flexDirection:{lg:"row",md:"row",sm:"column"},marginTop:"1.5rem",alignItems:{lg:"flex-start",md:"flex-start",sm:"center",xs:"center"}}}>
             <Box sx={{width:{lg:"20rem",sm:"15rem"},marginBottom:"2rem"}}>
                 <Box>
                 <Typography variant="h6" textAlign={"center"} letterSpacing={1}> DOWNLOAD OUR APP </Typography>
                 <Typography sx={{typography:"subtitle1",textAlign:"center"}}> Download App for Android and Ios mobile phone</Typography>
                 </Box>
                 <Box sx={{width:{lg:"20rem",md:"15rem",sm:"15rem",xs:"15rem"},margin:"auto"}}>
-                    <img src="./images/download.jpg" alt=""  style={{width:'100%'}}/>
+                    <img src="./images/untitled.png" alt=""  style={{width:'100%'}}/>
                 </Box>
             </Box>
             <Box sx={{width:"20rem",marginBottom:"1.5rem"}}>

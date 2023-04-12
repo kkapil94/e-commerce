@@ -62,7 +62,7 @@ export default function Products() {
               sx={{
                 position: { lg: "initial", md: "initial", sm: "absolute" ,xs:"absolute"},
                 top: {sm:"7.9rem"},
-                bottom:{xs:"0"},
+                bottom:{lg:"initial",md:"initial",sm:"initial",xs:"0"},
                 width: "98%",
                 display:{lg:"initial",md:"initial",sm:"initial",xs:sort},
                 height:{lg:"initial",md:"initial",sm:"initial",xs:"50vh"},
