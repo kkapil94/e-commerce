@@ -7,6 +7,7 @@ import cartStore from "../Stores/cartStore";
 import Stepper from "./Stepper"
 import orderStore from "../Stores/orderStore";
 import { shippingStore } from "../Stores/shippingStore";
+import Loader from "./Loader";
 
 export default function PaymentHandler() {
   const shippingInfo = shippingStore(state=>state.shippingInfo)
@@ -80,9 +81,8 @@ export default function PaymentHandler() {
       
     {!ref?<>
         <Stepper activeStep={2} sx={{overflow:"hidden"}}/>
-      <Box sx={{ display: "flex",height:"100vh",width:"100vw",alignItems:'center',justifyContent:"center",overflow:"hidden" }}>
-        <CircularProgress />
-      </Box> </>:<Box sx={{ display: "flex",height:"80vh",width:"100vw",alignItems:'center',justifyContent:"center",overflow:"hidden"}}>
+        <Loader/>
+       </>:<Box sx={{ display: "flex",height:"80vh",width:"100vw",alignItems:'center',justifyContent:"center",overflow:"hidden"}}>
         <Box sx={{border:"1px solid grey",width:{lg:"20rem",md:"20rem",sm:"20rem",xs:"18rem"},height:"20rem",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderRadius:'.5rem'}}>
           <OfflinePinIcon fontSize="large" sx={{fontSize:{lg:"15rem",md:"15rem",sm:"15rem",xs:"12rem"},color:"#1976d2"}}/>
           <Typography variant="h6">Payment successfull</Typography>

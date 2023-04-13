@@ -48,7 +48,7 @@ export default function Navbar() {
                 <IconButton id="open" ref={openIcon} onClick={()=>controlNavbar(true)} sx={{display:"none",zIndex:"1012",padding:0}}>
                     <MenuRoundedIcon/>
                 </IconButton>
-                <Box id='navBar' ref={nav} onClick={()=>setNavbar(false)}>
+                <Box id='nav' ref={nav} onClick={()=>setNavbar(false)}>
                     <Button component={Link} to={"/"} id="page" onClick={()=>controlNavbar(false)} >Home</Button>
                     <Button component={Link} to={"/products"} id="page" onClick={()=>controlNavbar(false)}>Products</Button>
                 </Box> 

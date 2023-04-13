@@ -7,6 +7,7 @@ import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useProducts from "../Stores/productStore";
 import ProductCard from "./ProductCard";
+import Loader from "./Loader"
 
 export default function HomeProducts() {
   
@@ -19,6 +20,9 @@ export default function HomeProducts() {
 
   return (
     <Fragment>
+      {
+        loading?<Loader/>:
+      
       <Container sx={{width:"85%",marginTop: "5rem" }}>
         <Typography
           
@@ -53,6 +57,7 @@ export default function HomeProducts() {
             ))}
         </Stack>
       </Container>
+}
     </Fragment>
   );
 }

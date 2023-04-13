@@ -6,8 +6,10 @@ import React, { useEffect, useRef, useState } from "react";
 import userStore from "../Stores/userStore"
 import "./LoginAndSignUP.css"
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 export default function LoginAndSignUp() {
+    const alert = useAlert()
     const [loginEmail,setLoginEmail] = useState("");
     const navigate = useNavigate()
     const [loginPassword,setLoginPassword] = useState("");
@@ -34,15 +36,18 @@ export default function LoginAndSignUp() {
         myForm.set("email",email);
         myForm.set("password",password);
         myForm.set("avatar",avatar)
-        const response =await registerUser(myForm);
-        // if(response.data.success){
-        //   navigate("/account")
-        // }
-        return response
+        const {status} =await registerUser(myForm);
+        if(status===200){
+          alert.success("Registered Successfully")
+        }
     }
     const loginSubmit =async (e)=>{
       e.preventDefault();
-      const response =await loginUser(loginEmail,loginPassword);
+      const {status} =await loginUser(loginEmail,loginPassword);
+      console.log(status);
+      if(status===200){
+        alert.success("Login Successfully")
+      }
     }
     const changeFormData = (e)=>{ 
         if(e.target.name==='avatar'){
@@ -59,7 +64,6 @@ export default function LoginAndSignUp() {
         }
     }
     const redirect = location.search?location.search.split("=")[1]:"account"
-    console.log("i am ",redirect);
     useEffect(() => {
       if(isAuthenticated){
         navigate("/"+redirect)

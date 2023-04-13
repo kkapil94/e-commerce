@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import orderStore from "../Stores/orderStore";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Container, Typography } from "@mui/material";
+import Loader from "./Loader";
 export function OrderPage() {
   const param = useParams();
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export function OrderPage() {
   }, []);
   return (
     <>
+    {!orders?<Loader/>:
       <Container sx={{ background: "#f1f3f6", paddingBottom: "1rem" }}>
         <Typography variant="h3">Your Orders:</Typography>
         <Box id="itemContainer" sx={{ marginTop: "2rem", paddingLeft: "1rem" }}>
@@ -64,6 +66,7 @@ export function OrderPage() {
             )}
         </Box>
       </Container>
+}
     </>
   );
 }

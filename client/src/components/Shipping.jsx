@@ -5,7 +5,6 @@ import {
   Box,
   Select,
   FormControl,
-  InputLabel,
   Button,
   Typography,
 } from "@mui/material";
@@ -87,7 +86,7 @@ export default function Shipping() {
                 type="text"
                 placeholder="enter your city"
                 value={shippingInfo.city}
-                required
+                required="true"
                 onChange={changeData}
                 sx={{width:"80%"}}
               />
@@ -98,6 +97,13 @@ export default function Shipping() {
                 name="pincode"
                 type="number"
                 placeholder="enter your pincode"
+                slotProps={{
+                  input: {
+                    type:"tel",
+                    maxLength:"6",
+                    minLength:"6"
+                  }
+                }}
                 required
                 value={shippingInfo.pincode}
                 onChange={changeData}
@@ -109,6 +115,13 @@ export default function Shipping() {
               <Input
                 name="phone"
                 type="number"
+                slotProps={{
+                  input: {
+                    type:"tel",
+                    maxLength:"10",
+                    minLength:"10"
+                  }
+                }}
                 placeholder="enter your phone no."
                 required
                 value={shippingInfo.phone}
@@ -119,10 +132,9 @@ export default function Shipping() {
             <div className="country" style={{ width: "100%",display:"flex",alignItems:"center",paddingLeft:"1rem"}}>
               <PublicIcon sx={{marginRight:".4rem"}}/>
               <FormControl variant="standard" sx={{minWidth:"100%"}}>
-                <InputLabel id="demo-simple-select-standard-label">
-                  Country
-                </InputLabel>
+                
                 <Select
+                  placeholder="Select your country"
                   name="country"
                   sx={{ width:"80%" }}
                   value={shippingInfo.country}
@@ -142,10 +154,9 @@ export default function Shipping() {
             <div className="state" style={{ width: "100%",display:"flex",alignItems:"center",paddingLeft:"1rem" }}>
               <LocationCityIcon sx={{ marginRight: ".4rem" }} />
               <FormControl variant="standard" sx={{minWidth:"100%"}}>
-                <InputLabel id="demo-simple-select-standard-label">
-                  State
-                </InputLabel>
+                
               <Select
+                placeholder="Select your state"
                 name="state"
                 sx={{ width:"80%" }}
                 label="State"

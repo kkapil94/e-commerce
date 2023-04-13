@@ -46,7 +46,12 @@ export default function PasswordUpdate(props) {
             const response = await updatePassword(password,user);
             console.log(response.data.success,"success");
             if(response.data.success){
-            alert.show("Password changed successfully")
+            alert.success("Password changed successfully")
+            setPassword({
+                oldOne:"",
+                newOne:"",
+                reNewOne:""
+            })
             close()
             }
         }
@@ -67,7 +72,7 @@ export default function PasswordUpdate(props) {
         <form onSubmit={changePassword} style={{display:"flex",flexDirection:"column",width:"100%",height:"26rem",justifyContent:"space-evenly"}}>
             <Box >
                 <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Old Password</Typography>
-                <Input placeholder="Enter your old password" sx={{width:"100%"}} required name="oldOne" value={password.oldOne} onChange={changeData} />
+                <Input placeholder="Enter your old password" type="password" sx={{width:"100%"}} required name="oldOne" value={password.oldOne} onChange={changeData} />
             </Box>
             <Box>
                 <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>New Password</Typography>

@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Drawer,
   Grid,
   List,
   ListItem,
@@ -13,10 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useProducts from "../Stores/productStore";
 import ProductCard from "./ProductCard";
+import Loader from "./Loader";
 
 export default function Products() {
   const params = useParams();
@@ -53,7 +53,8 @@ export default function Products() {
     fetchProducts(keyword, page, sliVal, category);
   }, [fetchProducts, keyword, page, price, category, sliVal]);
 
-  return (
+  return (<>
+    {!products?<Loader/>:
     <Box sx={{ background: "#f1f3f6", padding: ".5rem"}}>
       <Grid container justifyContent="space-around">
         <Grid item lg={2.2} md={2.2} sm={11.9} sx={{ background: "#fff" }}>
@@ -179,7 +180,7 @@ export default function Products() {
                 Filters
               </Button>
             </Box>
-            <Box sx={{ display: { lg: "initial", md: "initial",sm:state,xs:state} ,background:"#fff",zIndex:"1",position:{lg:"relative",md:"relative",sm:"fixed",xs:"fixed"},height:"100%",width:{lg:"100%",md:"100%",sm:"97vw",xs:"97vw"},zIndex:1101,marginBottom:{lg:0,md:0,sm:"1rem"}}}>
+            <Box sx={{ display: { lg: "initial", md: "initial",sm:state,xs:state} ,background:"#fff",position:{lg:"relative",md:"relative",sm:"fixed",xs:"fixed"},height:"100%",width:{lg:"100%",md:"100%",sm:"97vw",xs:"97vw"},zIndex:1101,marginBottom:{lg:0,md:0,sm:"1rem"}}}>
               <Typography
                 variant="h5"
                 sx={{
@@ -322,5 +323,5 @@ export default function Products() {
         </Grid>
       </Grid>
     </Box>
-  );
+             }</> );
 }
