@@ -1,4 +1,5 @@
 import {  Box, Button, IconButton, Input, Modal, Typography } from "@mui/material";
+import CancelIcon from '@mui/icons-material/Cancel';
 import React, { useState } from "react";
 import {useAlert} from "react-alert"
 import userStore from "../Stores/userStore";
@@ -7,13 +8,13 @@ const style = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "30rem",
-    minHeight:'35rem',
+    width: {lg:"25rem",md:"25rem",sm:"25rem",xs:"19rem"},
+    maxHeight:'35rem',
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
-    p: 4,
-    borderRadius:'1rem',
+    padding: {lg:"2rem 2rem 0 2rem",md:"2rem 2rem 0 2rem",sm:"2rem 2rem 0 2rem",xs:"1rem 1rem 0 1rem"},
+    borderRadius:'.5rem',
     zIndex:"1100"
   };
 
@@ -56,27 +57,27 @@ export default function PasswordUpdate(props) {
       onClose={close}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      sx={{zIndex:"10"}}
+      sx={{zIndex:"1101"}}
     >
       <Box sx={style}>
-        <Box sx={{borderBottom:"2px solid gray",display:"flex",justifyContent:"space-between",paddingBottom:".5rem",zIndex:"-1"}}>
-            <Typography variant="h4" >ChangePassword</Typography>
-            <IconButton onClick={close}><i class="fa-sharp fa-solid fa-circle-xmark"></i></IconButton>
+        <Box sx={{borderBottom:"2px solid gray",display:"flex",justifyContent:"space-between",paddingBottom:{lg:".5rem",md:".5rem",sm:"0",xs:"0"},zIndex:"-1"}}>
+            <Typography sx={{typography:{lg:"h4",md:"h4",sm:"h5",xs:"h6"}}} >Change Password</Typography>
+            <IconButton onClick={close}><CancelIcon/></IconButton>
         </Box>
-        <form onSubmit={changePassword} style={{display:"flex",flexDirection:"column",width:"25rem",height:"26rem",justifyContent:"space-evenly",paddingLeft:"2rem"}}>
-            <Box>
-                <Typography variant="h6">Old Password</Typography>
-                <Input placeholder="Enter your old password" sx={{width:"100%"}} required name="oldOne" value={password.oldOne} onChange={changeData}/>
+        <form onSubmit={changePassword} style={{display:"flex",flexDirection:"column",width:"100%",height:"26rem",justifyContent:"space-evenly"}}>
+            <Box >
+                <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Old Password</Typography>
+                <Input placeholder="Enter your old password" sx={{width:"100%"}} required name="oldOne" value={password.oldOne} onChange={changeData} />
             </Box>
             <Box>
-                <Typography variant="h6">New Password</Typography>
+                <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>New Password</Typography>
                 <Input placeholder="Enter your new password" type="password" sx={{width:"100%"}} required name="newOne" value={password.newOne} onChange={changeData}/>
             </Box>
             <Box>
-                <Typography variant="h6">Confirm New Password</Typography>
+                <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Confirm New Password</Typography>
                 <Input placeholder="Re-enter your new Password" type="password" sx={{width:"100%"}} required name="reNewOne" value={password.reNewOne} onChange={changeData}/>
             </Box>
-            <Button variant="outlined" type="submit" sx={{marginTop:"2rem"}}>Change Password</Button>
+            <Button variant="outlined" type="submit">Change Password</Button>
         </form>
       </Box>
     </Modal>

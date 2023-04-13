@@ -4,19 +4,21 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button, IconButton, Input } from "@mui/material";
 import userStore from "../Stores/userStore";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "30rem",
-  height:'35rem',
+  width: {lg:"25rem",md:"25rem",sm:"25rem",xs:"19rem"},
+  maxHeight:'35rem',
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
-  borderRadius:'1rem'
+  padding: {lg:"2rem 2rem 0 2rem",md:"2rem 2rem 0 2rem",sm:"2rem 2rem 0 2rem",xs:"1rem 1rem 0 1rem"},
+  borderRadius:'.5rem',
+  zIndex:"1100"
 };
 export default function UserUpdate(props) {
     const user = userStore(state=>state.user)
@@ -58,27 +60,27 @@ export default function UserUpdate(props) {
       onClose={close}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
-      sx={{zIndex:"10"}}
+      sx={{zIndex:"1101"}}
     >
       <Box sx={style}>
-        <Box sx={{display:"flex",flexDirection:'row',alignItems:'center',justifyContent:"space-between",marginBottom:"3.5rem",borderBottom:"2px solid gray",paddingBottom:"0.5rem"}}>
-            <Typography variant="h4" >Update Profile</Typography>
-            <IconButton onClick={close}><i class="fa-sharp fa-solid fa-circle-xmark"></i></IconButton>
+        <Box sx={{display:"flex",flexDirection:'row',alignItems:'center',justifyContent:"space-between",borderBottom:"2px solid gray",paddingBottom:"0.5rem"}}>
+            <Typography sx={{typography:{lg:"h4",md:"h4",sm:"h5",xs:"h6"}}} >Update Profile</Typography>
+            <IconButton onClick={close}><CancelIcon/></IconButton>
         </Box>
-        <form style={{display:"flex",flexDirection:"column"}} onSubmit={update}>
+        <form style={{display:"flex",flexDirection:"column",width:"100%",height:"26rem",justifyContent:"space-evenly"}} onSubmit={update}>
           <div>
-            <Typography variant="h6">Name:</Typography>
+            <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Name:</Typography>
             <Input placeholder="Enter Full Name" name="name" required value={userData.name} sx={{width:"100%"}} onChange={changeFormData}/>
           </div>
-          <div style={{margin:"3rem 0 3rem 0"}}>
-            <Typography variant="h6">Email:</Typography>
+          <Box >
+            <Typography sx={{typography:{lg:"h6",md:"h6",sm:"h6",xs:"subtitle1"}}}>Email:</Typography>
             <Input placeholder="Enter Your Email" name="email" required type="email" value={userData.email} sx={{width:"100%"}} onChange={changeFormData}/>
-          </div>
-          <div style={{display:'flex',alignItems:"center",justifyContent:"space-between"}}>
+          </Box>
+          <Box sx={{display:'flex',alignItems:"center",justifyContent:"space-between"}}>
             <img src={avatarPreview} alt="" style={{ height: "3rem", width: "3rem", marginRight:"2rem",borderRadius:'50%'}}/>
             <input type="file" name="avatar" onChange={changeFormData} accept="image/*" style={{width:"100%"}}/>
-          </div>
-          <Button type="submit" variant="outlined" sx={{marginTop:"2rem"}}>Update</Button>
+          </Box>
+          <Button type="submit" variant="outlined" >Update</Button>
         </form>
       </Box>
     </Modal>

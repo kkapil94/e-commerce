@@ -26,7 +26,7 @@ const steps = [
 
 export default function deliveryStepper({activeStep}) {
   return (
-    <Box sx={{ width: "100%",marginTop:"1rem" }}>
+    <Box sx={{ width: "100%",marginTop:{lg:"1rem",md:"1rem",sm:"1rem",xs:"3.8rem"} }}>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((step,index) => (
           <Step key={index} acitve={activeStep===index?true:false} completed={activeStep>=index?true:false}>

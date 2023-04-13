@@ -42,15 +42,15 @@ export default function Navbar() {
     <Box >
         <AppBar color='inherit' sx={{position:"relative",maxHeight:'4rem',}}>
             <Toolbar>
-                <IconButton id="close" ref={closeIcon} onClick={()=>controlNavbar(false)} sx={{display:"none",zIndex:"10",padding:0}}>
+                <IconButton id="close" ref={closeIcon} onClick={()=>controlNavbar(false)} sx={{display:"none",zIndex:"1102",padding:0}}>
                     <CloseRoundedIcon/>
                 </IconButton>
-                <IconButton id="open" ref={openIcon} onClick={()=>controlNavbar(true)} sx={{display:"none",zIndex:"10",padding:0}}>
+                <IconButton id="open" ref={openIcon} onClick={()=>controlNavbar(true)} sx={{display:"none",zIndex:"1012",padding:0}}>
                     <MenuRoundedIcon/>
                 </IconButton>
-                <Box id='nav' ref={nav} onClick={()=>setNavbar(false)}>
-                    <Button component={Link} to={"/"} id="page">Home</Button>
-                    <Button component={Link} to={"/products"} id="page">Products</Button>
+                <Box id='navBar' ref={nav} onClick={()=>setNavbar(false)}>
+                    <Button component={Link} to={"/"} id="page" onClick={()=>controlNavbar(false)} >Home</Button>
+                    <Button component={Link} to={"/products"} id="page" onClick={()=>controlNavbar(false)}>Products</Button>
                 </Box> 
                 <form id="logoContainer" style={{margin:"auto",display:"flex"}} onSubmit={handleClick}>
                     <Box sx={{width:{lg:"4.5rem",md:"4rem",sm:"3.5rem",xs:"2.9rem"},marginRight:"1.2rem"}}>

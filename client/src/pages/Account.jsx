@@ -6,6 +6,7 @@ import UserUpdate from "../components/UserUpdate"
 import PasswordUpdate from "../components/PassworUpdate"
 export default function Account(){
     const [edit,setEdit] = useState(0)
+    const [passUp,setPassUp] = useState(0)
     const user = userStore(state=>state.user)
     const isAuthenticated = userStore(state=>state.isAuthenticated)
     const navigate = useNavigate()
@@ -26,7 +27,7 @@ export default function Account(){
     return(
         <>{isAuthenticated&&
             <><UserUpdate open={edit} edit={(edit)=>setEdit(edit)} />
-              <PasswordUpdate open={edit} edit={(edit)=>setEdit(edit)} />   
+              <PasswordUpdate open={passUp} edit={(passUp)=>setPassUp(passUp)} />   
             <Container maxWidth="lg" sx={{marginTop:"2rem"}}>
                 <Typography  letterSpacing={2.5} sx={{typography:{lg:"h3",md:"h3",sm:"h3",xs:"h4"},borderBottom:'2px solid gray',display:'inline-block',marginTop:'1rem'}}>My Profile</Typography>
                 <Grid container alignItems="center" justifyContent="center" sx={{height:{lg:"90vh",md:"90vh",sm:"90vh",xs:"initial"},marginTop:{lg:"0",md:"0",sm:"0",xs:"2rem"}}} direction="row">
@@ -51,7 +52,7 @@ export default function Account(){
                         </Box>
                         <Box>
                             <Button variant="outlined" sx={{display:"block",marginBottom:"1rem",width:{lg:"70%",md:"70%",sm:"100%",xs:"100%"}}} onClick={()=>navigate(`/order/myOrders/${user._id}`)}>My Orders</Button>
-                            <Button variant="outlined" sx={{width:{lg:"70%",md:"70%",sm:"100%",xs:"100%"},marginBottom:"1rem"}} onClick={()=>setEdit(1)}>Change Password</Button>
+                            <Button variant="outlined" sx={{width:{lg:"70%",md:"70%",sm:"100%",xs:"100%"},marginBottom:"1rem"}} onClick={()=>setPassUp(1)}>Change Password</Button>
                             <Button variant="outlined" sx={{width:{lg:"70%",md:"70%",sm:"100%",xs:"100%"}}} onClick={logout} >Log Out</Button>
                         </Box>
                     </Grid>

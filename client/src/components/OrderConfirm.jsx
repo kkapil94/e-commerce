@@ -26,7 +26,7 @@ function OrderConfirm() {
     <>
       <Stepper activeStep={1}/>
       <Grid container>
-        <Grid item lg={8} md={8} sm={8} sx={{padding:"4rem",borderRight:"1px solid grey"}}>
+        <Grid item lg={8} md={8} sm={8} xs={12} sx={{padding:{lg:"4rem",md:"4rem",sm:"4rem",xs:"1rem"},borderRight:"1px solid grey"}}>
           <Stack >
             <Box sx={{marginBottom:"2rem"}}>
               <Typography variant="h6">Shipping Info</Typography>
@@ -44,7 +44,7 @@ function OrderConfirm() {
             </Box>
             <Box>
               <Typography variant="h6">Cart Items:</Typography>
-              <Box id="itemContainer" sx={{marginTop:"2rem",paddingLeft:"1rem"}}>
+              <Box id="itemContainer" sx={{marginTop:"2rem",paddingLeft:{lg:"1rem",md:"1rem",sm:"1rem",xs:"0"}}}>
                 {
                 cart.map(item=>(
                 <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center",minHeight:"5rem"}}>
@@ -60,7 +60,7 @@ function OrderConfirm() {
             </Box>
           </Stack>
         </Grid>
-        <Grid item lg="4" md="4" sm="4" sx={{padding:"4rem"}}>
+        <Grid item lg="4" md="4" sm="4" xs="12" sx={{padding:{lg:"4rem",md:"3rem",sm:"1.5rem",xs:"2rem"}}}>
           <Box >
             <Typography variant="h6" textAlign={"center"} sx={{paddingBottom:".5rem",borderBottom:"1px solid grey"}}>Order Summary</Typography>
             <Box sx={{marginTop:"2rem"}}>

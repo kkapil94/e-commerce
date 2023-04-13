@@ -115,7 +115,7 @@ export default function Cart() {
                   <div
                     className="itemContent"
                     style={{
-                      paddingLeft: "2rem",
+                      paddingLeft: "1.5rem",
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "space-between",
@@ -131,7 +131,8 @@ export default function Cart() {
                           sx={{
                             border: "2px solid gray",
                             borderRadius: ".4rem",
-                            height: "2rem",
+                            height: "1.7rem",
+                            width:"1.8rem"
                           }}
                           onClick={() => decQuan(item.product, item.quantity)}
                         >
@@ -141,7 +142,8 @@ export default function Cart() {
                           sx={{
                             border: "2px solid gray",
                             borderRadius: ".4rem",
-                            width:"2.6rem"
+                            width:"2.4rem",
+                            height:"1.8rem"
                           }}
                           type="number"
                           size="small"
@@ -158,7 +160,8 @@ export default function Cart() {
                           sx={{
                             border: "2px solid gray",
                             borderRadius: ".4rem",
-                            height: "2rem",
+                            height: "1.7rem",
+                            width:"1.8rem"
                           }}
                           onClick={() => incQuan(item.product, item.quantity)}
                         >

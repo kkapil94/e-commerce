@@ -82,9 +82,9 @@ export default function PaymentHandler() {
         <Stepper activeStep={2} sx={{overflow:"hidden"}}/>
       <Box sx={{ display: "flex",height:"100vh",width:"100vw",alignItems:'center',justifyContent:"center",overflow:"hidden" }}>
         <CircularProgress />
-      </Box> </>:<Box sx={{ display: "flex",height:"70vh",width:"100vw",alignItems:'center',justifyContent:"center",overflow:"hidden" }}>
-        <Box sx={{border:"1px solid grey",width:"20rem",height:"20rem",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderRadius:'.5rem'}}>
-          <OfflinePinIcon fontSize="large" sx={{fontSize:"15rem",color:"#1976d2"}}/>
+      </Box> </>:<Box sx={{ display: "flex",height:"80vh",width:"100vw",alignItems:'center',justifyContent:"center",overflow:"hidden"}}>
+        <Box sx={{border:"1px solid grey",width:{lg:"20rem",md:"20rem",sm:"20rem",xs:"18rem"},height:"20rem",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",borderRadius:'.5rem'}}>
+          <OfflinePinIcon fontSize="large" sx={{fontSize:{lg:"15rem",md:"15rem",sm:"15rem",xs:"12rem"},color:"#1976d2"}}/>
           <Typography variant="h6">Payment successfull</Typography>
           <Typography variant="subtitle2">reference no.: <b>{ref}</b></Typography>
         </Box>

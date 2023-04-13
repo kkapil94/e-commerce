@@ -44,7 +44,7 @@ export default function Shipping() {
   return (
     <>
       <Stepper activeStep={0}/>
-      <Container maxWidth="lg" sx={{ width: "100vw",height:"100vh", paddingTop: "2rem" }}>
+      <Container maxWidth="lg" sx={{ width:"100vw",height:"100vh", paddingTop: "2rem" }}>
         <Box
           sx={{
             display: "flex",
@@ -53,13 +53,14 @@ export default function Shipping() {
             flexDirection:"column"
           }}
         >
-          <Typography variant="h4" textAlign={'center'} letterSpacing={1} sx={{marginBottom:"2rem",borderBottom:"2px solid gray",paddingBottom:".4rem",width:"30%"}}>Shipping Details</Typography>
+          <Typography textAlign={'center'} letterSpacing={1} sx={{typography:{lg:"h4",md:"h4",sm:"h4",xs:"h6"},marginBottom:"2rem",borderBottom:"2px solid gray",paddingBottom:".4rem",width:{lg:"30%",md:"30%",sm:"40%",xs:"50%"}}}>Shipping Details</Typography>
+          <Box sx={{width:{lg:"22rem",md:"22rem",sm:"20rem",xs:"18rem"}}}>
           <form
             style={{
               border: "2px solid gray",
               borderRadius: ".5rem",
               height: "25rem",
-              width: "22rem",
+              width: "100%",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -123,7 +124,7 @@ export default function Shipping() {
                 </InputLabel>
                 <Select
                   name="country"
-                  sx={{ width: "80%" }}
+                  sx={{ width:"80%" }}
                   value={shippingInfo.country}
                   onChange={changeData}
                   label="Country"
@@ -146,7 +147,7 @@ export default function Shipping() {
                 </InputLabel>
               <Select
                 name="state"
-                sx={{ width: "80%" }}
+                sx={{ width:"80%" }}
                 label="State"
                 value={shippingInfo.state}
                 onChange={changeData}
@@ -166,6 +167,7 @@ export default function Shipping() {
             </div>
             <Button variant="outlined" type="submit" sx={{marginTop:"1rem",width:"100%"}} onClick={submit}>Continue</Button>
           </form>
+          </Box>
         </Box>
       </Container>
     </>
