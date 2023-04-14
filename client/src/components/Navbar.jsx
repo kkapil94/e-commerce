@@ -30,11 +30,13 @@ export default function Navbar() {
             openIcon.current.id = "close"
             closeIcon.current.id = "open"
             nav.current.id = "navBar"
+            document.body.style.overflow = "hidden"
         }
         else{
             openIcon.current.id = "open"
             closeIcon.current.id = "close"
             nav.current.id = "nav"
+            document.body.style.overflow = "initial"
         }
     }
   return (

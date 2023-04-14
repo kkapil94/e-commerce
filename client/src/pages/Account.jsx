@@ -4,7 +4,9 @@ import React, { useEffect, useState } from "react"
 import userStore from "../Stores/userStore"
 import UserUpdate from "../components/UserUpdate"
 import PasswordUpdate from "../components/PassworUpdate"
+import { useAlert } from "react-alert"
 export default function Account(){
+    const alert = useAlert()
     const [edit,setEdit] = useState(0)
     const [passUp,setPassUp] = useState(0)
     const user = userStore(state=>state.user)
@@ -14,6 +16,7 @@ export default function Account(){
     const logout =async ()=>{
         const response =await logoutUser()
         if(response.data.sucsess){
+            alert.success("Logout Successfully")
             navigate("/")
             sessionStorage.removeItem("user");
         }

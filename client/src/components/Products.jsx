@@ -17,6 +17,7 @@ import { Link, useParams } from "react-router-dom";
 import useProducts from "../Stores/productStore";
 import ProductCard from "./ProductCard";
 import Loader from "./Loader";
+import zIndex from "@mui/material/styles/zIndex";
 
 export default function Products() {
   const params = useParams();
@@ -67,7 +68,8 @@ export default function Products() {
                 width: "98%",
                 display:{lg:"initial",md:"initial",sm:"initial",xs:sort},
                 height:{lg:"initial",md:"initial",sm:"initial",xs:"50vh"},
-                background:"#fff"
+                background:"#fff",
+                zIndex:0
               }}
             >
               <Typography
@@ -98,7 +100,6 @@ export default function Products() {
                 justifyContent="center"
                 alignItems={"center"}
                 sx={{
-                  paddingLeft: { lg: "1rem", md: "1rem", sm: 0 ,xs:0},
                   flexDirection: { lg: "column", md: "column", sm: "row",xs:"column" },
                   display: { lg: "inherit", md: "inherit", sm: "inline" ,xs:"flex"},
                   justifyContent:"space-evenly",
@@ -118,7 +119,7 @@ export default function Products() {
                       xs:"0 !important"
                     },
                   }}
-                  onClick={()=>setSort("none")}
+                  onClick={()=>{setSort("none");document.body.style.overflow="initial"}}
                 >
                   Low to high
                 </Button>
@@ -135,7 +136,7 @@ export default function Products() {
                       xs: "0 !important",
                     },
                   }}
-                  onClick={()=>setSort("none")}
+                  onClick={()=>{setSort("none");document.body.style.overflow="initial"}}
                 >
                   High to low
                 </Button>
@@ -152,14 +153,14 @@ export default function Products() {
                       xs: "0 !important",
                     },
                   }}
-                  onClick={()=>setSort("none")}
+                  onClick={()=>{setSort("none");document.body.style.overflow="initial"}}
                 >
                   Rating
                 </Button>
               </Stack>
               <Button
                 variant="outlined"
-                onClick={() => setState("initial")}
+                onClick={() => {setState("inline-block");document.body.style.overflow='hidden'}}
                 size="small"
                 sx={{
                   display: {
@@ -180,7 +181,7 @@ export default function Products() {
                 Filters
               </Button>
             </Box>
-            <Box sx={{ display: { lg: "initial", md: "initial",sm:state,xs:state} ,background:"#fff",position:{lg:"relative",md:"relative",sm:"fixed",xs:"fixed"},height:"100%",width:{lg:"100%",md:"100%",sm:"97vw",xs:"97vw"},zIndex:1101,marginBottom:{lg:0,md:0,sm:"1rem"}}}>
+            <Box sx={{ display: { lg: "initial", md: "initial",sm:state,xs:state},position:{lg:"initial",md:"initial",sm:"absolute",xs:"absolute"},top:0,left:0,background:"#fff",height:"100vh",width:{lg:"100%",md:"100%",sm:"100vw",xs:"100vw"},zIndex:1101,marginBottom:{lg:0,md:0,sm:"1rem"}}}>
               <Typography
                 variant="h5"
                 sx={{
@@ -242,7 +243,7 @@ export default function Products() {
                   ))}
                 </List>
               </Box>
-              <Button variant="outlined" sx={{display:{lg:"none",md:"none",sm:"inline"},width:"100%"}} onClick={()=>setState("none")}>Submit</Button>
+              <Button variant="outlined" sx={{display:{lg:"none",md:"none",sm:"inline"},width:"100%"}} onClick={()=>{setState("none");document.body.style.overflow="initial"}}>Submit</Button>
             </Box>
           </Box>
         </Grid>
@@ -275,10 +276,10 @@ export default function Products() {
             Products
           </Typography>
           <Stack sx={{display:{lg:"none",md:"none",sm:"none",xs:"inline"}}} direction={"row"}>
-            <Button sx={{width:"50%",borderLeft:"0 !important",borderRadius:"0"}} size="small" variant="outlined" onClick={()=>setSort("initial")}>
+            <Button sx={{width:"50%",borderLeft:"0 !important",borderRadius:"0"}} size="small" variant="outlined" onClick={()=>{setSort("initial");document.body.style.overflow="hidden"}}>
               Sort
             </Button>
-            <Button sx={{width:"50%",borderRadius:"0",borderRight:"0 !important"}} size="small" variant="outlined" onClick={()=>setState("initial")}>
+            <Button sx={{width:"50%",borderRadius:"0",borderRight:"0 !important"}} size="small" variant="outlined" onClick={()=>{setState("initial");document.body.style.overflow="hidden"}}>
               Filters
             </Button>
           </Stack>

@@ -3,7 +3,6 @@
         font-size: 1rem;
         text-decoration: underline;
         font-family: 'Martian Mono', monospace;
-        color: #BAD7E9;
         letter-spacing: .2rem;
     }
     MuiTextFeild-root{
@@ -18,7 +17,7 @@
         top: 0rem;
         height: 100vh;
         width: 40vw;
-        background: #2B3467;
+        background: #eeeefd;
         display: flex;
         flex-direction: column;
         justify-content: center;
