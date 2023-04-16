@@ -97,7 +97,7 @@ export default function LoginAndSignUp() {
           alignItems: "center",
         }}
       >
-        <Box sx={{ height: "25rem", width: "20rem", border: "2px solid red",overflow:"hidden"}}>
+        <Box sx={{ height: "25rem", width: "20rem", border: "2px solid #1976d2",overflow:"hidden"}}>
           <div style={{ paddingTop: ".5rem",marginBottom:"1rem"}}>
             <span 
                 onClick={(e)=>switchTabs(e,"login")}
@@ -132,34 +132,34 @@ export default function LoginAndSignUp() {
           
             <form  className="loginForm" onSubmit={loginSubmit} ref={loginForm} style={{display:"flex",transition:"all 0.5s",flexDirection:"column",alignItems:"center",rowGap:"2.5rem",width:"100%",padding:"2.5rem"}}>
               <div style={{display:"flex",alignItems:"center"}}>
-                <EmailOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
+                <EmailOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1rem",marginRight:"2rem",color:"rgba(0, 0, 0, 0.623)"}}/>
                 <input type="email" required placeholder="Email" name="email" value={loginEmail} onChange={(e)=>{setLoginEmail(e.target.value)}} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <div style={{display:"flex",alignItems:"center"}}>
-                <VpnKeyOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
+                <VpnKeyOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1rem",color:"rgba(0, 0, 0, 0.623)"}}/>
                 <input type="password" required placeholder="Password" name="password" value={loginPassword} onChange={(e)=>{setLoginPassword(e.target.value)}} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <Link to="/forgotPassword" style={{display:"inline-block",fontSize:'.8rem',marginLeft:"auto"}}>Forgot Password?</Link>
               <button type="submit" style={{width:"100%",height:"2rem"}}>Login</button>
             </form>
-            <form  className="signUPForm" onSubmit={registerSubmit} ref={signUpForm} encType="multipart/form-data" style={{display:"flex",width:"100%",flexDirection:"column",alignItems:"center",rowGap:"2rem",justifyContent:"center",transition:"all 0.5s"}}>
+            <form  className="signUPForm" onSubmit={registerSubmit} ref={signUpForm} encType="multipart/form-data" style={{display:"flex",width:"100%",flexDirection:"column",alignItems:"center",rowGap:"1.8rem",justifyContent:"center",transition:"all 0.5s"}}>
               <div style={{display:"flex",alignItems:"center"}}>
-                <PortraitOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
+                <PortraitOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1rem",color:"rgba(0, 0, 0, 0.623)"}}/>
                 <input type="text" required placeholder="Name" name="name" value={user.name} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <div style={{display:"flex",alignItems:"center"}}>
-                <EmailOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
+                <EmailOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1rem",color:"rgba(0, 0, 0, 0.623)"}}/>
                 <input type="email" name="email" required placeholder="Email" value={user.email} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <div style={{display:"flex",alignItems:"center"}}>
-                <VpnKeyOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1.6vmax",color:"rgba(0, 0, 0, 0.623)"}}/>
+                <VpnKeyOutlinedIcon sx={{position:"absolute",transform:"translateX(1vmax)",fontSize:"1rem",color:"rgba(0, 0, 0, 0.623)"}}/>
                 <input type="password" name="password" required placeholder="Password" value={user.password} onChange={changeFormData} style={{height:"2.5rem",width:"100%",padding:"1vmax 4vmax",paddingRight:"1vmax",outline:"none"}}/>
               </div>
               <div id="registeredImage" style={{display:"flex",alignItems:"center",justifyContent:"center",width:"90%",paddingLeft:".5rem"}}>
                 <img src={avatarPreview}  alt="" style={{height:"3rem",width:"3rem"}}  />
                 <input type="file" name="avatar"  onChange={changeFormData} accept="image/*" />
               </div>
-              <button type="submit" style={{width:"80%",height:"2rem"}}>Sign Up</button>
+              <button type="submit" style={{width:"80%",height:"2rem",marginBottom:"1rem"}}>Sign Up</button>
             </form>
         </Box>
       </Container>

@@ -23,7 +23,6 @@ export const createProduct=catchAsyncErrors( async(req,res,next)=>{
 
 // updating products
 export const updateProduct =catchAsyncErrors( async (req,res,next)=>{
-    console.log(req.params.id)
     let product = await products.findById(req.params.id)
     if(!product){
         return next(new ErrorHandler("product not found",404))
@@ -66,7 +65,6 @@ export const getDetails =catchAsyncErrors( async (req,res,next)=>{
 // create review or update review
 
 export const createdProductReview = catchAsyncErrors(async (req,res,next)=>{
-    console.log("work")
     const {rating,productId,comment} = req.body;
     const review = {
         user : req.user._id,
@@ -74,11 +72,10 @@ export const createdProductReview = catchAsyncErrors(async (req,res,next)=>{
         rating:Number(rating),
         comment
     }
-    console.log('pre');
     const product =await products.findById(productId);
-   console.log("next")
+
     const isReviewed =await products.reviews.find((rev)=>rev.user.toString() === req.user._id.toString())
-    console.log("12");
+
     if(isReviewed){
         product.reviews.forEach((rev)=>{
             if(product.user.toString()===req.user._id.toString())
@@ -87,12 +84,10 @@ export const createdProductReview = catchAsyncErrors(async (req,res,next)=>{
                 rev.comment=comment
             }
         })
-        console.log('23');
     }
     else{
         product.reviews.push(review)
         product.numOfReviews = product.reviews.length
-        console.log('34');
     }
     let avg =0;
     product.reviews.forEach(rev=>{

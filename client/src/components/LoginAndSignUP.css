@@ -1,5 +1,5 @@
 .activeTab{
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid #1976d2;
 }
 .signUPForm{
     transform:translateY(-100%) translateX(-100vmax)

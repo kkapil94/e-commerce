@@ -1,9 +1,8 @@
 import { create } from "zustand";
-import {createJSONStorage, persist } from "zustand/middleware";
 import axios from "axios";
 
-const useProducts = create(persist(
-  (set, get) => ({
+const useProducts = create((
+  (set) => ({
     products: [],
     loading:true,
     fetchProducts: async (keyword = "",currentPage=1,price=[0,25000],category) => {
@@ -17,10 +16,7 @@ const useProducts = create(persist(
       const response = await axios.get(`/api/v1/${id}`);
       set({ productDetails: response.data,loading:false});
     },
-  }),{
-    name:"products",
-    storage:createJSONStorage(()=>sessionStorage)
-  }
+  })
 ));
 
 export default useProducts

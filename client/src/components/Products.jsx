@@ -17,7 +17,7 @@ import { Link, useParams } from "react-router-dom";
 import useProducts from "../Stores/productStore";
 import ProductCard from "./ProductCard";
 import Loader from "./Loader";
-import zIndex from "@mui/material/styles/zIndex";
+
 
 export default function Products() {
   const params = useParams();
@@ -27,15 +27,17 @@ export default function Products() {
   const [category, setCategory] = React.useState("");
   const [state, setState] = useState("none");
   const [sort, setSort] = useState("none");
+  const [sorted,setSorted] = useState()
   const categories = [
     "Electronics",
     "Fashion",
-    "Toys",
+    "Games",
     "Tools and Equipments",
     "Sports",
   ];
   const handleChange = (event, value) => {
     setPage(value);
+    setSorted()
   };
   const handlePrice = (e, newValue) => {
     setPrice({ ...price, [e.target.name]: e.target.value });
@@ -45,14 +47,33 @@ export default function Products() {
     setSliVal(newValue);
     setPrice({ min: sliVal[0], max: sliVal[1] });
   };
+
   const fetchProducts = useProducts((state) => state.fetchProducts);
-  const products = useProducts((state) => state.products.product);
+  let products = useProducts(state=>state.products.product)
+
+  console.log(products);
   const details = useProducts((state) => state.products);
   const keyword = params.keyword;
-
+  const lowToHigh = ()=>{
+   setSorted(products.sort((a,b)=>{return a.price - b.price}))
+   setSort("none");
+   document.body.style.overflow="initial";
+   setSorted()
+  }
+  const highToLow = ()=>{
+    setSorted(products.sort((a,b)=>{return  b.price - a.price}))
+    setSort("none");
+    document.body.style.overflow="initial";
+  }
+  const ratingSort = ()=>{
+    setSorted(products.sort((a,b)=>{return b.ratings - a.ratings}))
+    setSort("none");
+    document.body.style.overflow="initial";
+  }
+  
   useEffect(() => {
     fetchProducts(keyword, page, sliVal, category);
-  }, [fetchProducts, keyword, page, price, category, sliVal]);
+  }, [ keyword, page, price, category, sliVal, fetchProducts ]);
 
   return (<>
     {!products?<Loader/>:
@@ -119,7 +140,7 @@ export default function Products() {
                       xs:"0 !important"
                     },
                   }}
-                  onClick={()=>{setSort("none");document.body.style.overflow="initial"}}
+                  onClick={lowToHigh}
                 >
                   Low to high
                 </Button>
@@ -136,7 +157,7 @@ export default function Products() {
                       xs: "0 !important",
                     },
                   }}
-                  onClick={()=>{setSort("none");document.body.style.overflow="initial"}}
+                  onClick={highToLow}
                 >
                   High to low
                 </Button>
@@ -153,7 +174,7 @@ export default function Products() {
                       xs: "0 !important",
                     },
                   }}
-                  onClick={()=>{setSort("none");document.body.style.overflow="initial"}}
+                  onClick={ratingSort}
                 >
                   Rating
                 </Button>
@@ -293,8 +314,8 @@ export default function Products() {
               marginTop: { lg: "0", md: "0", sm: "1rem" ,xs:"1rem"},
             }}
           >
-            {products &&
-              products.map((product) => (
+            {products&&
+              (sorted?sorted:products).map((product) => (
                 <Link
                   to={`product/${product._id}`}
                   style={{ textDecoration: "none" }}
@@ -304,7 +325,7 @@ export default function Products() {
                 </Link>
               ))}
           </Stack>
-          {products.length === details.resultPerPage && (
+          
             <Pagination
               count={
                 details &&
@@ -320,7 +341,7 @@ export default function Products() {
                 justifyContent: "center",
               }}
             />
-          )}
+          
         </Grid>
       </Grid>
     </Box>

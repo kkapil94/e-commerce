@@ -18,6 +18,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import Review from "../components/Review";
 import "./ProductDetails.css"
 import cartStore from "../Stores/cartStore";
+import Loader from "../components/Loader"
 
 export default function ProductDetails() {
  
@@ -58,7 +59,7 @@ export default function ProductDetails() {
 
   return (
     <Fragment>
-      {productDetails && (
+      {!productDetails?<Loader/>: (
         <Grid
           container
           alignItems={"center"}
@@ -81,7 +82,7 @@ export default function ProductDetails() {
               <Slider {...settings}>
                 {productDetails.product.images.map((img) => (
                   <Box key={productDetails.product._id}>
-                    <Box sx={{width:{lg:"50%",md:"65%",sm:"50%",xs:"80%"},height:{lg:"25rem",md:"25rem",sm:"25rem",xs:"25rem"},margin: "auto",paddingTop: "2rem",}}>
+                    <Box sx={{width:{lg:"50%",md:"65%",sm:"50%",xs:"17rem"},height:{lg:"25rem",md:"25rem",sm:"25rem",xs:"23rem"},margin: "auto",paddingTop: "2rem",}}>
                     <img
                       src={img.url}
                       alt=""
@@ -106,7 +107,7 @@ export default function ProductDetails() {
             container
             justifyContent={"center"}
           >
-            <Box sx={{width:"100%"}}>
+            <Box sx={{width:"100%",marginTop:"2rem"}}>
               <Box>
                 <Typography variant="h5">
                   {productDetails.product.name}
@@ -175,7 +176,7 @@ export default function ProductDetails() {
           </Grid>
         </Grid>
       )}
-      <Box >
+      <Box sx={{marginTop:"4rem"}}>
         <Typography
           variant="h5"
           textAlign={"center"}
