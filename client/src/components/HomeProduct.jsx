@@ -47,7 +47,7 @@ export default function HomeProducts() {
           spacing={2}
           // sx={{width:"80vw"}}
         >
-          {!loading &&
+          {products &&
             products.map((product) => (
               <Link
                 to={`product/${product._id}`}
