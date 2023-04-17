@@ -6,7 +6,7 @@ const useProducts = create((
     products: [],
     loading:true,
     fetchProducts: async (keyword = "",currentPage=1,price=[0,25000],category) => {
-      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+      let link = `${process.env.REACT_APP_API_URL}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
       if(category)link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
       const {data} = await axios.get(link);
       set({ products: data,loading:false});
