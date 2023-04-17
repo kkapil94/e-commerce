@@ -1,4 +1,5 @@
 import {
+  Box,
   Container,
   Typography,
 } from "@mui/material";
@@ -23,9 +24,8 @@ export default function HomeProducts() {
       {
         loading?<Loader/>:
       
-      <Container sx={{width:"85%",marginTop: "5rem" }}>
+      <Box  sx={{maxWidth:"100vw",padding:"3rem"}}>
         <Typography
-          
           align="center"
           sx={{
             typography:{lg:"h4",xs:"h5"},
@@ -44,6 +44,8 @@ export default function HomeProducts() {
           flexWrap="wrap"
           alignItems={"center"}
           justifyContent="center"
+          spacing={2}
+          // sx={{width:"80vw"}}
         >
           {!loading &&
             products.map((product) => (
@@ -56,7 +58,7 @@ export default function HomeProducts() {
               </Link>
             ))}
         </Stack>
-      </Container>
+      </Box>
 }
     </Fragment>
   );

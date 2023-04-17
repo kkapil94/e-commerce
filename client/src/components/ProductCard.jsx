@@ -11,16 +11,17 @@ export default function ProductCard(products) {
   return (
     <Fragment>
        {product && <Card
-                  sx={{width: "14rem",height: "24rem",margin: "2rem 1rem 0 1rem"}}
+                  sx={{width: "15rem",height: "24rem",margin: "2rem .5rem 0 .5rem"}}
                 >
-                  <CardContent>
+                  <CardContent sx={{padding:"0"}}>
                     <Box>
                       <img
                         src={product.images[0].url}
                         alt=""
-                        style={{ height: "17rem", width: "100%" }}
+                        style={{ height: "18rem", width: "100%" }}
                       />
                     </Box>
+                    <Box sx={{padding:".5rem"}}>
                     <Typography variant="h6">
                       {product.name}
                     </Typography>
@@ -35,6 +36,7 @@ export default function ProductCard(products) {
                     >
                       ₹{product.price}
                     </Typography>
+                    </Box>
                   </CardContent>
                 </Card>
 }

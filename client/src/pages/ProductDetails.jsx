@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
   Input,
+  Stack,
 } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,9 +20,10 @@ import Review from "../components/Review";
 import "./ProductDetails.css"
 import cartStore from "../Stores/cartStore";
 import Loader from "../components/Loader"
+import {useAlert} from "react-alert"
 
 export default function ProductDetails() {
- 
+ const alert = useAlert()
   const { id } = useParams();
   const settings = {
     dots: true,
@@ -30,12 +32,13 @@ export default function ProductDetails() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 3000,
     cssEase: "linear",
   };
   const [quan,setQuan] = useState(1)
   const productDetails = useProducts((state) => state.productDetails);
+  console.log(productDetails);
   const fetchProductDetails = useProducts((state) => state.fetchProductDetails);
   const addItem = cartStore(state=>state.addToCart)
   const incQuan = ()=>{
@@ -62,11 +65,9 @@ export default function ProductDetails() {
       {!productDetails?<Loader/>: (
         <Grid
           container
-          alignItems={"center"}
           sx={{
-            // height: "100vh",
             overflow: "hidden",
-            padding: {lg:"2rem 5rem 5rem 5rem",md:"2rem 5rem 5rem 5rem",sm:"2rem 5rem 5rem 5rem",xs:"1rem"},
+            padding: {lg:"2rem 1.5rem 1.5rem 1.5rem",md:"2rem 1rem 1rem 1rem",sm:"2rem 1rem 1rem 1rem",xs:"1rem"},
             marginTop:{lg:0,md:0,sm:0,xs:"2rem"}
           }}
         >
@@ -76,26 +77,24 @@ export default function ProductDetails() {
             md={6}
             sm={12}
             xs={12}
-            sx={{ border: "1px solid #f0f0f0", paddingBottom: "4rem" }}
+            sx={{ border: "1px solid #f0f0f0", paddingBottom: "4rem",padding:{lg:"0rem 3.5rem 2rem 3.5rem",md:"0rem 1% 2rem 1%",sm:"0rem 15% 2rem 15%",xs:"2rem 0% 1rem 0%" }}}
           >
-            <Box>
+            <Stack >
               <Slider {...settings}>
                 {productDetails.product.images.map((img) => (
-                  <Box key={productDetails.product._id}>
-                    <Box sx={{width:{lg:"50%",md:"65%",sm:"50%",xs:"17rem"},height:{lg:"25rem",md:"25rem",sm:"25rem",xs:"23rem"},margin: "auto",paddingTop: "2rem",}}>
+                    <Box key={productDetails.product._id} sx={{width:{lg:"50% ",md:"65%",sm:"50%",xs:"100%"},height:{lg:"25rem",md:"25rem",sm:"25rem",xs:"20rem"},padding: {lg:"1rem",md:"1rem",sm:"1rem",xs:"0"},}}>
                     <img
                       src={img.url}
                       alt=""
                       style={{
-                        height: "25rem",
+                        height: "100%",
                         width: "100%",
                       }}
                     />
                     </Box>
-                  </Box>
                 ))}
               </Slider>
-            </Box>
+            </Stack>
           </Grid>
           <Grid
             item
@@ -103,7 +102,7 @@ export default function ProductDetails() {
             md={6}
             sm={12}
             xs={12}
-            sx={{ paddingLeft:{lg:"2rem",md:"2rem",sm:"2rem",xs:'0' }}}
+            sx={{ paddingLeft:{lg:"2rem",md:"2rem",sm:"2rem",xs:'0'}}}
             container
             justifyContent={"center"}
           >
@@ -152,7 +151,7 @@ export default function ProductDetails() {
                 <IconButton size="small" onClick={incQuan}>
                   <AddIcon />
                 </IconButton>
-                <Button variant="contained" sx={{ borderRadius: "2rem" }} onClick={()=>addToCart(productDetails.product)}>
+                <Button variant="contained" sx={{ borderRadius: "2rem" }} onClick={()=>{addToCart(productDetails.product);alert.success("Added to cart Successfully")}}>
                   Add to cart
                 </Button>
               </Box>
@@ -165,7 +164,7 @@ export default function ProductDetails() {
                 </Typography>
               </Box>
               <Box>
-                <Typography variant="h6" sx={{ padding: "1rem 0" }}>
+                <Typography variant="subtitle2" sx={{ padding: "1rem 0" }}>
                   Description:{productDetails.product.description}
                 </Typography>
                 <Button variant="contained" sx={{ borderRadius: "2rem" }}>
