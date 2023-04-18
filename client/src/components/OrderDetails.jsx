@@ -10,7 +10,7 @@ export default function OrderDetails() {
   console.log(user);
   const { id } = useParams();
   const OrderDet = async () => {
-    const { data } = await axios.get(`/api/v1/order/${id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`);
     setOrder(data.order)
     console.log(data.order);
   };

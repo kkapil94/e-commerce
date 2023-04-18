@@ -6,11 +6,11 @@ import { createJSONStorage, persist } from "zustand/middleware";
     orders:{},
     createOrder: async (order)=>{
         const config = { headers: {"Content-Type": "application/json"} }
-        const {data} =await axios.post("/api/v1/order/create",order,config)
+        const {data} =await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/order/create`,order,config)
         console.log("iam",data);
     },
     getOrders: async (id)=>{
-        const {data} = await axios.get(`/api/v1/order/myorders/${id}`)
+        const {data} = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/order/myorders/${id}`)
         return data
     }
 }),{

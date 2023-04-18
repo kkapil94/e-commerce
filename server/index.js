@@ -8,23 +8,16 @@ import cookieParser from 'cookie-parser'
 import errorMiddleware from './middleware/error.js'
 import cloudinary from 'cloudinary'
 import dotenv from 'dotenv'
-
 import paymentRoute from "./Routes/paymentRoute.js"
-
 import user from './Routes/userRoute.js'
 import cors from "cors"
 import fileUpload from 'express-fileupload'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import path from "path"
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-console.log(__dirname);
+
 const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(fileUpload())
-// app.use(path)
+
 //uncaught error
 
 process.on("uncaughtException",(err)=>{
@@ -49,10 +42,7 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET,
 
 })
-app.use(express.static(path.join(__dirname,"../client/build")))
-app.get("*",(req,res)=>{
-    res.sendFile(path.resolve(__dirname,"../client/build/index.html"))
-})
+
 
 const server = app.listen(process.env.PORT || 4000,()=>{
     console.log('app is listening on port:4000');
