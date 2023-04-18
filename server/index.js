@@ -14,10 +14,12 @@ import paymentRoute from "./Routes/paymentRoute.js"
 import user from './Routes/userRoute.js'
 import cors from "cors"
 import fileUpload from 'express-fileupload'
-import path from 'path';
-const __dirname = path.resolve();
-
-
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from "path"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+console.log(__dirname);
 const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
