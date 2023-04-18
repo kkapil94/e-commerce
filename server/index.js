@@ -14,6 +14,8 @@ import paymentRoute from "./Routes/paymentRoute.js"
 import user from './Routes/userRoute.js'
 import cors from "cors"
 import fileUpload from 'express-fileupload'
+import {path} from "path"
+
 const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -41,6 +43,10 @@ cloudinary.config({
     api_key:process.env.CLOUDINARY_API_KEY,
     api_secret:process.env.CLOUDINARY_API_SECRET,
 
+})
+app.use(express.static(this.path.join(__dirname,"../client/build")))
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../client/build/index.html"))
 })
 
 const server = app.listen(process.env.PORT || 4000,()=>{

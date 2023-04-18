@@ -130,7 +130,7 @@ export const forgotPass = catchAsyncErrors(async (req,res,next)=>{
     user.resetPasswordToken = token.resetPasswordToken;
     user.resetPasswordExpire = token.resetPasswordExpire;
     await user.save({validateBeforUse:false});
-    const resetPasswordUrl = `${process.env.FRONTED_URL}/password/reset/${token.resetToken}`
+    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${token.resetToken}`
     const message = `Your password reset token is :-- \n\n${resetPasswordUrl}\n\n . If you does not have requested it, then ignore it ` 
     try {
         await sendMail({
