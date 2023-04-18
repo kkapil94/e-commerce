@@ -14,12 +14,15 @@ import paymentRoute from "./Routes/paymentRoute.js"
 import user from './Routes/userRoute.js'
 import cors from "cors"
 import fileUpload from 'express-fileupload'
-import {path} from "path"
+import path from 'path';
+const __dirname = path.resolve();
+
 
 const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(fileUpload())
+// app.use(path)
 //uncaught error
 
 process.on("uncaughtException",(err)=>{
@@ -44,7 +47,7 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET,
 
 })
-app.use(express.static(this.path.join(__dirname,"../client/build")))
+app.use(express.static(path.join(__dirname,"../client/build")))
 app.get("*",(req,res)=>{
     res.sendFile(path.resolve(__dirname,"../client/build/index.html"))
 })
