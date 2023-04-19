@@ -3,6 +3,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import React, { useState } from "react";
 import {useAlert} from "react-alert"
 import userStore from "../Stores/userStore";
+import Loader from "./Loader";
 const style = {
     position: "absolute",
     top: "50%",
@@ -22,6 +23,7 @@ export default function PasswordUpdate(props) {
     const alert = useAlert()
     const user = userStore(state=>state.user)
     const updatePassword = userStore(state=>state.updatePassword)
+    const [loading,setLoading] = useState()
     const [password,setPassword] = useState({
         oldOne:"",
         newOne:"",
@@ -35,6 +37,7 @@ export default function PasswordUpdate(props) {
     const close = ()=>props.edit(0)
     const changePassword =async (e)=>{
         e.preventDefault()
+        setLoading(true)
         console.log(password.newOne.length);
         if(password.newOne.length<6){
             alert.show("Password should be of more than 6 characters");
@@ -52,6 +55,7 @@ export default function PasswordUpdate(props) {
                 newOne:"",
                 reNewOne:""
             })
+            setLoading(false)
             close()
             }
         }
@@ -64,7 +68,7 @@ export default function PasswordUpdate(props) {
       aria-describedby="modal-modal-description"
       sx={{zIndex:"1101"}}
     >
-      <Box sx={style}>
+      {loading?<Loader/>:<Box sx={style}>
         <Box sx={{borderBottom:"2px solid gray",display:"flex",justifyContent:"space-between",paddingBottom:{lg:".5rem",md:".5rem",sm:"0",xs:"0"},zIndex:"-1"}}>
             <Typography sx={{typography:{lg:"h4",md:"h4",sm:"h5",xs:"h6"}}} >Change Password</Typography>
             <IconButton onClick={close}><CancelIcon/></IconButton>
@@ -84,7 +88,7 @@ export default function PasswordUpdate(props) {
             </Box>
             <Button variant="outlined" type="submit">Change Password</Button>
         </form>
-      </Box>
+      </Box>}
     </Modal>
   );
 }

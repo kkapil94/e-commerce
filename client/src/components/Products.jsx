@@ -85,17 +85,18 @@ export default function Products() {
               sx={{
                 position: { lg: "initial", md: "initial", sm: "absolute" ,xs:"absolute"},
                 top: {sm:"7.9rem"},
-                bottom:{lg:"initial",md:"initial",sm:"initial",xs:"0"},
+                bottom:{lg:"initial",md:"initial",sm:"initial",xs:"-4rem"},
                 width: "98%",
                 display:{lg:"initial",md:"initial",sm:"initial",xs:sort},
                 height:{lg:"initial",md:"initial",sm:"initial",xs:"50vh"},
                 background:"#fff",
+                borderTop:{lg:"none",md:"none",sm:"none",xs:"1px solid gray"},
                 zIndex:0
               }}
             >
               <Typography
                 sx={{
-                  typography: { lg: "h5", md: "h6", sm: "subtitle1",xs:"subtitle1" },
+                  typography: { lg: "h5", md: "h6", sm: "subtitle1",xs:"h6" },
                   margin: {
                     lg: "1rem 1rem 2rem 0",
                     md: "1rem 1rem 2rem 0",
@@ -108,7 +109,7 @@ export default function Products() {
                     sm: "0",
                     xs: "0"
                   },
-                  width: { lg: "100%", md: "100%", sm: "3.2rem" ,xs:"3.2rem"},
+                  width: { lg: "100%", md: "100%", sm: "3.2rem"},
                   display: { sm: "inline-block" },
                   padding: { lg: ".5rem", md: ".5rem", sm: "0",xs:"0" },
                   color: "#94ada7",

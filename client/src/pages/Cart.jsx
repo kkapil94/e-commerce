@@ -47,7 +47,9 @@ export default function Cart() {
   return !cartItems.length ? (
     <>
       <div style={{ display: "flex", alignItems: "center",flexDirection:"column"}}>
-        <img src="./images/preview.png" alt="" style={{height:"26rem",width:"38rem",marginBottom:"2rem"}}/>
+        <Box sx={{height:{lg:"26rem",md:"24rem",sm:"25rem",xs:"18rem"},width:{lg:"38rem",md:"35rem",sm:"30rem",xs:"20rem"},marginTop:"2rem"}}>
+        <img src="./images/preview.png" alt="" style={{height:"100%",width:"100%",marginBottom:"2rem"}}/> 
+        </Box>
         <Typography variant="h4" letterSpacing={1}> Your cart is empty</Typography>
       </div>
     </>

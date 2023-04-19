@@ -6,12 +6,14 @@ import React, { useEffect, useRef, useState } from "react";
 import userStore from "../Stores/userStore"
 import "./LoginAndSignUP.css"
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loader from "./Loader"
 import { useAlert } from "react-alert";
 
 export default function LoginAndSignUp() {
     const alert = useAlert()
     const [loginEmail,setLoginEmail] = useState("");
     const navigate = useNavigate()
+    const [loading,setLoading] = useState(false)
     const [loginPassword,setLoginPassword] = useState("");
     const [avatarPreview,setAvatarPreview] = useState("./images/avatar.jpg")
     const [avatar,setAvatar] = useState("")
@@ -31,6 +33,7 @@ export default function LoginAndSignUp() {
     const isAuthenticated =  userStore(state=>state.isAuthenticated)
     const registerSubmit =async (e)=>{
       e.preventDefault();
+      setLoading(true)
         const myForm = new FormData();
         myForm.set("name",name);
         myForm.set("email",email);
@@ -39,14 +42,17 @@ export default function LoginAndSignUp() {
         const {status} =await registerUser(myForm);
         if(status===200){
           alert.success("Registered Successfully")
+          setLoading(false)
         }
     }
     const loginSubmit =async (e)=>{
       e.preventDefault();
+      setLoading(true)
       const {status} =await loginUser(loginEmail,loginPassword);
       console.log(status);
       if(status===200){
         alert.success("Login Successfully")
+        setLoading(false)
       }
     }
     const changeFormData = (e)=>{ 
@@ -96,7 +102,9 @@ export default function LoginAndSignUp() {
           justifyContent: "center",
           alignItems: "center",
         }}
-      >
+      >{
+        loading?<Loader/>:
+      
         <Box sx={{ height: "25rem", width: "20rem", border: "2px solid #1976d2",overflow:"hidden"}}>
           <div style={{ paddingTop: ".5rem",marginBottom:"1rem"}}>
             <span 
@@ -157,11 +165,11 @@ export default function LoginAndSignUp() {
               </div>
               <div id="registeredImage" style={{display:"flex",alignItems:"center",justifyContent:"center",width:"90%",paddingLeft:".5rem"}}>
                 <img src={avatarPreview}  alt="" style={{height:"3rem",width:"3rem"}}  />
-                <input type="file" name="avatar"  onChange={changeFormData} accept="image/*" />
+                <input type="file" name="avatar" required  onChange={changeFormData} accept="image/*" />
               </div>
               <button type="submit" style={{width:"80%",height:"2rem",marginBottom:"1rem"}}>Sign Up</button>
             </form>
-        </Box>
+        </Box>}
       </Container>
     </>
   );

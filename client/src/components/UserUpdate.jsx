@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import { Button, IconButton, Input } from "@mui/material";
 import userStore from "../Stores/userStore";
 import CancelIcon from '@mui/icons-material/Cancel';
+import Loader from "./Loader";
 
 const style = {
   position: "absolute",
@@ -22,6 +23,7 @@ const style = {
 };
 export default function UserUpdate(props) {
     const user = userStore(state=>state.user)
+    const [loading,setLoading] = React.useState(false)
     const [avatarPreview,setAvatarPreview] = React.useState(user.avatar.url)
     const close = ()=>{props.edit(0)}
     const updateUser = userStore(state=>state.updateUser)
@@ -48,9 +50,11 @@ export default function UserUpdate(props) {
     }
     const update = async (e)=>{
         e.preventDefault()
+        setLoading(true)
         const response = await updateUser(userData) ;
         console.log(response.data);
         if(response.data.success){
+          setLoading(false)
             close()
         }
     }
@@ -62,7 +66,7 @@ export default function UserUpdate(props) {
       aria-describedby="modal-modal-description"
       sx={{zIndex:"1101"}}
     >
-      <Box sx={style}>
+      {loading?<Loader/>:<Box sx={style}>
         <Box sx={{display:"flex",flexDirection:'row',alignItems:'center',justifyContent:"space-between",borderBottom:"2px solid gray",paddingBottom:"0.5rem"}}>
             <Typography sx={{typography:{lg:"h4",md:"h4",sm:"h5",xs:"h6"}}} >Update Profile</Typography>
             <IconButton onClick={close}><CancelIcon/></IconButton>
@@ -82,7 +86,7 @@ export default function UserUpdate(props) {
           </Box>
           <Button type="submit" variant="outlined" >Update</Button>
         </form>
-      </Box>
+      </Box>}
     </Modal>
   );
 }
