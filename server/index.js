@@ -14,7 +14,12 @@ import cors from "cors"
 import fileUpload from 'express-fileupload'
 
 const app = express()
-app.use(cors())
+app.use(cookieParser())
+app.use(cors({
+    credentials: true,
+    origin:  "http://localhost:3000",
+    optionsSuccessStatus: 200,
+  }));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(fileUpload())
 app.use(express.json({ limit: "50mb" }));
@@ -31,7 +36,6 @@ dotenv.config()
 mongoose.set("strictQuery", false);
  connect()
 app.use(bodyParser.json())
-app.use(cookieParser())
 app.use('/api/v1',product)
 app.use('/api/v1',user)
 app.use("/api/v1",order)

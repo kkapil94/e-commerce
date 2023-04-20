@@ -23,6 +23,9 @@ const cartStore = create(persist((set,get)=>({
         let cart = get().cart
          cart = cart.filter(i=>(i.product._id!==prod._id))
         set({cart})
+    },
+    emptyCart:()=>{
+        set({cart:[]})
     }
 }),{name:"cart",storage:createJSONStorage(()=>localStorage)}))
 

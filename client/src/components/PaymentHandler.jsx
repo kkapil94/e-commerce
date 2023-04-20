@@ -22,6 +22,7 @@ export default function PaymentHandler() {
   const gst = subTotal * 0.18;
   const shippingCharges = subTotal >= 500 ? 0 : 100;
   const total = subTotal + gst + shippingCharges;
+  const emptyCart = cartStore(state=>state.emptyCart)
 
   let orderDetails = {
     shippingInfo,
@@ -64,8 +65,12 @@ export default function PaymentHandler() {
     razor.open();
   };
   const newOrder = async()=>{
+    console.log("i am")
     orderDetails = {...orderDetails,paymentInfo:{id:ref,status:"success"}}
     const order =await createOrder(orderDetails)
+    console.log(localStorage.getItem("cart"))
+    localStorage.removeItem("cart")
+    emptyCart()
   }
   useEffect(() => {
     if(!ref)
