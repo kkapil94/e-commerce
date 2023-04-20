@@ -15,7 +15,11 @@ import fileUpload from 'express-fileupload'
 
 const app = express()
 app.use(cookieParser())
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin:"https://e-commerce-kkapil94.vercel.app",
+    optionsSuccessStatus: 200,
+  }));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(fileUpload())
 app.use(express.json({ limit: "50mb" }));

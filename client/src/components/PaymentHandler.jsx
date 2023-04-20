@@ -65,12 +65,10 @@ export default function PaymentHandler() {
     razor.open();
   };
   const newOrder = async()=>{
-    console.log("i am")
+    emptyCart()
+    localStorage.removeItem("cart")
     orderDetails = {...orderDetails,paymentInfo:{id:ref,status:"success"}}
     const order =await createOrder(orderDetails)
-    console.log(localStorage.getItem("cart"))
-    localStorage.removeItem("cart")
-    emptyCart()
   }
   useEffect(() => {
     if(!ref)
