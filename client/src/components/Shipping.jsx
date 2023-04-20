@@ -32,7 +32,6 @@ export default function Shipping() {
     country: shipInfo?shipInfo.country:'',
   });
   const changeData = (e) => {
-    console.log("working", shippingInfo.country);
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
   };
   const submit = (e)=>{

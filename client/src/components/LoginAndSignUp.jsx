@@ -48,8 +48,7 @@ export default function LoginAndSignUp() {
     const loginSubmit =async (e)=>{
       e.preventDefault();
       setLoading(true)
-      const {status} =await loginUser(loginEmail,loginPassword);
-      console.log(status);
+      const {status} = await loginUser(loginEmail,loginPassword);
       if(status===200){
         alert.success("Login Successfully")
         setLoading(false)
@@ -60,7 +59,8 @@ export default function LoginAndSignUp() {
           const reader = new FileReader();
           reader.onload = ()=>{
             if(reader.readyState === 2)
-            {setAvatar(reader.result)
+            {
+              setAvatar(reader.result)
             setAvatarPreview(reader.result)}
           }
           reader.readAsDataURL(e.target.files[0])
@@ -165,7 +165,7 @@ export default function LoginAndSignUp() {
               </div>
               <div id="registeredImage" style={{display:"flex",alignItems:"center",justifyContent:"center",width:"90%",paddingLeft:".5rem"}}>
                 <img src={avatarPreview}  alt="" style={{height:"3rem",width:"3rem"}}  />
-                <input type="file" name="avatar" required  onChange={changeFormData} accept="image/*" />
+                <input type="file" name="avatar"  onChange={changeFormData} accept="image/*" />
               </div>
               <button type="submit" style={{width:"80%",height:"2rem",marginBottom:"1rem"}}>Sign Up</button>
             </form>

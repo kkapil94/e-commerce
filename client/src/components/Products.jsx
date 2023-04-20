@@ -1,6 +1,8 @@
 import {
   Box,
   Button,
+  Checkbox,
+  FormControlLabel,
   Grid,
   List,
   ListItem,
@@ -24,15 +26,23 @@ export default function Products() {
   const [page, setPage] = React.useState(1);
   const [price, setPrice] = React.useState({ min: 0, max: 25000 });
   const [sliVal, setSliVal] = React.useState([0, 25000]);
-  const [category, setCategory] = React.useState("");
+  const [category, setCategory] = React.useState();
   const [state, setState] = useState("none");
   const [sort, setSort] = useState("none");
   const [sorted,setSorted] = useState()
+  const [checked,setChecked] = useState({
+    Electronics:false,
+    Fashion:false,
+    Games:false,
+    Tools_and_Equipments:false,
+    Sports:false,
+  });
+
   const categories = [
     "Electronics",
     "Fashion",
     "Games",
-    "Tools and Equipments",
+    "Tools_and_Equipments",
     "Sports",
   ];
   const handleChange = (event, value) => {
@@ -51,7 +61,6 @@ export default function Products() {
   const fetchProducts = useProducts((state) => state.fetchProducts);
   let products = useProducts(state=>state.products.product)
 
-  console.log(products);
   const details = useProducts((state) => state.products);
   const keyword = params.keyword;
   const lowToHigh = ()=>{
@@ -60,6 +69,11 @@ export default function Products() {
    document.body.style.overflow="initial";
    setSorted()
   }
+  const handleCheckbox = (e) =>{
+   setChecked({[e.target.name]:true})
+   setCategory(e.target.name)
+  }
+  
   const highToLow = ()=>{
     setSorted(products.sort((a,b)=>{return  b.price - a.price}))
     setSort("none");
@@ -91,7 +105,7 @@ export default function Products() {
                 height:{lg:"initial",md:"initial",sm:"initial",xs:"50vh"},
                 background:"#fff",
                 borderTop:{lg:"none",md:"none",sm:"none",xs:"1px solid gray"},
-                zIndex:0
+                zIndex:1
               }}
             >
               <Typography
@@ -125,7 +139,7 @@ export default function Products() {
                   flexDirection: { lg: "column", md: "column", sm: "row",xs:"column" },
                   display: { lg: "inherit", md: "inherit", sm: "inline" ,xs:"flex"},
                   justifyContent:"space-evenly",
-                  height:"70%"
+                  height:"70%",
                 }}
               >
                 <Button
@@ -255,11 +269,14 @@ export default function Products() {
                 </Typography>
                 <List>
                   {categories.map((category) => (
-                    <ListItem key={category} disablePadding>
+                    <ListItem key={category} disablePadding name={category}>
                       <ListItemButton>
-                        <ListItemText onClick={() => setCategory(category)}>
+                          
+                            <FormControlLabel  control={<Checkbox  />} label={category} checked={checked[category]} name={category} onChange={handleCheckbox}/>
+
+                        {/* <ListItemText onClick={() => setCategory(category)}>
                           {category}
-                        </ListItemText>
+                        </ListItemText> */}
                       </ListItemButton>
                     </ListItem>
                   ))}
@@ -315,7 +332,7 @@ export default function Products() {
               marginTop: { lg: "0", md: "0", sm: "1rem" ,xs:"1rem"},
             }}
           >
-            {products&&
+            {products.length!==0?
               (sorted?sorted:products).map((product) => (
                 <Link
                   to={`product/${product._id}`}
@@ -324,10 +341,10 @@ export default function Products() {
                 >
                   <ProductCard products={product} />
                 </Link>
-              ))}
+              )):<img src="https://cdn.dribbble.com/users/3512533/screenshots/14168376/media/1357b33cb4057ecb3c6f869fc977561d.jpg" style={{height:"100%",width:"80%",marginTop:"2rem"}}/>}
           </Stack>
           
-            <Pagination
+           {!category&& <Pagination
               count={
                 details &&
                 Math.ceil(details.countProducts / details.resultPerPage)
@@ -341,7 +358,7 @@ export default function Products() {
                 marginTop: "5rem",
                 justifyContent: "center",
               }}
-            />
+            />}
           
         </Grid>
       </Grid>

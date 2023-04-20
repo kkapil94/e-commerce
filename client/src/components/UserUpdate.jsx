@@ -52,7 +52,6 @@ export default function UserUpdate(props) {
         e.preventDefault()
         setLoading(true)
         const response = await updateUser(userData) ;
-        console.log(response.data);
         if(response.data.success){
           setLoading(false)
             close()

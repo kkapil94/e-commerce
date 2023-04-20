@@ -38,7 +38,6 @@ export default function ProductDetails() {
   };
   const [quan,setQuan] = useState(1)
   const productDetails = useProducts((state) => state.productDetails);
-  console.log(productDetails);
   const fetchProductDetails = useProducts((state) => state.fetchProductDetails);
   const addItem = cartStore(state=>state.addToCart)
   const incQuan = ()=>{

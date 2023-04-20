@@ -21,7 +21,6 @@ export default function ResetPassword() {
     }
     const changePassword =async (e)=>{
         e.preventDefault()
-        console.log(password.newOne.length);
         if(password.newOne.length<6){
             alert.show("Password should be of 6 or more than 6 characters");
         }else if(password.reNewOne !== password.newOne)

@@ -9,11 +9,13 @@ import cloudinary from "cloudinary"
 import sendMail from "../utils/sendMail.js"
 // register user
 export const registerUser = catchAsyncErrors(async (req,res,next)=>{
+    console.log(req.body.avatar);
     const myCloud =await cloudinary.v2.uploader.upload(req.body.avatar,{
         folder:"Avatars",
-        width:150,
+        width:300,
         crop:"scale"
     })
+    console.log(req.body);
     const {name,email,password,role} = req.body
     const hashedPass =await bcrypt.hash(password,10)
     const user =await User.create({

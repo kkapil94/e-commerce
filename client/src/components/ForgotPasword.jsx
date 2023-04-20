@@ -12,9 +12,7 @@ export default function ForgotPasword() {
 const submit =async (e)=>{
     e.preventDefault()
     const response = await forgot(mail);
-    console.log(response);
      if(response.data.success){
-        console.log("ok");
         alert.success("email sent successfully")
         navigate("/")
     }

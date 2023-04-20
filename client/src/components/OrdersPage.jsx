@@ -11,7 +11,6 @@ export function OrderPage() {
   const getOrders = async () => {
     const { orders } = await order(param.id);
     setOrders(orders);
-    console.log(orders);
   };
   useEffect(() => {
     getOrders();

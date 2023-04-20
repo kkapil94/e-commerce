@@ -12,11 +12,9 @@ import Loader from "./Loader";
 export default function PaymentHandler() {
   const shippingInfo = shippingStore(state=>state.shippingInfo)
   const cart = cartStore((state) => state.cart);
-  console.log(cart);
   const createOrder = orderStore((state) => state.createOrder);
   const param = useSearchParams()[0]
   const ref = param.get("reference")
-  console.log(ref);
   let subTotal = 0;
   cart.forEach((i) => {
     subTotal = subTotal + i.product.price * i.quantity;
@@ -67,9 +65,7 @@ export default function PaymentHandler() {
   };
   const newOrder = async()=>{
     orderDetails = {...orderDetails,paymentInfo:{id:ref,status:"success"}}
-    console.log(orderDetails);
     const order =await createOrder(orderDetails)
-    console.log("iam",order);
   }
   useEffect(() => {
     if(!ref)

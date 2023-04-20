@@ -11,7 +11,7 @@ export default function ProductCard(products) {
   return (
     <Fragment>
        {product && <Card
-                  sx={{width: "15rem",height: "24rem",margin: "2rem .5rem 0 .5rem"}}
+                  sx={{width: "15rem",height:"24.3rem",margin: "2rem .5rem 0 .5rem"}}
                 >
                   <CardContent sx={{padding:"0"}}>
                     <Box>
@@ -30,6 +30,7 @@ export default function ProductCard(products) {
                       value={product.ratings}
                       readOnly
                       size="small"
+                      sx={{zIndex:0}}
                     />
                     <Typography
                       variant="subtitle2"

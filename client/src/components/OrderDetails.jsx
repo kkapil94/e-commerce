@@ -7,12 +7,11 @@ import userStore from "../Stores/userStore";
 export default function OrderDetails() {
   const [order, setOrder] = useState();
   const user = userStore(state=>state.user)
-  console.log(user);
   const { id } = useParams();
   const OrderDet = async () => {
     const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`);
     setOrder(data.order)
-    console.log(data.order);
+
   };
   useEffect(()=>{
     OrderDet()

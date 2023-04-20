@@ -14,13 +14,11 @@ import { Box } from "@mui/system";
 import {useNavigate} from "react-router-dom"
 export default function Cart() {
   const cartItems = cartStore((state) => state.cart);
-  console.log(cartItems);
   const remove = cartStore((state) => state.removeItem);
   let total = 0;
   cartItems.forEach((i) => {
     total = total + i.product.price * i.quantity;
   });
-  console.log(total);
   // eslint-disable-next-line
   const [quan, setQuan] = useState(0);
   const setQuantity = cartStore((state) => state.setQuan);
