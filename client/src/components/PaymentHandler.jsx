@@ -38,7 +38,7 @@ export default function PaymentHandler() {
     totalPrice:total}
 
   const payment = async () => {
-    const {data: { order }, } = await axios.post(`${REACT_APP_API_URL}/api/v1/checkout`, { total });
+    const {data: { order }, } = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/checkout`, { total });
     var options = {
       key: "rzp_test_NImFwytULPh8lH",
       amount: order.amount,
@@ -47,7 +47,7 @@ export default function PaymentHandler() {
       description: "For eCommerce",
       image: "./images/logo1234.jpg",
       order_id: order.id,
-      callback_url: `${REACT_APP_API_URL}/api/v1/paymentVerification`,
+      callback_url: `${process.env.REACT_APP_API_URL}/api/v1/paymentVerification`,
       prefill: {
         name: "Gaurav Kumar",
         email: "gaurav.kumar@example.com",
