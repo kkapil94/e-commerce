@@ -24,6 +24,6 @@ export const paymentVerification = async (req,res)=>{
   var response = {"signatureIsValid":"false"}
   if(expectedSignature === req.body.razorpay_signature)
    {response={"signatureIsValid":"true"}
-   res.redirect(`http://localhost:3000/payment?reference=${req.body.razorpay_payment_id}`)
+   res.redirect(`https://e-commerce-kkapil94.vercel.app/payment?reference=${req.body.razorpay_payment_id}`)
   }
 } 
