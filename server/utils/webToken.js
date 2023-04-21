@@ -8,6 +8,9 @@ export const Token = (user,statusCode,res)=>{
             Date.now() + 5*24*60*60*1000
         ),
         httpOnly:true,
+        sameSite:"None",
+        secure:true,
+         path: '/'
     }
     res.status(statusCode).cookie("token",token,options).json({
         success:true,
