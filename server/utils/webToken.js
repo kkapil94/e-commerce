@@ -10,7 +10,8 @@ export const Token = (user,statusCode,res)=>{
         httpOnly:true,
         secure:true,
         path: '/',
-        sameSite: 'None'
+        sameSite: 'None',
+        domain:"https://e-commerce-kkapil94.vercel.app"
     }
     res.status(statusCode).cookie("token",token,options).json({
         success:true,
