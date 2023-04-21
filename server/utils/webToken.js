@@ -7,7 +7,7 @@ export const Token = (user,statusCode,res)=>{
         expires:new Date(
             Date.now() + 5*24*60*60*1000
         ),
-        httpOnly:true,
+        httpOnly:false,
         secure:true,
         sameSite: 'none'
     }
