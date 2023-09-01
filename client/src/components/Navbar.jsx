@@ -51,8 +51,8 @@ export default function Navbar() {
                     <MenuRoundedIcon/>
                 </IconButton>
                 <Box id='nav' ref={nav} onClick={()=>setNavbar(false)}>
-                    <Button component={Link} to={"/"} id="page" onClick={()=>controlNavbar(false)} >Home</Button>
-                    <Button component={Link} to={"/products"} id="page" onClick={()=>controlNavbar(false)}>Products</Button>
+                    <Button component={Link} to={"/"} id="page" onClick={()=>controlNavbar(false)} sx={{fontSize:"1.1rem"}}>Home</Button>
+                    <Button component={Link} to={"/products"} id="page" onClick={()=>controlNavbar(false)} sx={{fontSize:"1.1rem"}}>Products</Button>
                 </Box> 
                 <form id="logoContainer" style={{margin:"auto",display:"flex"}} onSubmit={handleClick}>
                     <Box sx={{width:{lg:"4.5rem",md:"4rem",sm:"3.5rem",xs:"2.9rem"},marginRight:"1.2rem"}}>
@@ -60,7 +60,7 @@ export default function Navbar() {
                     </Box>
                     <Box className="searchbar" style={{display:"flex",justifyContent:'center'}}>
                     <TextField id="searchBar"  size="small" sx={{width:{lg:"25rem",md:"22rem",},zIndex:1}} onChange={(e)=>setKeyword(e.target.value)} placeholder="Search any product" value={keyword}></TextField>
-                    <Button variant='outlined'size='small'  sx={{height:"2.5rem"}} onClick={handleClick}>Search</Button>
+                    <Button variant='outlined'size='small'  sx={{height:"2.5rem",fontSize:"1.1rem"}} onClick={handleClick}>Search</Button>
                     </Box>
                 </form>
                 <Box >

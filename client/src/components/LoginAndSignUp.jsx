@@ -39,19 +39,33 @@ export default function LoginAndSignUp() {
         myForm.set("email",email);
         myForm.set("password",password);
         myForm.set("avatar",avatar)
-        const {status} =await registerUser(myForm);
-        if(status===200){
+        const data =await registerUser(myForm);
+        console.log(data);
+        if(data.status===200){
           alert.success("Registered Successfully")
           setLoading(false)
+        }else if (data.response.data.message=="User validation failed: email: Please enter a valid email") {
+          setLoading(false)
+          alert.error("Please enter the valid email!")
+        }else{
+          setLoading(false)
+          alert.error("Cannot register successfully!")
         }
+        
     }
     const loginSubmit =async (e)=>{
       e.preventDefault();
       setLoading(true)
-      const {status} = await loginUser(loginEmail,loginPassword);
-      if(status===200){
+      const data = await loginUser(loginEmail,loginPassword);
+      if(data.status===200){
         alert.success("Login Successfully")
         setLoading(false)
+      }else if (data.response.status==400) {
+        setLoading(false)
+        alert.error("Please enter valid credentials!")
+      }else{
+        setLoading(false)
+        alert.error("Login unsuccessfull!")
       }
     }
     const changeFormData = (e)=>{ 
@@ -165,7 +179,7 @@ export default function LoginAndSignUp() {
               </div>
               <div id="registeredImage" style={{display:"flex",alignItems:"center",justifyContent:"center",width:"90%",paddingLeft:".5rem"}}>
                 <img src={avatarPreview}  alt="" style={{height:"3rem",width:"3rem"}}  />
-                <input type="file" name="avatar"  onChange={changeFormData} accept="image/*" />
+                <input type="file" name="avatar" required  onChange={changeFormData} accept="image/*" />
               </div>
               <button type="submit" style={{width:"80%",height:"2rem",marginBottom:"1rem"}}>Sign Up</button>
             </form>

@@ -9,13 +9,11 @@ import cloudinary from "cloudinary"
 import sendMail from "../utils/sendMail.js"
 // register user
 export const registerUser = catchAsyncErrors(async (req,res,next)=>{
-    console.log(req.body.avatar);
     const myCloud =await cloudinary.v2.uploader.upload(req.body.avatar,{
         folder:"Avatars",
         width:300,
         crop:"scale"
     })
-    console.log(req.body);
     const {name,email,password,role} = req.body
     const hashedPass =await bcrypt.hash(password,10)
     const user =await User.create({
@@ -69,11 +67,8 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
         email:req.body.email
     }
     if(req.body.avatar!==""){
-        console.log(req.body);
         const user = await User.findById(req.body._id)
-        console.log("i am user",user);
         const imageId =  user.avatar.public_id
-        console.log("image",imageId)
         await cloudinary.v2.uploader.destroy(imageId)
         const myCloud =await cloudinary.v2.uploader.upload(req.body.avatar,{
             folder:"Avatars",
@@ -100,9 +95,7 @@ export const registerUser = catchAsyncErrors(async (req,res,next)=>{
         return next(new ErrorHandler("Incorrect Old Password",404)) 
     }
     if(compare){
-        console.log(compare);
         const hashedPass =await bcrypt.hash(pass.newOne,10)
-        console.log(user._id,hashedPass);
     const resp =await User.findByIdAndUpdate(user._id,{password:hashedPass},{new:true,runValidators:true,useFindAndModify:true})
     res.status(200).json({success:true,resp})
     }
@@ -157,14 +150,11 @@ export const forgotPass = catchAsyncErrors(async (req,res,next)=>{
 //reset password
 
 export const resetPass = catchAsyncErrors(async (req,res,next)=>{
-    console.log(req.params.token);
     const token = crypto.createHash("sha256").update(req.params.token).digest('hex');
-    console.log(token);
     const user = await User.findOne({
         resetPasswordToken:token,
         resetPasswordExpire:{$gt:Date.now()}
     })
-    console.log(user);
     if(!user){
         return next(new ErrorHandler("the reset token is expired or invalid",400))
     }

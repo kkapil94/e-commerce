@@ -144,7 +144,7 @@ export default function Products() {
               >
                 <Button
                   variant="outlined"
-                  size="small"
+                  size="large"
                   sx={{
                     width: { lg: "95%", md: "95%", sm: "5.2rem",xs:"5.2rem" },
                     border: "none !important",
@@ -161,7 +161,7 @@ export default function Products() {
                 </Button>
                 <Button
                   variant="outlined"
-                  size="small"
+                  size="large"
                   sx={{
                     width: { lg: "95%", md: "95%", sm: "5.2rem",xs:"5.2rem" },
                     border: "none !important",
@@ -178,7 +178,7 @@ export default function Products() {
                 </Button>
                 <Button
                   variant="outlined"
-                  size="small"
+                  size="large"
                   sx={{
                     width: { lg: "95%", md: "95%", sm: "2rem",xs:"2rem" },
                     border: "none !important",

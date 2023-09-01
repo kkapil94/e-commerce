@@ -32,7 +32,7 @@ export default function ProductDetails() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 3000,
     cssEase: "linear",
   };
@@ -88,6 +88,7 @@ export default function ProductDetails() {
                       style={{
                         height: "100%",
                         width: "100%",
+                        objectFit:"contain"
                       }}
                     />
                     </Box>

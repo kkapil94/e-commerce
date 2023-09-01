@@ -6,18 +6,24 @@ const userStore = create(persist((set)=>({
     isAuthenticated:0,
     user:0,
     loginUser:async (email,password)=>{
-        const config = {headers:{"Content-Type":"application/json"}}
+        try{const config = {headers:{"Content-Type":"application/json"}}
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/login`,{email,password},config)
         if(response.data.success)
         set({isAuthenticated:1,user:response.data.user})
-        return response
+        return response}
+        catch(err){
+           return err 
+        }
     },
     registerUser:async (myData)=>{
-        const config = {headers:{"Content-Type":"multipart/form-data"}}
+       try{ const config = {headers:{"Content-Type":"multipart/form-data"}}
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/register`,myData,config)
         if(response.data.success)
         set({isAuthenticated:1,user:response.data.user})
-        return response
+        return response}
+        catch(err){
+            return err
+        }
     },
     logoutUser:async ()=>{
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/logout`);
@@ -28,20 +34,26 @@ const userStore = create(persist((set)=>({
         return response;
     },
     updateUser:async (user)=>{
-        const config = {headers:{"Content-Type":"multipart/form-data"}}
+        try{const config = {headers:{"Content-Type":"multipart/form-data"}}
         const response = await axios.patch(`${process.env.REACT_APP_API_URL}/api/v1/update`,user,config)
         if(response.data.success){
             set({user:response.data.user})
         }
-        return response;
+        return response;}
+        catch(err){
+            return err
+        }
     },
     updatePassword:async (pass,user)=>{
-        const config = {headers:{"Content-Type":"application/json"}} 
+        try{const config = {headers:{"Content-Type":"application/json"}} 
         const response = await axios.patch(`${process.env.REACT_APP_API_URL}/api/v1/updatePassword`,{pass,user},config) 
         if(response.data.success){
             set({user:response.data.resp})
         }
-        return response
+        return response}
+        catch(err){
+            return err
+        }
     },
     forgotPassword:async (mail)=>{
         const config = {headers:{"Content-Type":"application/json"}} 

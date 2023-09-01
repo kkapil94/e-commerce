@@ -11,14 +11,14 @@ export default function ProductCard(products) {
   return (
     <Fragment>
        {product && <Card
-                  sx={{width: "15rem",height:"24.3rem",margin: "2rem .5rem 0 .5rem"}}
+                  sx={{width: "15rem",height:"24.3rem",margin: "2rem .5rem 0 .5rem","&:hover":{transform:"scale(1.1)"},transition:"all .1s ease-in"}}
                 >
                   <CardContent sx={{padding:"0"}}>
                     <Box>
                       <img
                         src={product.images[0].url}
                         alt=""
-                        style={{ height: "18rem", width: "100%" }}
+                        style={{ height: "18rem", width: "100%", objectFit:"contain" }}
                       />
                     </Box>
                     <Box sx={{padding:".5rem"}}>
