@@ -16,7 +16,7 @@
         left: 0;
         top: 0rem;
         height: 100vh;
-        width: 40vw;
+        width: 50vw;
         background: #eeeefd;
         display: flex;
         flex-direction: column;
@@ -26,6 +26,9 @@
     }
     #open{
         display: block;
+    }
+    #page{
+        font-size: 1.5rem;
     }
     #close{
         display: none;
@@ -42,6 +45,9 @@
         left:0rem;
         width:100% !important;
     }
+    #page{
+        font-size: 1.5rem;
+    }
     #searchBar{
         width: 100vw !important;
     }
@@ -49,7 +55,7 @@
         margin-left:1rem !important;
     }
     #navBar{
-        width:50vw
+        width:80vw
     }
     .posterImg{
         height: 1.5rem !important;
