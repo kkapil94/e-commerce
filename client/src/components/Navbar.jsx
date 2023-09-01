@@ -64,10 +64,10 @@ export default function Navbar() {
                     </Box>
                 </form>
                 <Box >
-                    <IconButton onClick={()=>navigate('/cart')} sx={{padding:{xs:"0rem"}}}>
+                    <IconButton onClick={()=>navigate('/cart')} sx={{marginLeft:'5px',padding:{lg:".5rem",md:".5rem",sm:"0rem",xs:"0rem"}}}>
                         <ShoppingCartOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
                     </IconButton>
-                    <IconButton sx={{marginLeft:'5px',padding:{lg:"1rem",md:"1rem",sm:"0rem",xs:"0rem"}}} component={Link} to="/login" >
+                    <IconButton sx={{marginLeft:'5px',padding:{lg:".5rem",md:".5rem",sm:"0rem",xs:"0rem"}}} component={Link} to="/login" >
                         {user? <img src={user.avatar.url} alt="" style={{height:"1.9rem",width:"1.9rem",borderRadius:"50%"}}/>:
                               <AccountCircleOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
                         }

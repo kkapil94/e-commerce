@@ -76,12 +76,13 @@ export default function ProductDetails() {
             md={6}
             sm={12}
             xs={12}
+            pb={2}
             sx={{ border: "1px solid #f0f0f0", paddingBottom: "4rem",padding:{lg:"0rem 3.5rem 2rem 3.5rem",md:"0rem 1% 2rem 1%",sm:"0rem 15% 2rem 15%",xs:"2rem 0% 1rem 0%" }}}
           >
-            <Stack >
+            <Stack pb={4}>
               <Slider {...settings}>
                 {productDetails.product.images.map((img) => (
-                    <Box key={productDetails.product._id} sx={{width:{lg:"50% ",md:"65%",sm:"50%",xs:"100%"},height:{lg:"25rem",md:"25rem",sm:"25rem",xs:"20rem"},padding: {lg:"1rem",md:"1rem",sm:"1rem",xs:"0"},}}>
+                    <Box  key={productDetails.product._id} sx={{width:{lg:"50% ",md:"65%",sm:"50%",xs:"100%"},height:{lg:"25rem",md:"25rem",sm:"25rem",xs:"20rem"},padding: {lg:"1rem",md:"1rem",sm:"1rem",xs:"0"},}}>
                     <img
                       src={img.url}
                       alt=""

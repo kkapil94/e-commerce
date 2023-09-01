@@ -17,8 +17,8 @@ export default function Footer() {
                 </Box>
             </Box>
             <Box sx={{width:"20rem",marginBottom:"1.5rem"}}>
-                <Typography sx={{typography:{lg:"h4",sm:"h5"}}} textAlign={"center"}>KK Mart</Typography>
-                <Typography variant="h6" textAlign={"center"}>High Quality is our first priority<br/>copyright 2023 © kapil</Typography>
+                <Typography sx={{typography:{lg:"h4",sm:"h3",xs:"h4"}}} textAlign={"center"}>KK Mart</Typography>
+                <Typography sx={{typography:{lg:"h6",sm:"h6",xs:"h6"}}}  textAlign={"center"}>High Quality is our first priority<br/>copyright 2023 © kapil</Typography>
             </Box>
             <Box sx={{display:"flex",flexDirection:{lg:"column",md:"column",sm:"row"},width:{lg:"20rem",md:"10rem",xs:"100%"},justifyContent:"space-evenly"}}>
                 <Typography variant='h5' sx={{display:{lg:"block",md:"block",sm:"none",xs:"none"}}}>Follow US</Typography>
