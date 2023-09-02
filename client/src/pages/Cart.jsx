@@ -109,6 +109,7 @@ export default function Cart() {
                       height: "100%",
                       width: "8rem",
                       border: "1px solid grey",
+                      objectFit:"contain"
                     }}
                     alt=""
                   />
@@ -125,7 +126,7 @@ export default function Cart() {
                     <div>
                       <Typography variant="h5">{item.product.name}</Typography>
                       <Typography variant="subtitle2" sx={{display:{lg:"none",md:"none",sm:"none",xs:"inline"}}}>₹{item.quantity * item.product.price}</Typography>
-                      <Box sx={{ margin: {lg:"1.9rem 0",md:"1.9rem 0",sm:"1.9rem 0",xs:"1rem 0"} }}>
+                      <Stack direction={'row'} sx={{ margin: {lg:"1.9rem 0",md:"1.9rem 0",sm:"1.9rem 0",xs:"1rem 0"} }}>
                         <IconButton
                           size="small"
                           sx={{
@@ -139,11 +140,13 @@ export default function Cart() {
                           <RemoveIcon />
                         </IconButton>
                         <Input
+                          
                           sx={{
                             border: "2px solid gray",
                             borderRadius: ".4rem",
                             width:"2.4rem",
-                            height:"1.8rem"
+                            height:"1.8rem",
+                            paddingTop:'.3rem'
                           }}
                           type="number"
                           size="small"
@@ -167,7 +170,7 @@ export default function Cart() {
                         >
                           <AddIcon />
                         </IconButton>
-                      </Box>
+                      </Stack>
                       <Button
                         variant="outlined"
                         size="small"
