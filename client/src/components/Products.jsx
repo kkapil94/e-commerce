@@ -146,7 +146,7 @@ export default function Products() {
                   variant="outlined"
                   size="large"
                   sx={{
-                    width: { lg: "95%", md: "95%", sm: "5.2rem",xs:"5.2rem" },
+                    width: { lg: "95%", md: "95%", sm: "7.2rem",xs:"7.2rem" },
                     border: "none !important",
                     margin: {
                       lg: "initial !important",
@@ -163,7 +163,7 @@ export default function Products() {
                   variant="outlined"
                   size="large"
                   sx={{
-                    width: { lg: "95%", md: "95%", sm: "5.2rem",xs:"5.2rem" },
+                    width: { lg: "95%", md: "95%", sm: "7.2rem",xs:"7.2rem" },
                     border: "none !important",
                     margin: {
                       lg: "initial !important",
@@ -180,7 +180,7 @@ export default function Products() {
                   variant="outlined"
                   size="large"
                   sx={{
-                    width: { lg: "95%", md: "95%", sm: "2rem",xs:"2rem" },
+                    width: { lg: "95%", md: "95%", sm: "2em",xs:"2rem" },
                     border: "none !important",
                     margin: {
                       lg: "initial !important",
