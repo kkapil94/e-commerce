@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import Slider from "react-slick";
 import useProducts from "../Stores/productStore";
 import { Link, useParams } from "react-router-dom";
@@ -47,18 +47,20 @@ export default function ProductDetails() {
   const addItem = cartStore((state) => state.addToCart);
   const loading = useProducts((state) => state.loading);
 
-  // Slider settings
+  // Slider settings with reference for direct control
+  const sliderRef = useRef(null);
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     autoplay: true,
     autoplaySpeed: 5000,
     cssEase: "ease-in-out",
     beforeChange: (current, next) => setCurrentSlide(next),
+    afterChange: (current) => setCurrentSlide(current),
     customPaging: (i) => (
       <Box
         sx={{
@@ -161,7 +163,11 @@ export default function ProductDetails() {
                 justifyContent: "center",
               }}
             >
-              <Slider {...settings} className="product-detail-slider">
+              <Slider
+                ref={sliderRef}
+                {...settings}
+                className="product-detail-slider"
+              >
                 {product.images.map((img, index) => (
                   <Box
                     key={`${product._id}-${index}`}
@@ -201,7 +207,7 @@ export default function ProductDetails() {
                 {product.images.map((img, index) => (
                   <Box
                     key={`thumb-${index}`}
-                    onClick={() => setCurrentSlide(index)}
+                    onClick={() => sliderRef.current.slickGoTo(index)}
                     sx={{
                       width: 60,
                       height: 60,
