@@ -1,13 +1,125 @@
-.activeTab{
-    border-bottom: 2px solid #1976d2;
-}
-.signUPForm{
-    transform:translateY(-100%) translateX(-100vmax)
-}
-.shiftLeft{
-    transform: translateX(-100%);
+/* Form tab styling */
+.active-form {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.shiftToNeutralForm{
-    transform: translateX(0%) translateY(-100%);
+.inactive-form {
+  display: none;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: none;
+}
+
+/* Avatar upload styling */
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
+/* Error field animation */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.MuiTextField-root .Mui-error {
+  animation: shake 0.6s;
+}
+
+/* Button hover and active effects */
+.MuiButton-root.MuiButton-contained {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.MuiButton-root.MuiButton-contained:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.3) !important;
+}
+
+.MuiButton-root.MuiButton-contained:active {
+  transform: translateY(-1px) !important;
+}
+
+/* Social login buttons */
+.MuiButton-root.MuiButton-outlined {
+  transition: all 0.3s ease !important;
+}
+
+.MuiButton-root.MuiButton-outlined:hover {
+  background-color: rgba(25, 118, 210, 0.04) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Avatar preview hover effect */
+.MuiAvatar-root {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.MuiAvatar-root:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Form field focus effect */
+.MuiOutlinedInput-root:focus-within {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+/* Paper card hover effect */
+.MuiPaper-root {
+  transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+.MuiPaper-root:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Tab transition effects */
+.MuiTabs-indicator {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.MuiTab-root {
+  transition: color 0.3s ease, background-color 0.3s ease !important;
+}
+
+.MuiTab-root:hover {
+  background-color: rgba(25, 118, 210, 0.04) !important;
+}
+
+/* Legacy classes kept for compatibility */
+.activeTab {
+  border-bottom: 2px solid #1976d2;
+}
+
+.signUPForm {
+  transform: translateY(-100%) translateX(-100vmax);
+}
+
+.shiftLeft {
+  transform: translateX(-100%);
+}
+
+.shiftToNeutralForm {
+  transform: translateX(0%) translateY(-100%);
 }
