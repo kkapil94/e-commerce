@@ -261,7 +261,16 @@ export default function Navbar() {
                   borderRadius: "4px",
                 }}
               />
-              <span style={{ fontSize: "1.4rem", fontWeight: 600 }}>
+              <span
+                style={{
+                  fontSize: "1.4rem",
+                  fontWeight: 700,
+                  fontFamily: "'Montserrat', sans-serif",
+                  background: "linear-gradient(45deg, #1976d2, #f50057)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
                 KK Mart
               </span>
             </Box>

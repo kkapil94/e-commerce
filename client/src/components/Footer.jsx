@@ -45,7 +45,16 @@ export default function Footer() {
                     },
                   }}
                 />
-                <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: 800,
+                    fontFamily: "'Montserrat', sans-serif",
+                    background: "linear-gradient(45deg, #1976d2, #f50057)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
                   KK Mart
                 </Typography>
               </Box>
