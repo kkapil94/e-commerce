@@ -97,13 +97,20 @@ export default function Navbar() {
                 }}
               >
                 <img
-                  src="/images/logo1234.jpg"
-                  alt="Logo"
+                  src="/images/new_logo.svg"
+                  alt="KK Mart Logo"
                   style={{
                     width: "100%",
                     height: "100%",
                     objectFit: "contain",
                     borderRadius: "8px",
+                    transition: "transform 0.3s ease",
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = "scale(1.1)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
                   }}
                 />
               </Box>
@@ -245,11 +252,11 @@ export default function Navbar() {
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <img
-                src="/images/logo1234.jpg"
-                alt="Logo"
+                src="/images/new_logo.svg"
+                alt="KK Mart Logo"
                 style={{
-                  width: 36,
-                  height: 36,
+                  width: 40,
+                  height: 40,
                   marginRight: 8,
                   borderRadius: "4px",
                 }}

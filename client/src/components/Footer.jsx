@@ -32,13 +32,17 @@ export default function Footer() {
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Box
                   component="img"
-                  src="/images/logo1234.jpg"
+                  src="/images/new_logo.svg"
                   alt="KK Mart"
                   sx={{
-                    width: 50,
-                    height: 50,
+                    width: 60,
+                    height: 60,
                     mr: 2,
-                    borderRadius: "8px",
+                    borderRadius: "10px",
+                    transition: "transform 0.3s ease",
+                    "&:hover": {
+                      transform: "scale(1.05)",
+                    },
                   }}
                 />
                 <Typography variant="h4" sx={{ fontWeight: 700 }}>

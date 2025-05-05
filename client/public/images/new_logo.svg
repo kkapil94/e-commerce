@@ -1,0 +1,20 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#1976d2" opacity="0.1"/>
+  
+  <!-- Shopping Bag Shape -->
+  <path d="M60,70 L60,140 L140,140 L140,70 L125,70 L125,60 C125,43.4315 111.5685,30 95,30 C78.4315,30 65,43.4315 65,60 L65,70 L60,70 Z" 
+        fill="#ffffff" stroke="#1976d2" stroke-width="4"/>
+  
+  <!-- Bag Handles -->
+  <path d="M75,70 L75,55 C75,46.7157 83.9543,40 95,40 C106.0457,40 115,46.7157 115,55 L115,70" 
+        fill="none" stroke="#1976d2" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Letters "KK" -->
+  <text x="100" y="110" font-family="Arial, sans-serif" font-size="32" font-weight="bold" 
+        text-anchor="middle" fill="#f50057">KK</text>
+  
+  <!-- "MART" text -->
+  <text x="100" y="128" font-family="Arial, sans-serif" font-size="16" 
+        text-anchor="middle" fill="#1976d2">MART</text>
+</svg>
