@@ -38,7 +38,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "'Teko', sans-serif",
+    fontFamily: "'Montserrat', 'Roboto', sans-serif",
     h3: {
       fontWeight: 600,
     },

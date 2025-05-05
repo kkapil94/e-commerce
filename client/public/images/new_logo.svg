@@ -10,11 +10,11 @@
   <path d="M75,70 L75,55 C75,46.7157 83.9543,40 95,40 C106.0457,40 115,46.7157 115,55 L115,70" 
         fill="none" stroke="#1976d2" stroke-width="4" stroke-linecap="round"/>
   
-  <!-- Letters "KK" -->
-  <text x="100" y="110" font-family="Arial, sans-serif" font-size="32" font-weight="bold" 
-        text-anchor="middle" fill="#f50057">KK</text>
+  <!-- Letters "KK" with modern font -->
+  <text x="100" y="105" font-family="'Montserrat', sans-serif" font-size="34" font-weight="800" 
+        text-anchor="middle" fill="#f50057" letter-spacing="0">KK</text>
   
-  <!-- "MART" text -->
-  <text x="100" y="128" font-family="Arial, sans-serif" font-size="16" 
-        text-anchor="middle" fill="#1976d2">MART</text>
+  <!-- "MART" text with modern font -->
+  <text x="100" y="128" font-family="'Montserrat', sans-serif" font-size="16" font-weight="600"
+        text-anchor="middle" fill="#1976d2" letter-spacing="2">MART</text>
 </svg>
