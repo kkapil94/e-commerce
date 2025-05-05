@@ -1,82 +1,336 @@
-import React,{useRef, useState} from 'react'
-import {AppBar, Box, Button, IconButton, Toolbar, TextField} from '@mui/material'
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import {Link, useNavigate} from "react-router-dom"
-import userStore from '../Stores/userStore';
-import './Navbar.css'
+import React, { useRef, useState, useEffect } from "react";
+import {
+  AppBar,
+  Box,
+  Button,
+  IconButton,
+  Toolbar,
+  TextField,
+  Badge,
+  Container,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  InputAdornment,
+} from "@mui/material";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import SearchIcon from "@mui/icons-material/Search";
+import { Link, useNavigate } from "react-router-dom";
+import userStore from "../Stores/userStore";
+import cartStore from "../Stores/cartStore";
+import "./Navbar.css";
+
 export default function Navbar() {
-    const user = userStore(state=>state.user)
-    const openIcon = useRef()
-    const closeIcon = useRef()
-    const nav = useRef()
-    const [navbar,setNavbar] = useState(false)
-    const navigate = useNavigate()
-    const [keyword,setKeyword] = useState()
-    const handleClick = (e)=>{
-        e.preventDefault()
-        if(keyword.trim()){
-            navigate(`/products/${keyword}`)
-            setKeyword("")
-        }else{
-            navigate('/products')
-            setKeyword("")
-        }
+  const user = userStore((state) => state.user);
+  const cartItems = cartStore((state) => state.cart);
+  const [drawer, setDrawer] = useState(false);
+  const [keyword, setKeyword] = useState("");
+  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (keyword.trim()) {
+      navigate(`/products/${keyword}`);
+      setKeyword("");
+    } else {
+      navigate("/products");
+      setKeyword("");
     }
-    const controlNavbar = (control)=>{
-        if(control){
-            openIcon.current.id = "close"
-            closeIcon.current.id = "open"
-            nav.current.id = "navBar"
-            document.body.style.overflow = "hidden"
-        }
-        else{
-            openIcon.current.id = "open"
-            closeIcon.current.id = "close"
-            nav.current.id = "nav"
-            document.body.style.overflow = "initial"
-        }
-    }
+  };
+
   return (
-    <>
-    <Box >
-        <AppBar color='inherit' sx={{position:"relative",maxHeight:'4rem',}}>
-            <Toolbar>
-                <IconButton id="close" ref={closeIcon} onClick={()=>controlNavbar(false)} sx={{display:"none",zIndex:"1102",padding:0}}>
-                    <CloseRoundedIcon/>
-                </IconButton>
-                <IconButton id="open" ref={openIcon} onClick={()=>controlNavbar(true)} sx={{display:"none",zIndex:"1012",padding:0}}>
-                    <MenuRoundedIcon/>
-                </IconButton>
-                <Box id='nav' ref={nav} onClick={()=>setNavbar(false)}>
-                    <Button component={Link} to={"/"} id="page" onClick={()=>controlNavbar(false)} sx={{fontSize:"1.1rem"}}>Home</Button>
-                    <Button component={Link} to={"/products"} id="page" onClick={()=>controlNavbar(false)} sx={{fontSize:"1.1rem"}}>Products</Button>
-                </Box> 
-                <form id="logoContainer" style={{margin:"auto",display:"flex"}} onSubmit={handleClick}>
-                    <Box sx={{width:{lg:"4.5rem",md:"4rem",sm:"3.5rem",xs:"2.9rem"},marginRight:"1.2rem"}}>
-                    <img className="logo" src='./images/logo1234.jpg' style={{width:'80%',height:"80%",cursor:"pointer"}} alt=''/>
-                    </Box>
-                    <Box className="searchbar" style={{display:"flex",justifyContent:'center'}}>
-                    <TextField id="searchBar"  size="small" sx={{width:{lg:"25rem",md:"22rem",},zIndex:1}} onChange={(e)=>setKeyword(e.target.value)} placeholder="Search any product" value={keyword}></TextField>
-                    <Button variant='outlined'size='small'  sx={{height:"2.5rem",fontSize:"1.1rem"}} onClick={handleClick}>Search</Button>
-                    </Box>
-                </form>
-                <Box >
-                    <IconButton onClick={()=>navigate('/cart')} sx={{marginLeft:'5px',padding:{lg:".5rem",md:".5rem",sm:"0rem",xs:"0rem"}}}>
-                        <ShoppingCartOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
+    <AppBar
+      position="sticky"
+      color="inherit"
+      sx={{
+        boxShadow: scrolled ? "0px 2px 8px rgba(0,0,0,0.1)" : "none",
+        transition: "all 0.3s ease",
+        backgroundColor: scrolled ? "rgba(255,255,255,0.95)" : "#fff",
+      }}
+      elevation={scrolled ? 3 : 0}
+    >
+      <Container maxWidth="xl">
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "8px 0",
+          }}
+        >
+          {/* Logo Section */}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              edge="start"
+              sx={{ display: { md: "none" }, mr: 1 }}
+              onClick={() => setDrawer(true)}
+            >
+              <MenuRoundedIcon />
+            </IconButton>
+
+            <Link to="/">
+              <Box
+                sx={{
+                  width: { xs: "40px", sm: "50px" },
+                  height: { xs: "40px", sm: "50px" },
+                  marginRight: 2,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src="/images/logo1234.jpg"
+                  alt="Logo"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    borderRadius: "8px",
+                  }}
+                />
+              </Box>
+            </Link>
+
+            {/* Desktop Menu */}
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+              <Button
+                component={Link}
+                to="/"
+                sx={{
+                  fontSize: "1.1rem",
+                  fontWeight: 500,
+                  color: "#333",
+                  "&:hover": { color: "primary.main" },
+                }}
+              >
+                Home
+              </Button>
+              <Button
+                component={Link}
+                to="/products"
+                sx={{
+                  fontSize: "1.1rem",
+                  fontWeight: 500,
+                  color: "#333",
+                  "&:hover": { color: "primary.main" },
+                }}
+              >
+                Products
+              </Button>
+            </Box>
+          </Box>
+
+          {/* Search Bar */}
+          <Box
+            component="form"
+            onSubmit={handleSearch}
+            sx={{
+              flexGrow: 1,
+              maxWidth: { sm: "400px", md: "500px" },
+              mx: { xs: 1, sm: 2, md: 4 },
+            }}
+          >
+            <TextField
+              fullWidth
+              size="small"
+              placeholder="Search products..."
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon color="action" />
+                  </InputAdornment>
+                ),
+                endAdornment: keyword && (
+                  <InputAdornment position="end">
+                    <IconButton size="small" onClick={() => setKeyword("")}>
+                      <CloseRoundedIcon fontSize="small" />
                     </IconButton>
-                    <IconButton sx={{marginLeft:'5px',padding:{lg:".5rem",md:".5rem",sm:"0rem",xs:"0rem"}}} component={Link} to="/login" >
-                        {user? <img src={user.avatar.url} alt="" style={{height:"1.9rem",width:"1.9rem",borderRadius:"50%"}}/>:
-                              <AccountCircleOutlinedIcon sx={{fontSize:{lg:"2rem",md:"2rem",sm:"1.8rem",xs:"1.8rem"}}}/>
-                        }
-                    </IconButton>
+                  </InputAdornment>
+                ),
+                sx: {
+                  borderRadius: "24px",
+                  background: scrolled ? "#f8f9fa" : "#f0f2f5",
+                  transition: "all 0.3s ease",
+                  "&:hover": { background: "#e9ecef" },
+                },
+              }}
+            />
+          </Box>
+
+          {/* Action Icons */}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              component={Link}
+              to="/cart"
+              sx={{
+                color: "#333",
+                transition: "all 0.2s",
+                "&:hover": { transform: "translateY(-2px)" },
+              }}
+            >
+              <Badge badgeContent={cartItems.length} color="primary">
+                <ShoppingCartOutlinedIcon fontSize="medium" />
+              </Badge>
+            </IconButton>
+
+            <IconButton
+              component={Link}
+              to={user ? "/account" : "/login"}
+              sx={{
+                ml: { xs: 1, sm: 2 },
+                color: "#333",
+                transition: "all 0.2s",
+                "&:hover": { transform: "translateY(-2px)" },
+              }}
+            >
+              {user ? (
+                <Box
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: "50%",
+                    overflow: "hidden",
+                    border: "2px solid #1976d2",
+                  }}
+                >
+                  <img
+                    src={user.avatar.url}
+                    alt="User"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
                 </Box>
-            </Toolbar>
-        </AppBar>
-        
-    </Box>
-    </>
-  )
+              ) : (
+                <AccountCircleOutlinedIcon fontSize="medium" />
+              )}
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </Container>
+
+      {/* Mobile Drawer */}
+      <Drawer anchor="left" open={drawer} onClose={() => setDrawer(false)}>
+        <Box sx={{ width: 250 }} role="presentation">
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              p: 2,
+              borderBottom: "1px solid #eee",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <img
+                src="/images/logo1234.jpg"
+                alt="Logo"
+                style={{
+                  width: 36,
+                  height: 36,
+                  marginRight: 8,
+                  borderRadius: "4px",
+                }}
+              />
+              <span style={{ fontSize: "1.4rem", fontWeight: 600 }}>
+                KK Mart
+              </span>
+            </Box>
+            <IconButton onClick={() => setDrawer(false)}>
+              <CloseRoundedIcon />
+            </IconButton>
+          </Box>
+
+          <List>
+            <ListItem
+              button
+              component={Link}
+              to="/"
+              onClick={() => setDrawer(false)}
+            >
+              <ListItemText
+                primary="Home"
+                sx={{
+                  "& .MuiListItemText-primary": {
+                    fontSize: "1.3rem",
+                    fontWeight: 500,
+                  },
+                }}
+              />
+            </ListItem>
+            <ListItem
+              button
+              component={Link}
+              to="/products"
+              onClick={() => setDrawer(false)}
+            >
+              <ListItemText
+                primary="Products"
+                sx={{
+                  "& .MuiListItemText-primary": {
+                    fontSize: "1.3rem",
+                    fontWeight: 500,
+                  },
+                }}
+              />
+            </ListItem>
+            <ListItem
+              button
+              component={Link}
+              to="/cart"
+              onClick={() => setDrawer(false)}
+            >
+              <ListItemText
+                primary="Cart"
+                sx={{
+                  "& .MuiListItemText-primary": {
+                    fontSize: "1.3rem",
+                    fontWeight: 500,
+                  },
+                }}
+              />
+            </ListItem>
+            <ListItem
+              button
+              component={Link}
+              to={user ? "/account" : "/login"}
+              onClick={() => setDrawer(false)}
+            >
+              <ListItemText
+                primary={user ? "My Account" : "Login"}
+                sx={{
+                  "& .MuiListItemText-primary": {
+                    fontSize: "1.3rem",
+                    fontWeight: 500,
+                  },
+                }}
+              />
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
+    </AppBar>
+  );
 }
